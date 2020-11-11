@@ -22,6 +22,13 @@ public:
 	enum Angle_LR { Left, Right };
 	Angle_LR	angle_LR;
 
+	float maxFallSpeedDown;		//最大落下速度
+	float maxFallSpeedUp;
+	float maxFallSpeedLeft;
+	float maxFallSpeedRight;
+
+	float gravity;			//重力加速度＆時間速度による加算量
+
 	//重力の方向
 	enum Gravity { up, down, left, right };
 	Gravity MoveGravity;
@@ -35,6 +42,11 @@ public:
 		, moveCnt(0)
 		, angle_LR(Right)
 		, MoveGravity(down)
+		,maxFallSpeedDown(0)
+		,maxFallSpeedUp(0)
+		,maxFallSpeedLeft(0)
+		,maxFallSpeedRight(0)
+		,gravity(0)
 	{
     }
 	virtual  ~BChara(){}
@@ -76,6 +88,7 @@ public:
 	//モーションを更新(変更なしの場合 false)
 	bool UpdateMotion(Motion nm_);
 
+	void GravityMotion();
 
 	//当たり判定
 	virtual bool Attack_Std(const string& GName, AttackInfo at_);

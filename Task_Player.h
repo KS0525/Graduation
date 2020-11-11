@@ -10,7 +10,7 @@ namespace Player {
 
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName("プレイヤー");	//グループ名
-	const  string  defName("仮");	//タスク名
+	const  string  defName("卵");	//タスク名
 	//-------------------------------------------------------------------
 	class Resource : public BResource
 	{
@@ -52,16 +52,7 @@ namespace Player {
 		//追加したい変数・メソッドはここに追加する
 		//BCharaに持たせていない変数・メソッドのみここに書く
 		XI::GamePad::SP  controller;
-		int chargeX;
 		int hp;
-		int dist;
-		float maxFallSpeedDown;		//最大落下速度
-		float maxFallSpeedUp;
-		float maxFallSpeedLeft;
-		float maxFallSpeedRight;
-
-		float gravity;			//重力加速度＆時間速度による加算量
-
 
 		//接触時の応答処理(必ず受け身の処理として実装する)
 		void Received(BChara* from_, AttackInfo at_);
