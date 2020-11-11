@@ -85,20 +85,20 @@ namespace  Game
 		auto inp = ge->in1->GetState();
 
 		//++count;
-		++bcount;
+		//++bcount;
 
-		if (count >=120)
-		{
-			count = 0;
-			auto ene = Enemy::Object::Create(true);
-			ene->pos.x = rand() % (ge->screen2DWidth - 100);
-		}
+		//if (count >=120)
+		//{
+		//	count = 0;
+		//	auto ene = Enemy::Object::Create(true);
+		//	ene->pos.x = rand() % (ge->screen2DWidth - 100);
+		//}
 
-		if (bcount >= 160) {
-			bcount = 0;
-			auto blo = Block01::Object::Create(true);
-			blo->pos.x = rand() % (ge->screen2DWidth - 100);
-		}
+		//if (bcount >= 160) {
+		//	bcount = 0;
+		//	auto blo = Block01::Object::Create(true);
+		//	blo->pos.x = rand() % (ge->screen2DWidth - 100);
+		//}
 		if (ms.B1.down) {
 			
 		}
@@ -113,20 +113,20 @@ namespace  Game
 	{
 
 		//スコア描画
-		char msg[10];
-		sprintf(msg, "%5d", ge->score);
-		//SPRINTF　S　String　Print Format　フォーマットに合わせて出力
-		//　Intからchar配列への変換
+		//char msg[10];
+		//sprintf(msg, "%5d", ge->score);
+		////SPRINTF　S　String　Print Format　フォーマットに合わせて出力
+		////　Intからchar配列への変換
 
-		for (int i = 0; i < 5; i++) {
-			if (msg[i] != ' ') {
-				ML::Box2D  draw2(-(48 / 2), (-60 / 2), 48, 60);
-				ML::Box2D  src2((msg[i] - '0') * 19, 32, 19, 32);
-				draw2.Offset((50 * i) + 500, 50);
+		//for (int i = 0; i < 5; i++) {
+		//	if (msg[i] != ' ') {
+		//		ML::Box2D  draw2(-(48 / 2), (-60 / 2), 48, 60);
+		//		ML::Box2D  src2((msg[i] - '0') * 19, 32, 19, 32);
+		//		draw2.Offset((50 * i) + 500, 50);
 
-				this->res->score->Draw(draw2, src2);
-			}
-		}
+		//		this->res->score->Draw(draw2, src2);
+		//	}
+		//}
 	}
 
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

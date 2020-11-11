@@ -55,6 +55,14 @@ namespace Player {
 		int chargeX;
 		int hp;
 		int dist;
+		float maxFallSpeedDown;		//最大落下速度
+		float maxFallSpeedUp;
+		float maxFallSpeedLeft;
+		float maxFallSpeedRight;
+
+		float gravity;			//重力加速度＆時間速度による加算量
+
+
 		//接触時の応答処理(必ず受け身の処理として実装する)
 		void Received(BChara* from_, AttackInfo at_);
 		bool CheckHit(const  ML::Box2D&  hit_);

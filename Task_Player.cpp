@@ -44,6 +44,13 @@ namespace Player
 		this->chargeX = 0;
 		this->hp = 10;
 		this->dist = 0;
+
+		this->maxFallSpeedDown = 10.0f;	//最大落下速度
+		this->maxFallSpeedUp = -10.0f;
+		this->maxFallSpeedLeft = -10.0f;
+		this->maxFallSpeedRight = 10.0f;
+
+		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 
 		return  true;
@@ -70,47 +77,95 @@ namespace Player
 
 		//移動実装(ナナメ入力等未考慮  後々実装)
 		int speed = 7;
-		if (key.B1.on) { this->pos.y -= speed; }
-		if (key.B2.on) { this->pos.x -= speed; }
-		if (key.B3.on) { this->pos.y += speed; }
-		if (key.B4.on) { this->pos.x += speed; }
+		if (key.B1.on) { this->MoveGravity = Gravity::up; }
+		if (key.B2.on) { this->MoveGravity = Gravity::left; }
+		if (key.B3.on) { this->MoveGravity = Gravity::down; }
+		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+		
+		//this->moveVec.y = min(this->moveVec.y + this->gravity, this->maxFallSpeed);
+
+		if (this->MoveGravity == Gravity::up) 
+		{
+			this->moveVec.y = max(this->moveVec.y - this->gravity, this->maxFallSpeedUp);
+		}
+		else if (this->MoveGravity == Gravity::down)
+		{
+			this->moveVec.y = min(this->moveVec.y + this->gravity, this->maxFallSpeedDown);
+		}
+		else if (this->MoveGravity == Gravity::left) 
+		{ 
+			this->moveVec.x = max(this->moveVec.x - this->gravity, this->maxFallSpeedLeft);
+		}
+		else if (this->MoveGravity == Gravity::right) 
+		{
+			this->moveVec.x = min(this->moveVec.x + this->gravity, this->maxFallSpeedRight);
+		}
+
+		if (this->MoveGravity == Gravity::up || this->MoveGravity == Gravity::down) 
+		{
+			if (this->moveVec.x < 0.0f)
+			{
+				this->moveVec.x += 0.2f;
+				if (this->moveVec.x > 0.0f) { this->moveVec.x = 0.0f; }
+			}
+			else if (this->moveVec.x > 0.0f)
+			{
+				this->moveVec.x -= 0.2f;
+				if (this->moveVec.x < 0.0f) { this->moveVec.x = 0.0f; }
+			}
+		}
+		if (this->MoveGravity == Gravity::left || this->MoveGravity == Gravity::right)
+		{
+			if (this->moveVec.y < 0.0f)
+			{
+				this->moveVec.y += 0.2f;
+				if (this->moveVec.y > 0.2f) { this->moveVec.y = 0.0f; }
+			}
+			else if (this->moveVec.y > 0.0f)
+			{
+				this->moveVec.y -= 0.2f;
+				if (this->moveVec.y < 0.2f) { this->moveVec.y = 0.0f; }
+			}
+		}
+
+		this->pos += this->moveVec;
+
 		if (this->pos.x < 0) { pos.x = 0; }
 		if (this->pos.y < 0) { pos.y = 0; }
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
-		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; } 
-		
-		if (mouse.LB.on)
-		{
-			dist++;
-			if (dist % 7 == 0) {
-				auto shot = Shot00::Object::Create(true);
-				shot->pos.y = this->pos.y;
-				ML::Box2D shotpos = this->hitBase.OffsetCopy(pos);
-				shot->pos.x = (shotpos.x + (shotpos.x +shotpos.w)) /2;
-				shot->moveVec = { 0,-5 };
+		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
+		//if (mouse.LB.on)
+		//{
+		//	dist++;
+		//	if (dist % 7 == 0) {
+		//		auto shot = Shot00::Object::Create(true);
+		//		shot->pos.y = this->pos.y;
+		//		ML::Box2D shotpos = this->hitBase.OffsetCopy(pos);
+		//		shot->pos.x = (shotpos.x + (shotpos.x +shotpos.w)) /2;
+		//		shot->moveVec = { 0,-5 };
 
-				shot->atk = 1;
+		//		shot->atk = 1;
 
-				this->chargeX = 0;
-			}
-		}
+		//		this->chargeX = 0;
+		//	}
+		//}
 		
 		//カメラの位置を再調整
-		{
-			//プレイヤを画面のどこに置くか（今回は画面中央）
-			int px = ge->camera2D.w / 2;
-			int py = ge->camera2D.h / 2;
-			//プレイヤを画面中央に置いた時のカメラの左上座標を求める
-			int cpx = int(this->pos.x) - px;
-			int cpy = int(this->pos.y) - py;
-			//カメラの座標を更新
-			//ge->camera2D.x = cpx;
-			//ge->camera2D.y = cpy;
-			//以下はスクロール停止の節まで入力しない
-			if (auto map = ge->qa_Map) {
-				//map->AdjustCameraPos();
-			}
-		}
+		//{
+		//	//プレイヤを画面のどこに置くか（今回は画面中央）
+		//	int px = ge->camera2D.w / 2;
+		//	int py = ge->camera2D.h / 2;
+		//	//プレイヤを画面中央に置いた時のカメラの左上座標を求める
+		//	int cpx = int(this->pos.x) - px;
+		//	int cpy = int(this->pos.y) - py;
+		//	//カメラの座標を更新
+		//	//ge->camera2D.x = cpx;
+		//	//ge->camera2D.y = cpy;
+		//	//以下はスクロール停止の節まで入力しない
+		//	if (auto map = ge->qa_Map) {
+		//		//map->AdjustCameraPos();
+		//	}
+		//}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理

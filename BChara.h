@@ -22,6 +22,10 @@ public:
 	enum Angle_LR { Left, Right };
 	Angle_LR	angle_LR;
 
+	//重力の方向
+	enum Gravity { up, down, left, right };
+	Gravity MoveGravity;
+	
 	//メンバ変数に最低限の初期化を行う
 	//★★メンバ変数を追加したら必ず初期化も追加する事★★
 	BChara()
@@ -30,6 +34,7 @@ public:
 		, moveVec(0, 0)
 		, moveCnt(0)
 		, angle_LR(Right)
+		, MoveGravity(down)
 	{
     }
 	virtual  ~BChara(){}
