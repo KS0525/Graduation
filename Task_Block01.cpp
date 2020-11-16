@@ -37,7 +37,7 @@ namespace  Block01
 		this->res = Resource::Create();
 
 		//★データ初期化
-		hitBase = ML::Box2D(-28, -28, 56, 56);
+		hitBase = ML::Box2D(0, 0, 128, 128);
 		hp = 3;
 		moveVec = { 0,2 };
 		atk = { 0 };
@@ -64,10 +64,7 @@ namespace  Block01
 	//-------------------------------------------------------------------
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
-	{
-		pos.x += moveVec.x;
-		pos.y += moveVec.y;
-		
+	{		
 		
 		//敵との当たり判定
 		if (this->Attack_Std("プレイヤー", atk)) { //共通化により
@@ -126,7 +123,7 @@ namespace  Block01
 		it != targets->end();
 		++it) {
 		//相手に接触の有無を確認させる
-		if ((*it)->CheckHit(bottom)) {
+		if ((*it)->CheckHit(me)) {
 			//相手にダメージの処理を行わせる
 			(*it)->Received(this, at_);
 			return true;

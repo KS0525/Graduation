@@ -53,6 +53,15 @@ namespace  Game
 		auto pl = Player::Object::Create(true);
 		pl->pos.x = 480 / 2;
 		pl->pos.y = 270 * 2 / 3;
+
+		auto blo = Block00::Object::Create(true);
+		blo->pos.x = 500;
+		blo->pos.y = 500;
+
+		auto blo2 = Block01::Object::Create(true);
+		blo2->pos.x = 200;
+		blo2->pos.y = 200;
+
 		auto map = Map2D::Object::Create(true);
 		map->Load("./data/Map/Map2.txt");
 	
@@ -68,6 +77,7 @@ namespace  Game
 		ge->KillAll_G("背景画像");
 		ge->KillAll_G("敵");
 		ge->KillAll_G("弾");
+		ge->KillAll_G("ブロック");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
