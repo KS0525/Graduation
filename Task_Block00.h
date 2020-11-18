@@ -52,8 +52,8 @@ namespace  Block00
 		int hp;
 		//BChara‚ÉŠÜ‚Ü‚ê‚È‚¢ƒ‚ƒm‚Ì‚Ý‚±‚±‚É’Ç‰Á‚·‚é
 		AttackInfo atk;
-		void  Object::Received(BChara*  from_, AttackInfo  at_);
-		bool Attack_Std(const string& GName, AttackInfo at_);
+		void  Object::Received(BChara*  from_);
+		bool Attack_Std(const string& GName);
 		bool Check_bottom();
 	};
 }

@@ -81,6 +81,7 @@ namespace  MyPG
 		
 		int						score;
 		bool					gameClearFlag;
+		int						serial;			//ブロックナンバー
 
 		XI::Mouse::SP  mouse;
 		XI::GamePad::SP  in1, in2, in3, in4;	//取り合えず４本

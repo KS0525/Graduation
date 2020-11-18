@@ -2,7 +2,7 @@
 //弾
 //-------------------------------------------------------------------
 #include  "MyPG.h"
-#include  "Task_Block01.h"
+#include  "Task_Block02.h"
 #include  "Task_Player.h"
 #include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
@@ -10,7 +10,7 @@
 
 
 
-namespace  Block01
+namespace  Block02
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
@@ -42,9 +42,9 @@ namespace  Block01
 		moveVec = { 0,2 };
 		atk = { 0 };
 
-		this->maxFallSpeed = 20.0f;	//最大落下速度
+		this->maxFallSpeed = 5.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 10; //重力加速度＆時間速度による加算量
+		this->gravity = ML::Gravity(32) * 3; //重力加速度＆時間速度による加算量
 
 		ge->serial++;
 		this->serial = ge->serial;
@@ -227,7 +227,7 @@ private:
 	{
 		for (auto chips : mChips)
 		{
-			auto bl = Block01::Object::Create(true);
+			auto bl = Block02::Object::Create(true);
 			//あとはチップ情報を渡す
 
 		}

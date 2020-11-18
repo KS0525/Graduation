@@ -5,7 +5,7 @@
 //-------------------------------------------------------------------
 #include "BChara.h"
 
-namespace  Block01
+namespace  Block02
 {
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName(		"ブロック");	//グループ名

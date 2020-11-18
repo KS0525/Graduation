@@ -13,6 +13,7 @@
 #include  "Task_Enemy01.h"
 #include  "Task_Map2D.h"
 #include  "Task_Block01.h"
+#include  "Task_Block02.h"
 
 namespace  Game
 {
@@ -59,8 +60,12 @@ namespace  Game
 		blo->pos.y = 500;
 
 		auto blo2 = Block01::Object::Create(true);
-		blo2->pos.x = 200;
-		blo2->pos.y = 200;
+		blo2->pos.x = 1000;
+		blo2->pos.y = 700;
+
+		auto blo3 = Block02::Object::Create(true);
+		blo3->pos.x = 700;
+		blo3->pos.y = 700;
 
 		auto map = Map2D::Object::Create(true);
 		map->Load("./data/Map/Map2.txt");
