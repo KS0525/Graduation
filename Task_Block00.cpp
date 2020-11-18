@@ -17,7 +17,7 @@ namespace  Block00
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/map/CastleTown-B.png");
+		img = DG::Image::Create("./data/image/Block/Block_01.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -37,7 +37,7 @@ namespace  Block00
 		this->res = Resource::Create();
 
 		//★データ初期化
-		hitBase = ML::Box2D(0, 0, 128, 128);
+		//hitBase = ML::Box2D(0, 0, 128, 128);
 		hp = 3;
 		moveVec = { 0,2 };
 		atk = { 0 };
@@ -105,13 +105,14 @@ namespace  Block00
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
+		/*ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
 							ML::Box2D(289,64,30,32),
 							ML::Box2D(257, 64, 30, 32)						
-							};
+							};*/
+		ML::Box2D src(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
-		res->img->Draw(draw, src[this->hp-1]);
+		res->img->Draw(draw, src);
 	}
 	//------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）

@@ -13,6 +13,7 @@
 #include  "Task_Enemy01.h"
 #include  "Task_Map2D.h"
 #include  "Task_Block01.h"
+#include  "Task_MapGenerator.h"
 
 namespace  Game
 {
@@ -50,7 +51,8 @@ namespace  Game
 
 	   //šƒ^ƒXƒN‚Ì¶¬
 		BackGround::Object::Create(true);
-		auto pl = Player::Object::Create(true);
+
+		/*auto pl = Player::Object::Create(true);
 		pl->pos.x = 480 / 2;
 		pl->pos.y = 270 * 2 / 3;
 
@@ -60,11 +62,11 @@ namespace  Game
 
 		auto blo2 = Block01::Object::Create(true);
 		blo2->pos.x = 200;
-		blo2->pos.y = 200;
+		blo2->pos.y = 200;*/
 
-		auto map = Map2D::Object::Create(true);
-		map->Load("./data/Map/Map2.txt");
-	
+		if (auto map = Generator::Object::Create_Mutex()) {
+			map->Set("./data/Map/Map.txt");
+		}
 
 		return  true;
 	}
@@ -94,21 +96,6 @@ namespace  Game
 		auto ms = ge->mouse->GetState();
 		auto inp = ge->in1->GetState();
 
-		//++count;
-		//++bcount;
-
-		//if (count >=120)
-		//{
-		//	count = 0;
-		//	auto ene = Enemy::Object::Create(true);
-		//	ene->pos.x = rand() % (ge->screen2DWidth - 100);
-		//}
-
-		//if (bcount >= 160) {
-		//	bcount = 0;
-		//	auto blo = Block01::Object::Create(true);
-		//	blo->pos.x = rand() % (ge->screen2DWidth - 100);
-		//}
 		if (ms.B1.down) {
 			
 		}
