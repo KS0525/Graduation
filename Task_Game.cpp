@@ -96,8 +96,12 @@ namespace  Game
 		auto ms = ge->mouse->GetState();
 		auto inp = ge->in1->GetState();
 
-		if (ms.B1.down) {
-			
+		if (ms.LB.down) {
+			ge->KillAll_G("プレイヤー");
+			ge->KillAll_G("ブロック");
+			if (auto map = Generator::Object::Create_Mutex()) {
+				map->Set("./data/Map/Map.txt");
+			}
 		}
 		if (ms.CB.down) {
 			//自身に消滅要請
