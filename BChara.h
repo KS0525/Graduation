@@ -23,9 +23,9 @@ public:
 	Angle_LR	angle_LR;
 
 	float maxFallSpeedDown;		//最大落下速度
-	float maxFallSpeedUp;
-	float maxFallSpeedLeft;
-	float maxFallSpeedRight;
+	float maxFallSpeedUp;		//上昇
+	float maxFallSpeedLeft;		//
+	float maxFallSpeedRight;	//
 
 	float gravity;			//重力加速度＆時間速度による加算量
 
