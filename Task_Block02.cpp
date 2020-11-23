@@ -17,7 +17,7 @@ namespace  Block02
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/map/BrightForest-B.png");
+		img = DG::Image::Create("./data/image/Block/Block_03.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -107,7 +107,7 @@ namespace  Block02
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(416, 450, 32, 32);
+		ML::Box2D src = ML::Box2D(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);

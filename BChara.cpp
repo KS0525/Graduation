@@ -73,7 +73,7 @@ void BChara::GravityMotion(const string& GName)
 
 	//XˆÚ“®
 	float moveX = this->moveVec.x;
-	while (moveX > 1);
+	while (moveX > 1)
 	{
 		float savePosX = this->pos.x;
 		this->pos.x++;
@@ -84,7 +84,7 @@ void BChara::GravityMotion(const string& GName)
 			moveX = 0;
 		}
 	}
-	while (moveX < 1);
+	while (moveX < -1)
 	{
 		float savePosX = this->pos.x;
 		this->pos.x--;
@@ -95,11 +95,11 @@ void BChara::GravityMotion(const string& GName)
 			this->pos.x = savePosX;
 		}
 	}
-	if (moveX != 0) { this->pos.x += moveX; }
+	//if (moveX != 0) { this->pos.x += moveX; }
 
 	//YˆÚ“®
 	float moveY = this->moveVec.y;
-	while (moveY > 1);
+	while (moveY > 1)
 	{
 		float savePosY = this->pos.y;
 		this->pos.y++;
@@ -110,7 +110,7 @@ void BChara::GravityMotion(const string& GName)
 			moveY = 0;
 		}
 	}
-	while (moveY < 1);
+	while (moveY < -1)
 	{
 		float savePosY = this->pos.y;
 		this->pos.y--;
@@ -121,7 +121,7 @@ void BChara::GravityMotion(const string& GName)
 			this->pos.y = savePosY;
 		}
 	}
-	if (moveY != 0) { this->pos.y += moveY; }
+	//if (moveY != 0) { this->pos.y += moveY; }
 
 	//Œ¸‘¬
 	if (this->MoveGravity == Gravity::up || this->MoveGravity == Gravity::down)

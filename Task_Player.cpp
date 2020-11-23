@@ -77,7 +77,7 @@ namespace Player
 
 		this->GravityMotion("ブロック");
 
-		this->pos += this->moveVec;
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; }
@@ -87,7 +87,7 @@ namespace Player
 		
 		if (this->Attack_Std("ブロック")) { //共通化により
 			//接触していた場合、自分に対して何かしたいなら
-			this->Kill();
+			//this->Kill();
 		}
 	}
 	//-------------------------------------------------------------------
@@ -109,7 +109,7 @@ namespace Player
 	{
 		//if (from_->groupName == "ブロック")
 		//{
-		//	this->Kill();
+			this->Kill();
 		//	ge->KillAll_G("本編");
 		//}
 		//if (this->hp <= 0)

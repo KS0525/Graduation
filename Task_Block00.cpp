@@ -17,7 +17,7 @@ namespace  Block00
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/map/CastleTown-B.png");
+		img = DG::Image::Create("./data/image/Block/Block_02.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -107,26 +107,23 @@ namespace  Block00
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
-							ML::Box2D(289,64,30,32),
-							ML::Box2D(257, 64, 30, 32)						
-							};
+		ML::Box2D src = ML::Box2D(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
-		res->img->Draw(draw, src[this->hp-1]);
+		res->img->Draw(draw, src);
 	}
 	//------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		if (this->moveVec > from_->moveVec)
-		{
-			this->moveVec = from_->moveVec;
-		}
-		else
-		{
-			from_->moveVec = this->moveVec;
-		}
+		//if (this->moveVec > from_->moveVec)
+		//{
+		//	this->moveVec = from_->moveVec;
+		//}
+		//else
+		//{
+		//	from_->moveVec = this->moveVec;
+		//}
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -145,22 +142,25 @@ namespace  Block00
 		//自身同士で判定してないかチェック
 		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
 
-	auto targets = ge->GetTask_Group_G<BChara>(GName);
-	for (auto it = targets->begin();
-		it != targets->end();
-		++it)
-	{
-		//相手に接触の有無を確認させる
-		if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
+		auto targets = ge->GetTask_Group_G<BChara>(GName);
+		for (auto it = targets->begin();
+			it != targets->end();
+			++it)
 		{
-			//相手にダメージの処理を行わせる
-			(*it)->Received(this);
-			return true;
-		}
+			//相手に接触の有無を確認させる
+			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
+			{
+				//this->moveVec.x = 0;
+				//this->moveVec.y = 0;
+				//相手にダメージの処理を行わせる
+				(*it)->Received(this);
+				return true;
+			}
 
+		}
+		return false;
 	}
-	return false;
-	}
+
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

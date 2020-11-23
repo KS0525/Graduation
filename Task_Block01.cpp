@@ -17,7 +17,7 @@ namespace  Block01
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/map/BrightForest-B.png");
+		img = DG::Image::Create("./data/image/Block/Block_01.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -107,7 +107,7 @@ namespace  Block01
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(416, 450, 32, 32);
+		ML::Box2D src = ML::Box2D(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
@@ -116,6 +116,7 @@ namespace  Block01
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
+		
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -141,6 +142,8 @@ namespace  Block01
 			//相手に接触の有無を確認させる
 			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
 			{
+				//this->moveVec.x = 0;
+				//this->moveVec.y = 0;
 				//相手にダメージの処理を行わせる
 				(*it)->Received(this);
 				return true;
