@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------
-//ƒQ[ƒ€–{•Ò
+//ã‚²ãƒ¼ãƒ æœ¬ç·¨
 //-------------------------------------------------------------------
 #include  "MyPG.h"
 #include  "Task_Game.h"
@@ -14,44 +14,46 @@
 #include  "Task_Map2D.h"
 #include  "Task_Block01.h"
 #include  "Task_Block02.h"
+#include  "Task_MapGenerator.h"
 
 namespace  Game
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
-	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
+	//ãƒªã‚½ãƒ¼ã‚¹ã®åˆæœŸåŒ–
 	bool  Resource::Initialize()
 	{
 		this->score = DG::Image::Create("./data/image/font_number.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
-	//ƒŠƒ\[ƒX‚Ì‰ğ•ú
+	//ãƒªã‚½ãƒ¼ã‚¹ã®è§£æ”¾
 	bool  Resource::Finalize()
 	{
 		return true;
 	}
 	//-------------------------------------------------------------------
-	//u‰Šú‰»vƒ^ƒXƒN¶¬‚É‚P‰ñ‚¾‚¯s‚¤ˆ—
+	//ã€ŒåˆæœŸåŒ–ã€ã‚¿ã‚¹ã‚¯ç”Ÿæˆæ™‚ã«ï¼‘å›ã ã‘è¡Œã†å‡¦ç†
 	bool  Object::Initialize()
 	{
-		//ƒX[ƒp[ƒNƒ‰ƒX‰Šú‰»
+		//ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹åˆæœŸåŒ–
 		__super::Initialize(defGroupName, defName, true);
-		//ƒŠƒ\[ƒXƒNƒ‰ƒX¶¬orƒŠƒ\[ƒX‹¤—L
+		//ãƒªã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ç”Ÿæˆorãƒªã‚½ãƒ¼ã‚¹å…±æœ‰
 		this->res = Resource::Create();
 
-		//šƒf[ƒ^‰Šú‰»
+		//â˜…ãƒ‡ãƒ¼ã‚¿åˆæœŸåŒ–
 		this->count = 0;
 		this->bcount = 0;
 
 		ge->camera2D = ML::Box2D(0,0, ge->screen2DWidth, ge->screen2DHeight);
 
-		//ƒXƒRƒA‰Šú‰»
+		//ã‚¹ã‚³ã‚¢åˆæœŸåŒ–
 		ge->score = 0;
 
-	   //šƒ^ƒXƒN‚Ì¶¬
+	   //â˜…ã‚¿ã‚¹ã‚¯ã®ç”Ÿæˆ
 		BackGround::Object::Create(true);
-		auto pl = Player::Object::Create(true);
+
+		/*auto pl = Player::Object::Create(true);
 		pl->pos.x = 480 / 2;
 		pl->pos.y = 270 * 2 / 3;
 
@@ -67,25 +69,26 @@ namespace  Game
 		blo3->pos.x = 700;
 		blo3->pos.y = 700;
 
-		auto map = Map2D::Object::Create(true);
-		map->Load("./data/Map/Map2.txt");
-	
+
+		if (auto map = Generator::Object::Create_Mutex()) {
+			map->Set("./data/Map/Map.txt");
+		}
 
 		return  true;
 	}
 	//-------------------------------------------------------------------
-	//uI—¹vƒ^ƒXƒNÁ–Å‚É‚P‰ñ‚¾‚¯s‚¤ˆ—
+	//ã€Œçµ‚äº†ã€ã‚¿ã‚¹ã‚¯æ¶ˆæ»…æ™‚ã«ï¼‘å›ã ã‘è¡Œã†å‡¦ç†
 	bool  Object::Finalize()
 	{
-		//šƒf[ƒ^•ƒ^ƒXƒN‰ğ•ú
-		ge->KillAll_G("ƒvƒŒƒCƒ„[");
-		ge->KillAll_G("”wŒi‰æ‘œ");
-		ge->KillAll_G("“G");
-		ge->KillAll_G("’e");
-		ge->KillAll_G("ƒuƒƒbƒN");
+		//â˜…ãƒ‡ãƒ¼ã‚¿ï¼†ã‚¿ã‚¹ã‚¯è§£æ”¾
+		ge->KillAll_G("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼");
+		ge->KillAll_G("èƒŒæ™¯ç”»åƒ");
+		ge->KillAll_G("æ•µ");
+		ge->KillAll_G("å¼¾");
+		ge->KillAll_G("ãƒ–ãƒ­ãƒƒã‚¯");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
-			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
+			//â˜…å¼•ãç¶™ãã‚¿ã‚¹ã‚¯ã®ç”Ÿæˆ
 			auto nextTask = Ending::Object::Create(true);
 
 		}
@@ -93,45 +96,34 @@ namespace  Game
 		return  true;
 	}
 	//-------------------------------------------------------------------
-	//uXVv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
+	//ã€Œæ›´æ–°ã€ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã«è¡Œã†å‡¦ç†
 	void  Object::UpDate()
 	{
 		auto ms = ge->mouse->GetState();
 		auto inp = ge->in1->GetState();
 
-		//++count;
-		//++bcount;
-
-		//if (count >=120)
-		//{
-		//	count = 0;
-		//	auto ene = Enemy::Object::Create(true);
-		//	ene->pos.x = rand() % (ge->screen2DWidth - 100);
-		//}
-
-		//if (bcount >= 160) {
-		//	bcount = 0;
-		//	auto blo = Block01::Object::Create(true);
-		//	blo->pos.x = rand() % (ge->screen2DWidth - 100);
-		//}
-		if (ms.B1.down) {
-			
+		if (ms.LB.down) {
+			ge->KillAll_G("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼");
+			ge->KillAll_G("ãƒ–ãƒ­ãƒƒã‚¯");
+			if (auto map = Generator::Object::Create_Mutex()) {
+				map->Set("./data/Map/Map.txt");
+			}
 		}
 		if (ms.CB.down) {
-			//©g‚ÉÁ–Å—v¿
+			//è‡ªèº«ã«æ¶ˆæ»…è¦è«‹
 			this->Kill();
 		}
 	}
 	//-------------------------------------------------------------------
-	//u‚Q‚c•`‰æv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
+	//ã€Œï¼’ï¼¤æç”»ã€ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã«è¡Œã†å‡¦ç†
 	void  Object::Render2D_AF()
 	{
 
-		//ƒXƒRƒA•`‰æ
+		//ã‚¹ã‚³ã‚¢æç”»
 		//char msg[10];
 		//sprintf(msg, "%5d", ge->score);
-		////SPRINTF@S@String@Print Format@ƒtƒH[ƒ}ƒbƒg‚É‡‚í‚¹‚Äo—Í
-		////@Int‚©‚çchar”z—ñ‚Ö‚Ì•ÏŠ·
+		////SPRINTFã€€Sã€€Stringã€€Print Formatã€€ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«åˆã‚ã›ã¦å‡ºåŠ›
+		////ã€€Intã‹ã‚‰charé…åˆ—ã¸ã®å¤‰æ›
 
 		//for (int i = 0; i < 5; i++) {
 		//	if (msg[i] != ' ') {
@@ -144,21 +136,21 @@ namespace  Game
 		//}
 	}
 
-	//šššššššššššššššššššššššššššššššššššššššššš
-	//ˆÈ‰º‚ÍŠî–{“I‚É•ÏX•s—v‚Èƒƒ\ƒbƒh
-	//šššššššššššššššššššššššššššššššššššššššššš
+	//â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…
+	//ä»¥ä¸‹ã¯åŸºæœ¬çš„ã«å¤‰æ›´ä¸è¦ãªãƒ¡ã‚½ãƒƒãƒ‰
+	//â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…
 	//-------------------------------------------------------------------
-	//ƒ^ƒXƒN¶¬‘‹Œû
+	//ã‚¿ã‚¹ã‚¯ç”Ÿæˆçª“å£
 	Object::SP  Object::Create(bool  flagGameEnginePushBack_)
 	{
 		Object::SP  ob = Object::SP(new  Object());
 		if (ob) {
 			ob->me = ob;
 			if (flagGameEnginePushBack_) {
-				ge->PushBack_ABCDEFGHIJKLMN(ob);//ƒQ[ƒ€ƒGƒ“ƒWƒ“‚É“o˜^
+				ge->PushBack_ABCDEFGHIJKLMN(ob);//ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ã‚¸ãƒ³ã«ç™»éŒ²
 			}
 			if (!ob->B_Initialize()) {
-				ob->Kill();//ƒCƒjƒVƒƒƒ‰ƒCƒY‚É¸”s‚µ‚½‚çKill
+				ob->Kill();//ã‚¤ãƒ‹ã‚·ãƒ£ãƒ©ã‚¤ã‚ºã«å¤±æ•—ã—ãŸã‚‰Kill
 			}
 			return  ob;
 		}
@@ -179,7 +171,7 @@ namespace  Game
 	//-------------------------------------------------------------------
 	Object::Object() {	}
 	//-------------------------------------------------------------------
-	//ƒŠƒ\[ƒXƒNƒ‰ƒX‚Ì¶¬
+	//ãƒªã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ã®ç”Ÿæˆ
 	Resource::SP  Resource::Create()
 	{
 		if (auto sp = instance.lock()) {
