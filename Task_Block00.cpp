@@ -93,9 +93,9 @@ namespace  Block00
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
 		
 		//敵との当たり判定
-		if (this->Attack_Std("プレイヤー")) { //共通化により
-			//接触していた場合、自分に対して何かしたいなら
-		}
+		//if (this->Attack_Std("プレイヤー")) { //共通化により
+		//	接触していた場合、自分に対して何かしたいなら
+		//}
 
 		//if (this->Attack_Std("ブロック")) { //共通化により
 		//	//接触していた場合、自分に対して何かしたいなら

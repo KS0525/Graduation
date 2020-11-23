@@ -42,6 +42,9 @@ namespace Player
 		this->controller = ge->in1;
 		this->hp = 10;
 
+		ge->serial++;
+		this->serial = ge->serial;
+
 		this->maxFallSpeed = 10.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
@@ -85,10 +88,10 @@ namespace Player
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
 		
-		if (this->Attack_Std("ブロック")) { //共通化により
-			//接触していた場合、自分に対して何かしたいなら
-			//this->Kill();
-		}
+		//if (this->Attack_Std("ブロック")) { //共通化により
+		//	//接触していた場合、自分に対して何かしたいなら
+		//	//this->Kill();
+		//}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
@@ -105,7 +108,7 @@ namespace Player
 	}
 	//-----------------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_, AttackInfo  at_)
+	void  Object::Received(BChara*  from_)
 	{
 		//if (from_->groupName == "ブロック")
 		//{
@@ -124,6 +127,27 @@ namespace Player
 	{
 		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);
 		return  me.Hit(hit_);
+	}
+	//------------------------------------------------------------------
+	bool Object::Attack_Std(const string& GName)
+	{
+		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
+
+		auto targets = ge->GetTask_Group_G<BChara>(GName);
+		for (auto it = targets->begin();
+			it != targets->end();
+			++it)
+		{
+			//相手に接触の有無を確認させる
+			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
+			{
+				//相手にダメージの処理を行わせる
+				(*it)->Received(this);
+				return true;
+			}
+
+		}
+		return false;
 	}
 	//-----------------------------------------------------------------------------
 	//
