@@ -22,11 +22,12 @@ public:
 	enum Angle_LR { Left, Right };
 	Angle_LR	angle_LR;
 
-	float maxFallSpeed;		//最大落下速度
+	float maxFallSpeedDown;		//最大落下速度
+	float maxFallSpeedUp;		//上昇
+	float maxFallSpeedLeft;		//
+	float maxFallSpeedRight;	//
 
 	float gravity;			//重力加速度＆時間速度による加算量
-	float gensoku;			//時間による減速量
-	int	serial;				//ブロックナンバー
 
 	//重力の方向
 	enum Gravity { up, down, left, right };
@@ -41,10 +42,11 @@ public:
 		, moveCnt(0)
 		, angle_LR(Right)
 		, MoveGravity(down)
-		,maxFallSpeed(0)
+		,maxFallSpeedDown(0)
+		,maxFallSpeedUp(0)
+		,maxFallSpeedLeft(0)
+		,maxFallSpeedRight(0)
 		,gravity(0)
-		,gensoku(0)
-		,serial(0)
 	{
     }
 	virtual  ~BChara(){}
@@ -79,16 +81,17 @@ public:
 
 	//キャラクタ共通メソッド
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	virtual  void  Received(BChara*  from_);
+	virtual  void  Received(BChara*  from_,
+									AttackInfo  at_);
 	//接触判定
 	virtual  bool  CheckHit(const  ML::Box2D&  hit);
 	//モーションを更新(変更なしの場合 false)
 	bool UpdateMotion(Motion nm_);
 
-	void GravityMotion(const string& GName);
+	void GravityMotion();
 
 	//当たり判定
-	virtual bool Attack_Std(const string& GName);
+	virtual bool Attack_Std(const string& GName, AttackInfo at_);
 	virtual bool Check_Bottom();
 	//virtual bool Check_Head(const ML::Box2D& hit_);
 };

@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------
-//å¼¾
+//’e
 //-------------------------------------------------------------------
 #include  "MyPG.h"
 #include  "Task_Block00.h"
@@ -14,43 +14,41 @@ namespace  Block00
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
-	//ãƒªã‚½ãƒ¼ã‚¹ã®åˆæœŸåŒ–
+	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_02.jpg");
-
+		img = DG::Image::Create("./data/image/Block/Block_01.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
 	//-------------------------------------------------------------------
-	//ãƒªã‚½ãƒ¼ã‚¹ã®è§£æ”¾
+	//ƒŠƒ\[ƒX‚Ì‰ğ•ú
 	bool  Resource::Finalize()
 	{
 		return true;
 	}
 	//-------------------------------------------------------------------
-	//ã€ŒåˆæœŸåŒ–ã€ã‚¿ã‚¹ã‚¯ç”Ÿæˆæ™‚ã«ï¼‘å›ã ã‘è¡Œã†å‡¦ç†
+	//u‰Šú‰»vƒ^ƒXƒN¶¬‚É‚P‰ñ‚¾‚¯s‚¤ˆ—
 	bool  Object::Initialize()
 	{
-		//ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹åˆæœŸåŒ–
+		//ƒX[ƒp[ƒNƒ‰ƒX‰Šú‰»
 		__super::Initialize(defGroupName, defName, true);
-		//ãƒªã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ç”Ÿæˆorãƒªã‚½ãƒ¼ã‚¹å…±æœ‰
+		//ƒŠƒ\[ƒXƒNƒ‰ƒX¶¬orƒŠƒ\[ƒX‹¤—L
 		this->res = Resource::Create();
 
-		//â˜…ãƒ‡ãƒ¼ã‚¿åˆæœŸåŒ–
+		//šƒf[ƒ^‰Šú‰»
 		//hitBase = ML::Box2D(0, 0, 128, 128);
 		hp = 3;
 		moveVec = { 0,2 };
 		atk = { 0 };
 
-		this->maxFallSpeed = 10.0f;	//æœ€å¤§è½ä¸‹é€Ÿåº¦
-		this->gensoku = 0.2f;		//æ™‚é–“ã«ã‚ˆã‚‹æ¸›é€Ÿé‡
-		this->gravity = ML::Gravity(32) * 5; //é‡åŠ›åŠ é€Ÿåº¦ï¼†æ™‚é–“é€Ÿåº¦ã«ã‚ˆã‚‹åŠ ç®—é‡
+		this->maxFallSpeedDown = 10.0f;	//Å‘å—‰º‘¬“x
+		this->maxFallSpeedUp = -10.0f;
+		this->maxFallSpeedLeft = -10.0f;
+		this->maxFallSpeedRight = 10.0f;
 
-		ge->serial++;
-		this->serial = ge->serial;
-
-		//â˜…ã‚¿ã‚¹ã‚¯ã®ç”Ÿæˆ
+		this->gravity = ML::Gravity(32) * 5; //d—Í‰Á‘¬“x•ŠÔ‘¬“x‚É‚æ‚é‰ÁZ—Ê
+		//šƒ^ƒXƒN‚Ì¶¬
 		//this->res->se->Play_Normal(false);
 
 		se::LoadFile("shot", "./data/sound/shot.wav");
@@ -58,73 +56,79 @@ namespace  Block00
 		return  true;
 	}
 	//-------------------------------------------------------------------
-	//ã€Œçµ‚äº†ã€ã‚¿ã‚¹ã‚¯æ¶ˆæ»…æ™‚ã«ï¼‘å›ã ã‘è¡Œã†å‡¦ç†
+	//uI—¹vƒ^ƒXƒNÁ–Å‚É‚P‰ñ‚¾‚¯s‚¤ˆ—
 	bool  Object::Finalize()
 	{
-		//â˜…ãƒ‡ãƒ¼ã‚¿ï¼†ã‚¿ã‚¹ã‚¯è§£æ”¾
+		//šƒf[ƒ^•ƒ^ƒXƒN‰ğ•ú
 
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
-			//â˜…å¼•ãç¶™ãã‚¿ã‚¹ã‚¯ã®ç”Ÿæˆ
+			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
 		}
 
 		return  true;
 	}
 	//-------------------------------------------------------------------
-	//ã€Œæ›´æ–°ã€ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã«è¡Œã†å‡¦ç†
+	//uXVv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
 	void  Object::UpDate()
-	{	
+	{
+		//pos.x += moveVec.x;
+		//pos.y += moveVec.y;
+		
 		auto key = ge->in1->GetState();
-		//ML::Vec2 savePos = this->pos;
 
-		//é‡åŠ›å¤‰æ›´
+		//d—Í•ÏX
 		if (key.B1.on) { this->MoveGravity = Gravity::up; }
 		if (key.B2.on) { this->MoveGravity = Gravity::left; }
 		if (key.B3.on) { this->MoveGravity = Gravity::down; }
 		if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion("ãƒ–ãƒ­ãƒƒã‚¯");
+		this->GravityMotion();
 
-		//this->pos += this->moveVec;
+		this->pos += this->moveVec;
 
-		//ç”»é¢å¤–ã¸å‡ºãªã„ã‚ˆã†ã«
-		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }
-		if (this->pos.y < 0) { pos.y = 0; this->moveVec.y = 0; }
-		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; this->moveVec.x = 0; }
-		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
+		//‰æ–ÊŠO‚Öo‚È‚¢‚æ‚¤‚É
+		if (this->pos.x < 0) { pos.x = 0; }
+		if (this->pos.y < 0) { pos.y = 0; }
+		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
+		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
 		
-		//æ•µã¨ã®å½“ãŸã‚Šåˆ¤å®š
-		//if (this->Attack_Std("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼")) { //å…±é€šåŒ–ã«ã‚ˆã‚Š
-		//	æ¥è§¦ã—ã¦ã„ãŸå ´åˆã€è‡ªåˆ†ã«å¯¾ã—ã¦ä½•ã‹ã—ãŸã„ãªã‚‰
-		//}
-
-		//if (this->Attack_Std("ãƒ–ãƒ­ãƒƒã‚¯")) { //å…±é€šåŒ–ã«ã‚ˆã‚Š
-		//	//æ¥è§¦ã—ã¦ã„ãŸå ´åˆã€è‡ªåˆ†ã«å¯¾ã—ã¦ä½•ã‹ã—ãŸã„ãªã‚‰
-		//	//this->pos = savePos;
-		//}
+		//“G‚Æ‚Ì“–‚½‚è”»’è
+		if (this->Attack_Std("ƒvƒŒƒCƒ„[", atk)) { //‹¤’Ê‰»‚É‚æ‚è
+			//ÚG‚µ‚Ä‚¢‚½ê‡A©•ª‚É‘Î‚µ‚Ä‰½‚©‚µ‚½‚¢‚È‚ç
+			
+		   //this->Kill();
+		}
 	}
 	//-------------------------------------------------------------------
-	//ã€Œï¼’ï¼¤æç”»ã€ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã«è¡Œã†å‡¦ç†
+	//u‚Q‚c•`‰æv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src = ML::Box2D(0, 0, 128, 128);
+		/*ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
+							ML::Box2D(289,64,30,32),
+							ML::Box2D(257, 64, 30, 32)						
+							};*/
+		ML::Box2D src(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
 	}
 	//------------------------------------------------------------------
-	//æ¥è§¦æ™‚ã®å¿œç­”å‡¦ç†ï¼ˆã“ã‚Œè‡ªä½“ã¯ãƒ€ãƒŸãƒ¼ã®ã‚ˆã†ãªãƒ¢ãƒï¼‰
-	void  Object::Received(BChara*  from_)
+	//ÚG‚Ì‰“šˆ—i‚±‚ê©‘Ì‚Íƒ_ƒ~[‚Ì‚æ‚¤‚Èƒ‚ƒmj
+	void  Object::Received(BChara*  from_, AttackInfo  at_)
 	{
-		//if (this->moveVec > from_->moveVec)
-		//{
-		//	this->moveVec = from_->moveVec;
-		//}
-		//else
-		//{
-		//	from_->moveVec = this->moveVec;
-		//}
+		this->hp -= at_.power;
+
+		if (this->hp <= 0)
+		{
+			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
+			++ge->score;
+			this->Kill();
+		}
+		else {
+			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
+		}
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -138,46 +142,42 @@ namespace  Block00
 		return pl->CheckHit(bottom);
 	}
 	//------------------------------------------------------------------
-	bool Object::Attack_Std(const string& GName)
+	bool Object::Attack_Std(const string& GName,AttackInfo at_)
 	{
-		//è‡ªèº«åŒå£«ã§åˆ¤å®šã—ã¦ãªã„ã‹ãƒã‚§ãƒƒã‚¯
 		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
+	
+		ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
+		bottom.Offset(this->pos);
 
-		auto targets = ge->GetTask_Group_G<BChara>(GName);
-		for (auto it = targets->begin();
-			it != targets->end();
-			++it)
-		{
-			//ç›¸æ‰‹ã«æ¥è§¦ã®æœ‰ç„¡ã‚’ç¢ºèªã•ã›ã‚‹
-			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
-			{
-				//this->moveVec.x = 0;
-				//this->moveVec.y = 0;
-				//ç›¸æ‰‹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å‡¦ç†ã‚’è¡Œã‚ã›ã‚‹
-				(*it)->Received(this);
-				return true;
-			}
-
+	auto targets = ge->GetTask_Group_G<BChara>(GName);
+	for (auto it = targets->begin();
+		it != targets->end();
+		++it) {
+		//‘Šè‚ÉÚG‚Ì—L–³‚ğŠm”F‚³‚¹‚é
+		if ((*it)->CheckHit(bottom)) {
+			//‘Šè‚Éƒ_ƒ[ƒW‚Ìˆ—‚ğs‚í‚¹‚é
+			(*it)->Received(this, at_);
+			return true;
 		}
-		return false;
 	}
-
-	//â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…
-	//ä»¥ä¸‹ã¯åŸºæœ¬çš„ã«å¤‰æ›´ä¸è¦ãªãƒ¡ã‚½ãƒƒãƒ‰
-	//â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…â˜…
+	return false;
+	}
+	//šššššššššššššššššššššššššššššššššššššššššš
+	//ˆÈ‰º‚ÍŠî–{“I‚É•ÏX•s—v‚Èƒƒ\ƒbƒh
+	//šššššššššššššššššššššššššššššššššššššššššš
 	//-------------------------------------------------------------------
-	//ã‚¿ã‚¹ã‚¯ç”Ÿæˆçª“å£
+	//ƒ^ƒXƒN¶¬‘‹Œû
 	Object::SP  Object::Create(bool  flagGameEnginePushBack_)
 	{
 		Object::SP  ob = Object::SP(new  Object());
 		if (ob) {
 			ob->me = ob;
 			if (flagGameEnginePushBack_) {
-				ge->PushBack_ABCDEFGHIJKLMN(ob);//ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ã‚¸ãƒ³ã«ç™»éŒ²
-				//ï¼ˆãƒ¡ã‚½ãƒƒãƒ‰åãŒå¤‰ãªã®ã¯æ—§ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®ã‚³ãƒ”ãƒ¼ã«ã‚ˆã‚‹ãƒã‚°ã‚’å›é¿ã™ã‚‹ãŸã‚
+				ge->PushBack_ABCDEFGHIJKLMN(ob);//ƒQ[ƒ€ƒGƒ“ƒWƒ“‚É“o˜^
+				//iƒƒ\ƒbƒh–¼‚ª•Ï‚È‚Ì‚Í‹Œƒo[ƒWƒ‡ƒ“‚ÌƒRƒs[‚É‚æ‚éƒoƒO‚ğ‰ñ”ğ‚·‚é‚½‚ß
 			}
 			if (!ob->B_Initialize()) {
-				ob->Kill();//ã‚¤ãƒ‹ã‚·ãƒ£ãƒ©ã‚¤ã‚ºã«å¤±æ•—ã—ãŸã‚‰Kill
+				ob->Kill();//ƒCƒjƒVƒƒƒ‰ƒCƒY‚É¸”s‚µ‚½‚çKill
 			}
 			return  ob;
 		}
@@ -198,7 +198,7 @@ namespace  Block00
 	//-------------------------------------------------------------------
 	Object::Object() {	}
 	//-------------------------------------------------------------------
-	//ãƒªã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ã®ç”Ÿæˆ
+	//ƒŠƒ\[ƒXƒNƒ‰ƒX‚Ì¶¬
 	Resource::SP  Resource::Create()
 	{
 		if (auto sp = instance.lock()) {
@@ -241,15 +241,15 @@ private:
 		for (auto chips : mChips)
 		{
 			auto bl = Block00::Object::Create(true);
-			//ã‚ã¨ã¯ãƒãƒƒãƒ—æƒ…å ±ã‚’æ¸¡ã™
+			//‚ ‚Æ‚Íƒ`ƒbƒvî•ñ‚ğ“n‚·
 
 		}
 	}
 public:
 	enum class Chiptype {
-		broken, //å£Šã›ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
-		hardbroken, //å£Šã—ã«ãã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
-		Unbroken //å£Šã›ãªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+		broken, //‰ó‚¹‚éƒIƒuƒWƒFƒNƒg
+		hardbroken, //‰ó‚µ‚É‚­‚¢ƒIƒuƒWƒFƒNƒg
+		Unbroken //‰ó‚¹‚È‚¢ƒIƒuƒWƒFƒNƒg
 	};
 
 	ML::Box2D src;

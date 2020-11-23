@@ -160,7 +160,6 @@
     <ClCompile Include="Task_Block01.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Block02.cpp">
     <ClCompile Include="Task_MapGenerator.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
@@ -277,8 +276,6 @@
     <ClInclude Include="Task_Block01.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
-
-    <ClInclude Include="Task_Block02.h">
     <ClInclude Include="Task_MapGenerator.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
