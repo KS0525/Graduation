@@ -42,11 +42,11 @@ namespace Player
 		this->controller = ge->in1;
 		this->hp = 10;
 
-		this->maxFallSpeedDown = 10.0f;	//最大落下速度
-		this->maxFallSpeedUp = -10.0f;
-		this->maxFallSpeedLeft = -10.0f;
-		this->maxFallSpeedRight = 10.0f;
+		ge->serial++;
+		this->serial = ge->serial;
 
+		this->maxFallSpeed = 10.0f;	//最大落下速度
+		this->gensoku = 0.2f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 
@@ -78,9 +78,9 @@ namespace Player
 		if (key.B3.on) { this->MoveGravity = Gravity::down; }
 		if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion();
+		this->GravityMotion("ブロック");
 
-		this->pos += this->moveVec;
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; }
@@ -88,21 +88,9 @@ namespace Player
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
 		
-		//カメラの位置を再調整
-		//{
-		//	//プレイヤを画面のどこに置くか（今回は画面中央）
-		//	int px = ge->camera2D.w / 2;
-		//	int py = ge->camera2D.h / 2;
-		//	//プレイヤを画面中央に置いた時のカメラの左上座標を求める
-		//	int cpx = int(this->pos.x) - px;
-		//	int cpy = int(this->pos.y) - py;
-		//	//カメラの座標を更新
-		//	//ge->camera2D.x = cpx;
-		//	//ge->camera2D.y = cpy;
-		//	//以下はスクロール停止の節まで入力しない
-		//	if (auto map = ge->qa_Map) {
-		//		//map->AdjustCameraPos();
-		//	}
+		//if (this->Attack_Std("ブロック")) { //共通化により
+		//	//接触していた場合、自分に対して何かしたいなら
+		//	//this->Kill();
 		//}
 	}
 	//-------------------------------------------------------------------
@@ -120,23 +108,18 @@ namespace Player
 	}
 	//-----------------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_, AttackInfo  at_)
+	void  Object::Received(BChara*  from_)
 	{
-		hp -= at_.power;
-		if (from_->groupName == "ブロック") {
-			//if(from_->Check_Bottom()){
-				this->pos.y = from_->pos.y;
-				if (this->pos.y >ge->screenHeight- this->hitBase.h) {
-					this->Kill();
-					ge->KillAll_G("本編");
-				}
-			}
-		//}
-		if (this->hp <= 0)
-		{
+		//if (from_->groupName == "ブロック")
+		//{
 			this->Kill();
-			ge->KillAll_G("本編");
-		}
+		//	ge->KillAll_G("本編");
+		//}
+		//if (this->hp <= 0)
+		//{
+		//	this->Kill();
+		//	ge->KillAll_G("本編");
+		//}
 	}
 	//-----------------------------------------------------------------------------
 	//接触判定
@@ -144,6 +127,27 @@ namespace Player
 	{
 		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);
 		return  me.Hit(hit_);
+	}
+	//------------------------------------------------------------------
+	bool Object::Attack_Std(const string& GName)
+	{
+		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
+
+		auto targets = ge->GetTask_Group_G<BChara>(GName);
+		for (auto it = targets->begin();
+			it != targets->end();
+			++it)
+		{
+			//相手に接触の有無を確認させる
+			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
+			{
+				//相手にダメージの処理を行わせる
+				(*it)->Received(this);
+				return true;
+			}
+
+		}
+		return false;
 	}
 	//-----------------------------------------------------------------------------
 	//

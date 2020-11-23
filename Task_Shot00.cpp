@@ -77,12 +77,12 @@ namespace  Shot00
 		}
 
 		//“G‚Æ‚Ì“–‚½‚è”»’è
-		if (this->Attack_Std("“G", atk)) { //‹¤’Ê‰»‚É‚æ‚è
+		if (this->Attack_Std("“G")) { //‹¤’Ê‰»‚É‚æ‚è
 			//ÚG‚µ‚Ä‚¢‚½ê‡AŽ©•ª‚É‘Î‚µ‚Ä‘ŠŽè‚É‰½‚©‚µ‚½‚¢‚È‚ç
 			
 			this->Kill();
 		}
-		if (this->Attack_Std("ƒuƒƒbƒN", atk)) {
+		if (this->Attack_Std("ƒuƒƒbƒN")) {
 
 			this->Kill();
 		}
