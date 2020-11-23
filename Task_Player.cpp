@@ -12,7 +12,7 @@ namespace Player
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		this->img = DG::Image::Create("./data/image/chara/maou_64_64.png");
+		this->img = DG::Image::Create("./data/image/chara/Egg_normal.png");
 		this->chargeimg = DG::Image::Create("./data/image/bar.png");
 
 		return true;
@@ -111,7 +111,7 @@ namespace Player
 	{
 		{
 			ML::Box2D draw = this->hitBase;
-			ML::Box2D src(0, 0, 64, 64);
+			ML::Box2D src(0, 0, 100, 100);
 			draw.Offset(this->pos);
 
 			this->res->img->Draw(draw, src);
