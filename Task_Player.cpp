@@ -42,11 +42,11 @@ namespace Player
 		this->controller = ge->in1;
 		this->hp = 10;
 
-		this->maxFallSpeedDown = 10.0f;	//最大落下速度
-		this->maxFallSpeedUp = -10.0f;
-		this->maxFallSpeedLeft = -10.0f;
-		this->maxFallSpeedRight = 10.0f;
+		ge->serial++;
+		this->serial = ge->serial;
 
+		this->maxFallSpeed = 10.0f;	//最大落下速度
+		this->gensoku = 0.2f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 
@@ -78,9 +78,9 @@ namespace Player
 		if (key.B3.on) { this->MoveGravity = Gravity::down; }
 		if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion();
+		this->GravityMotion("ブロック");
 
-		this->pos += this->moveVec;
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; }
@@ -122,21 +122,28 @@ namespace Player
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_, AttackInfo  at_)
 	{
-		hp -= at_.power;
-		if (from_->groupName == "ブロック") {
-			//if(from_->Check_Bottom()){
-				this->pos.y = from_->pos.y;
-				if (this->pos.y >ge->screenHeight- this->hitBase.h) {
-					this->Kill();
-					ge->KillAll_G("本編");
-				}
-			}
-		//}
-		if (this->hp <= 0)
+		this->Kill();
+	}
+	//------------------------------------------------------------------
+	bool Object::Attack_Std(const string& GName)
+	{
+		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
+
+		auto targets = ge->GetTask_Group_G<BChara>(GName);
+		for (auto it = targets->begin();
+			it != targets->end();
+			++it)
 		{
-			this->Kill();
-			ge->KillAll_G("本編");
+			//相手に接触の有無を確認させる
+			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
+			{
+				//相手にダメージの処理を行わせる
+				(*it)->Received(this);
+				return true;
+			}
+
 		}
+		return false;
 	}
 	//-----------------------------------------------------------------------------
 	//接触判定

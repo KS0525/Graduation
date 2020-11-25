@@ -9,7 +9,7 @@ namespace  Block01
 {
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName(		"ブロック");	//グループ名
-	const  string  defName(				"ブロック");		//タスク名
+	const  string  defName(				"移動ブロック");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource
 	{
@@ -52,8 +52,8 @@ namespace  Block01
 		int hp;
 		//BCharaに含まれないモノのみここに追加する
 		AttackInfo atk;
-		void  Object::Received(BChara*  from_, AttackInfo  at_);
-		bool Attack_Std(const string& GName, AttackInfo at_);
+		void  Object::Received(BChara*  from_);
+		bool Attack_Std(const string& GName);
 		bool Check_bottom();
 	};
 }

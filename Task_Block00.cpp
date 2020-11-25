@@ -17,7 +17,7 @@ namespace  Block00
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_01.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_02.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -37,17 +37,18 @@ namespace  Block00
 		this->res = Resource::Create();
 
 		//★データ初期化
-		//hitBase = ML::Box2D(0, 0, 128, 128);
+		hitBase = ML::Box2D(0, 0, 128, 128);
 		hp = 3;
 		moveVec = { 0,2 };
 		atk = { 0 };
 
-		this->maxFallSpeedDown = 10.0f;	//最大落下速度
-		this->maxFallSpeedUp = -10.0f;
-		this->maxFallSpeedLeft = -10.0f;
-		this->maxFallSpeedRight = 10.0f;
-
+		this->maxFallSpeed = 10.0f;	//最大落下速度
+		this->gensoku = 0.2f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
+
+		ge->serial++;
+		this->serial = ge->serial;
+
 		//★タスクの生成
 		//this->res->se->Play_Normal(false);
 
@@ -83,22 +84,22 @@ namespace  Block00
 		if (key.B3.on) { this->MoveGravity = Gravity::down; }
 		if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion();
+		this->GravityMotion("ブロック");
 
-		this->pos += this->moveVec;
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
-		if (this->pos.x < 0) { pos.x = 0; }
-		if (this->pos.y < 0) { pos.y = 0; }
-		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
-		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
-		
-		//敵との当たり判定
-		if (this->Attack_Std("プレイヤー", atk)) { //共通化により
-			//接触していた場合、自分に対して何かしたいなら
-			
-		   //this->Kill();
-		}
+		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }
+		if (this->pos.y < 0) { pos.y = 0; this->moveVec.y = 0; }
+		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; this->moveVec.x = 0; }
+		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
+
+		////敵との当たり判定
+		//if (this->Attack_Std("プレイヤー", atk)) { //共通化により
+		//	//接触していた場合、自分に対して何かしたいなら
+		//	
+		//   //this->Kill();
+		//}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
@@ -116,9 +117,9 @@ namespace  Block00
 	}
 	//------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_, AttackInfo  at_)
+	void  Object::Received(BChara*  from_)
 	{
-		this->hp -= at_.power;
+		/*this->hp -= at_.power;
 
 		if (this->hp <= 0)
 		{
@@ -128,7 +129,7 @@ namespace  Block00
 		}
 		else {
 			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
-		}
+		}*/
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -142,21 +143,18 @@ namespace  Block00
 		return pl->CheckHit(bottom);
 	}
 	//------------------------------------------------------------------
-	bool Object::Attack_Std(const string& GName,AttackInfo at_)
+	bool Object::Attack_Std(const string& GName)
 	{
 		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
 	
-		ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
-		bottom.Offset(this->pos);
-
 	auto targets = ge->GetTask_Group_G<BChara>(GName);
 	for (auto it = targets->begin();
 		it != targets->end();
 		++it) {
 		//相手に接触の有無を確認させる
-		if ((*it)->CheckHit(bottom)) {
+		if ((*it)->CheckHit(me) && this->serial != (*it)->serial) {
 			//相手にダメージの処理を行わせる
-			(*it)->Received(this, at_);
+			(*it)->Received(this);
 			return true;
 		}
 	}
