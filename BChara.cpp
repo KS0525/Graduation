@@ -43,6 +43,7 @@ bool BChara::Attack_Std(const string& GName)
 		//相手に接触の有無を確認させる
 		if ((*it)->CheckHit(me)) {
 			//相手にダメージの処理を行わせる
+
 			(*it)->Received(this);
 			return true;
 		}

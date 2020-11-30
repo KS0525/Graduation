@@ -15,6 +15,7 @@
 #include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
 #include  "Task_Block02.h"
+#include  "Task_Block03.h"
 
 namespace  Game
 {
@@ -57,15 +58,23 @@ namespace  Game
 		//pl->pos.x = 480 / 2;
 		//pl->pos.y = 270 * 2 / 3;
 
-		auto blo = Block00::Object::Create(true);
-		blo->pos.x = 500;
-		blo->pos.y = 500;
+		//auto blo0 = Block00::Object::Create(true);
+		//blo0->pos.x = 500;
+		//blo0->pos.y = 500;
 
-		auto blo2 = Block01::Object::Create(true);
-		blo2->pos.x = 1000;
-		blo2->pos.y = 700;
+		//auto blo1 = Block01::Object::Create(true);
+		//blo1->pos.x = 1000;
+		//blo1->pos.y = 700;
 
-		auto blo3 = Block02::Object::Create(true);
+		//auto blo2 = Block02::Object::Create(true);
+		//blo2->pos.x = 700;
+		//blo2->pos.y = 700;
+
+		auto blo3 = Block03::Object::Create(true);
+		blo3->pos.x = 500;
+		blo3->pos.y = 500;
+
+		blo3 = Block03::Object::Create(true);
 		blo3->pos.x = 700;
 		blo3->pos.y = 700;
 

@@ -166,6 +166,8 @@
     <ClCompile Include="Task_Block02.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="Task_Block03.cpp" />
+    <ClCompile Include="Task_Switch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myLib.h">
@@ -285,6 +287,8 @@
     <ClInclude Include="Task_Block02.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="Task_Block03.h" />
+    <ClInclude Include="Task_Switch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Shader\MyStdShader.fx" />
