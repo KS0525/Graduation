@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------------
 //プレイヤー（卵）
 //-----------------------------------------------------------------------------
-#include "Task_Player.h"
+#include "Task_Goal.h"
 #include "Task_EffectHit.h"
 #include  "MyPG.h"
 
-namespace Player 
+namespace Goal
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->img = DG::Image::Create("./data/image/chara/Egg_normal.png");
+		this->img = DG::Image::Create("./data/image/Goal/Goal01.png");
 		this->chargeimg = DG::Image::Create("./data/image/bar.png");
 
 		return true;
@@ -35,7 +35,6 @@ namespace Player
 		this->res = Resource::Create();
 
 		//★データ初期化
-		pos.y = 300;
 		//this->render2D_Priority[1] = 0.5f;
 		this->hitBase = ML::Box2D(0, 0, 128, 128);
 		this->angle_LR = Angle_LR::Right;
@@ -45,9 +44,9 @@ namespace Player
 		ge->serial++;
 		this->serial = ge->serial;
 
-		this->maxFallSpeed = 10.0f;	//最大落下速度
-		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
+		//this->maxFallSpeed = 10.0f;	//最大落下速度
+		//this->gensoku = 0.2f;		//時間による減速量
+		//this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 
 		return  true;
@@ -69,16 +68,15 @@ namespace Player
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
 	{
-		auto mouse = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 
 		//重力変更
-		if (key.B1.on) { this->MoveGravity = Gravity::up; }
-		if (key.B2.on) { this->MoveGravity = Gravity::left; }
-		if (key.B3.on) { this->MoveGravity = Gravity::down; }
-		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+		//if (key.B1.on) { this->MoveGravity = Gravity::up; }
+		//if (key.B2.on) { this->MoveGravity = Gravity::left; }
+		//if (key.B3.on) { this->MoveGravity = Gravity::down; }
+		//if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion("ブロック");
+		//this->GravityMotion("ブロック");
 
 		//this->pos += this->moveVec;
 
@@ -88,6 +86,10 @@ namespace Player
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
 		
+		if (Attack_Std("プレイヤー"))
+		{
+			ge->KillAll_G("本編");
+		}
 		//カメラの位置を再調整
 		//{
 		//	//プレイヤを画面のどこに置くか（今回は画面中央）
@@ -111,7 +113,7 @@ namespace Player
 	{
 		{
 			ML::Box2D draw = this->hitBase;
-			ML::Box2D src(0, 0, 100, 100);
+			ML::Box2D src(0, 0, 330, 330);
 			draw.Offset(this->pos);
 
 			this->res->img->Draw(draw, src);
@@ -120,7 +122,7 @@ namespace Player
 	}
 	//-----------------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_)
+	void  Object::Received(BChara*  from_, AttackInfo  at_)
 	{
 		this->Kill();
 	}

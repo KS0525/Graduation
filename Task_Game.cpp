@@ -18,6 +18,7 @@
 #include  "Task_Block03.h"
 #include  "Task_Block04.h"
 #include  "Task_Switch.h"
+#include  "Task_Goal.h"
 
 namespace  Game
 {
@@ -88,6 +89,14 @@ namespace  Game
 		blo4->pos.x = 100;
 		blo4->pos.y = 1000;
 
+		auto pl = Player::Object::Create(true);
+		pl->pos.x = 0;
+		pl->pos.y = 0;
+
+		auto go = Goal::Object::Create(true);
+		go->pos.x = 1280;
+		go->pos.y = 720;
+
 		/*if (auto map = Generator::Object::Create_Mutex()) {
 			map->Set("./data/Map/Map.txt");
 		}*/
@@ -104,6 +113,7 @@ namespace  Game
 		ge->KillAll_G("敵");
 		ge->KillAll_G("弾");
 		ge->KillAll_G("ブロック");
+		ge->KillAll_G("ゴール");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成

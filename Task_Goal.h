@@ -6,11 +6,11 @@
 #include "GameEngine_Ver3_82.h"
 #include "BChara.h"
 
-namespace Player {
+namespace Goal {
 
 	//タスクに割り当てるグループ名と固有名
-	const  string  defGroupName("プレイヤー");	//グループ名
-	const  string  defName("卵");	//タスク名
+	const  string  defGroupName("ゴール");	//グループ名
+	const  string  defName("ゴール");	//タスク名
 	//-------------------------------------------------------------------
 	class Resource : public BResource
 	{
@@ -55,7 +55,7 @@ namespace Player {
 		int hp;
 
 		//接触時の応答処理(必ず受け身の処理として実装する)
-		void Received(BChara* from_);
+		void Received(BChara* from_, AttackInfo at_);
 		bool CheckHit(const  ML::Box2D&  hit_);
 		bool Attack_Std(const string& GName);
 		bool Check_Head(const ML::Box2D& head_);

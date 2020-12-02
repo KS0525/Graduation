@@ -175,6 +175,9 @@
     <ClCompile Include="Task_Block04.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="Task_Goal.cpp">
+      <Filter>MyPG\Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myLib.h">
@@ -301,6 +304,9 @@
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_Block04.h">
+      <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Goal.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
   </ItemGroup>
