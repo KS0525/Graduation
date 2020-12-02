@@ -8,7 +8,7 @@
 namespace  Switch
 {
 	//タスクに割り当てるグループ名と固有名
-	const  string  defGroupName(		"ブロック");	//グループ名
+	const  string  defGroupName(		"スイッチ");	//グループ名
 	const  string  defName(				"スイッチ");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource

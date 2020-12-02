@@ -62,7 +62,7 @@ namespace  Switch
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-
+		ge->KillAll_G("ブロック");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
@@ -84,6 +84,21 @@ namespace  Switch
 		//if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
 		//this->GravityMotion("ブロック");
+		auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
+		if (nullptr == block) 
+		{
+		}
+		else
+		{
+			if (Attack_Std("ブロック"))
+			{
+				block->MoveGravity = Gravity::up;
+			}
+			else
+			{
+				block->MoveGravity = Gravity::down;
+			}
+		}
 
 		//this->pos += this->moveVec;
 
@@ -117,8 +132,7 @@ namespace  Switch
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
-		block->MoveGravity = Gravity::up;
+
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -146,6 +160,8 @@ namespace  Switch
 			{
 				//相手にダメージの処理を行わせる
 				(*it)->Received(this);
+				//auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
+				//block->MoveGravity = Gravity::up;
 				return true;
 			}
 

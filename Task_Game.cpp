@@ -108,6 +108,7 @@ namespace  Game
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
+		ge->KillAll_G("スイッチ");
 		ge->KillAll_G("プレイヤー");
 		ge->KillAll_G("背景画像");
 		ge->KillAll_G("敵");
