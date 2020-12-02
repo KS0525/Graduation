@@ -7,6 +7,7 @@
 #include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
+#include  "Task_Block04.h"
 
 
 
@@ -17,7 +18,7 @@ namespace  Switch
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_04.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_08.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -77,12 +78,12 @@ namespace  Switch
 		//ML::Vec2 savePos = this->pos;
 
 		//重力変更
-		if (key.B1.on) { this->MoveGravity = Gravity::up; }
-		if (key.B2.on) { this->MoveGravity = Gravity::left; }
-		if (key.B3.on) { this->MoveGravity = Gravity::down; }
-		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+		//if (key.B1.on) { this->MoveGravity = Gravity::up; }
+		//if (key.B2.on) { this->MoveGravity = Gravity::left; }
+		//if (key.B3.on) { this->MoveGravity = Gravity::down; }
+		//if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion("ブロック");
+		//this->GravityMotion("ブロック");
 
 		//this->pos += this->moveVec;
 
@@ -116,11 +117,8 @@ namespace  Switch
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		if (from_->name == this->name)
-		{
-			this->Kill();
-			from_->Kill();
-		}
+		auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
+		block->MoveGravity = Gravity::up;
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
