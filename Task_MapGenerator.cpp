@@ -7,6 +7,15 @@
 #include  "Task_Enemy01.h"
 #include  "Task_Player.h"
 #include  "Task_Block00.h"
+#include  "Task_Block01.h"
+#include  "Task_Block02.h"
+#include  "Task_Block03.h"
+#include  "Task_Block04.h"
+#include  "Task_Block05.h"
+#include  "Task_Block06.h"
+#include  "Task_Block07.h"
+#include  "Task_Block08.h"
+//#include  "Task_Block09.h"
 
 namespace  Generator
 {
@@ -165,27 +174,56 @@ namespace  Generator
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}
-		//	if (bar[x] == 1) {
-		//		ML::Box2D draw(0, 0, 32, 32);
-		//		draw.Offset(x * 32, 0);
-		//		//auto bl = Enemy02::Object::Create(true);
-		//		//bl->pos.x = draw.x;
-		//		bl->pos.y = draw.y;
-		//	}
-		//	else if (bar[x] == 9) {
-		//		ML::Box2D draw(0, 0, 32, 32);
-		//		draw.Offset(x * 32, 0);
-		//		auto bl = Enemy::Object::Create(true);
-		//		bl->pos.x = draw.x;
-		//		bl->pos.y = draw.y;
-		//	}
-		//	else if (bar[x] == 8) {
-		//		ML::Box2D draw(0, 0, 32, 32);
-		//		draw.Offset(x * 32, 0);
-		//		auto bl = Enemy01::Object::Create(true);
-		//		bl->pos.x = draw.x;
-		//		bl->pos.y = draw.y;
-		//	}
+		if (kind == "Block01") {
+			auto bl = Block01::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block02") {
+			auto bl = Block02::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block03") {
+			auto bl = Block03::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block04") {
+			auto bl = Block04::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block05") {
+			auto bl = Block05::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block06") {
+			auto bl = Block06::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block07") {
+			auto bl = Block07::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block08") {
+			auto bl = Block08::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		/*if (kind == "Block09") {
+			auto bl = Block09::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}*/
+		/*if (kind == "Goal") {
+			auto bl = Goal::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}*/
 	}
 	//-------------------------------------------------------------------
 	void Object::Generate()

@@ -17,7 +17,7 @@ namespace  Block03
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_04.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_03.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -42,9 +42,9 @@ namespace  Block03
 		moveVec = { 0,2 };
 		atk = { 0 };
 
-		this->maxFallSpeed = 5.0f;	//最大落下速度
+		this->maxFallSpeed = 10.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 3; //重力加速度＆時間速度による加算量
+		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 
 		ge->serial++;
 		this->serial = ge->serial;
@@ -72,15 +72,17 @@ namespace  Block03
 	//-------------------------------------------------------------------
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
-	{		
+	{
+		//pos.x += moveVec.x;
+		//pos.y += moveVec.y;
+		
 		auto key = ge->in1->GetState();
-		//ML::Vec2 savePos = this->pos;
 
 		//重力変更
-		if (key.B1.on) { this->MoveGravity = Gravity::up; }
-		if (key.B2.on) { this->MoveGravity = Gravity::left; }
-		if (key.B3.on) { this->MoveGravity = Gravity::down; }
-		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+		if (key.B1.on) { this->MoveGravity = Gravity::down; }
+		if (key.B2.on) { this->MoveGravity = Gravity::right; }
+		if (key.B3.on) { this->MoveGravity = Gravity::up; }
+		if (key.B4.on) { this->MoveGravity = Gravity::left; }
 
 		this->GravityMotion("ブロック");
 
@@ -92,14 +94,11 @@ namespace  Block03
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; this->moveVec.x = 0; }
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
 
-		//敵との当たり判定
-		//if (this->Attack_Std("プレイヤー")) { //共通化により
+		////敵との当たり判定
+		//if (this->Attack_Std("プレイヤー", atk)) { //共通化により
 		//	//接触していた場合、自分に対して何かしたいなら
-		//}
-
-		//if (this->Attack_Std("ブロック")) { //共通化により
-		//	//接触していた場合、自分に対して何かしたいなら
-		//	this->pos = savePos;
+		//	
+		//   //this->Kill();
 		//}
 	}
 	//-------------------------------------------------------------------
@@ -107,7 +106,11 @@ namespace  Block03
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src = ML::Box2D(0, 0, 128, 128);
+		/*ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
+							ML::Box2D(289,64,30,32),
+							ML::Box2D(257, 64, 30, 32)						
+							};*/
+		ML::Box2D src(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
@@ -116,11 +119,17 @@ namespace  Block03
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		if (from_->name == this->name)
+		/*this->hp -= at_.power;
+
+		if (this->hp <= 0)
 		{
+			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
+			++ge->score;
 			this->Kill();
-			from_->Kill();
 		}
+		else {
+			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
+		}*/
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -137,22 +146,19 @@ namespace  Block03
 	bool Object::Attack_Std(const string& GName)
 	{
 		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
-
-		auto targets = ge->GetTask_Group_G<BChara>(GName);
-		for (auto it = targets->begin();
-			it != targets->end();
-			++it)
-		{
-			//相手に接触の有無を確認させる
-			if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
-			{
-				//相手にダメージの処理を行わせる
-				(*it)->Received(this);
-				return true;
-			}
-
+	
+	auto targets = ge->GetTask_Group_G<BChara>(GName);
+	for (auto it = targets->begin();
+		it != targets->end();
+		++it) {
+		//相手に接触の有無を確認させる
+		if ((*it)->CheckHit(me) && this->serial != (*it)->serial) {
+			//相手にダメージの処理を行わせる
+			(*it)->Received(this);
+			return true;
 		}
-		return false;
+	}
+	return false;
 	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
@@ -210,39 +216,3 @@ namespace  Block03
 	//-------------------------------------------------------------------
 	Resource::~Resource() { this->Finalize(); }
 }
-
-
-
-class ChipInfo
-{
-private:
-	ChipInfo()
-	{
-		num = chip;
-		chip++;
-		mChips.push_back(this);
-	}
-	static int chip;
-	int num;
-
-	string srcName;
-
-	std::vector<ChipInfo*> mChips;
-	void Create()
-	{
-		for (auto chips : mChips)
-		{
-			auto bl = Block03::Object::Create(true);
-			//あとはチップ情報を渡す
-
-		}
-	}
-public:
-	enum class Chiptype {
-		broken, //壊せるオブジェクト
-		hardbroken, //壊しにくいオブジェクト
-		Unbroken //壊せないオブジェクト
-	};
-
-	ML::Box2D src;
-};

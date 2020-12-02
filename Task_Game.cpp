@@ -15,7 +15,7 @@
 #include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
 #include  "Task_Block02.h"
-#include  "Task_Block03.h"
+//#include  "Task_Block03.h"
 
 namespace  Game
 {
@@ -54,33 +54,9 @@ namespace  Game
 	   //šƒ^ƒXƒN‚Ì¶¬
 		BackGround::Object::Create(true);
 
-		//auto pl = Player::Object::Create(true);
-		//pl->pos.x = 480 / 2;
-		//pl->pos.y = 270 * 2 / 3;
-
-		//auto blo0 = Block00::Object::Create(true);
-		//blo0->pos.x = 500;
-		//blo0->pos.y = 500;
-
-		//auto blo1 = Block01::Object::Create(true);
-		//blo1->pos.x = 1000;
-		//blo1->pos.y = 700;
-
-		//auto blo2 = Block02::Object::Create(true);
-		//blo2->pos.x = 700;
-		//blo2->pos.y = 700;
-
-		auto blo3 = Block03::Object::Create(true);
-		blo3->pos.x = 500;
-		blo3->pos.y = 500;
-
-		blo3 = Block03::Object::Create(true);
-		blo3->pos.x = 700;
-		blo3->pos.y = 700;
-
-		/*if (auto map = Generator::Object::Create_Mutex()) {
-			map->Set("./data/Map/Map.txt");
-		}*/
+		if (auto map = Generator::Object::Create_Mutex()) {
+			map->Set("./data/Map/Map_Title.txt");
+		}
 
 		return  true;
 	}
