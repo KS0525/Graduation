@@ -74,7 +74,7 @@ namespace  Title
 
 		//easing::UpDate();
 
-		if (ms.CB.down) {
+		if (ms.LB.down) {
 			//ロゴの出現が終わっているか？
 		//	if(easing::GetState("titlelogoX") == easing::EQ_STATE::EQ_END){
 				//自身に消滅要請

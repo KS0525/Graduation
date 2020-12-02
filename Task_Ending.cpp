@@ -65,7 +65,7 @@ namespace  Ending
 
 		this->logoPosY = (int)easing::GetPos("endlogoY");
 		
-		if (ms.CB.down) {
+		if (ms.LB.down) {
 			//Ž©g‚ÉÁ–Å—v¿
 			this->Kill();
 		}

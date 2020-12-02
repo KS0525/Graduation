@@ -111,9 +111,9 @@ namespace Player
 	void  Object::Received(BChara*  from_)
 	{
 
-		if (auto map = Generator::Object::Create_Mutex()) {
-			map->Set("./data/Map/Map.txt");
-		}
+		//if (auto map = Generator::Object::Create_Mutex()) {
+		//	map->Set("./data/Map/Map.txt");
+		//}
 
 		this->Kill();
 

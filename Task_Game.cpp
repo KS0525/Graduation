@@ -87,7 +87,7 @@ namespace  Game
 		auto ms = ge->mouse->GetState();
 		auto inp = ge->in1->GetState();
 
-		if (ms.LB.down) {
+		if (ms.RB.down) {
 			ge->KillAll_G("プレイヤー");
 			ge->KillAll_G("ブロック");
 			ge->KillAll_G("固定ブロック");
@@ -108,21 +108,6 @@ namespace  Game
 	void  Object::Render2D_AF()
 	{
 
-		//スコア描画
-		//char msg[10];
-		//sprintf(msg, "%5d", ge->score);
-		////SPRINTF　S　String　Print Format　フォーマットに合わせて出力
-		////　Intからchar配列への変換
-
-		//for (int i = 0; i < 5; i++) {
-		//	if (msg[i] != ' ') {
-		//		ML::Box2D  draw2(-(48 / 2), (-60 / 2), 48, 60);
-		//		ML::Box2D  src2((msg[i] - '0') * 19, 32, 19, 32);
-		//		draw2.Offset((50 * i) + 500, 50);
-
-		//		this->res->score->Draw(draw2, src2);
-		//	}
-		//}
 	}
 
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
