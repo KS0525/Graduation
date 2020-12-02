@@ -1,15 +1,15 @@
 #pragma warning(disable:4996)
 #pragma once
 //-------------------------------------------------------------------
-//スイッチ
+//ブロック(破壊可能)
 //-------------------------------------------------------------------
 #include "BChara.h"
 
-namespace  Switch
+namespace  Block04
 {
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName(		"ブロック");	//グループ名
-	const  string  defName(				"スイッチ");		//タスク名
+	const  string  defName(				"スイッチ連動ブロック");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource
 	{

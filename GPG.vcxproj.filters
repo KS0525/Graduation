@@ -166,8 +166,15 @@
     <ClCompile Include="Task_Block02.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Block03.cpp" />
-    <ClCompile Include="Task_Switch.cpp" />
+    <ClCompile Include="Task_Block03.cpp">
+      <Filter>MyPG\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Switch.cpp">
+      <Filter>MyPG\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block04.cpp">
+      <Filter>MyPG\Tasks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myLib.h">
@@ -287,8 +294,15 @@
     <ClInclude Include="Task_Block02.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="Task_Block03.h" />
-    <ClInclude Include="Task_Switch.h" />
+    <ClInclude Include="Task_Block03.h">
+      <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Switch.h">
+      <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block04.h">
+      <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Shader\MyStdShader.fx" />

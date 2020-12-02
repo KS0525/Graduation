@@ -7,15 +7,17 @@
 #include  "Task_Player.h"
 #include  "Task_BackGround.h"
 #include  "Task_Enemy.h"
-#include  "Task_Block00.h"
 #include  "Task_EffectBomb.h"
 #include  "Task_EffectHit.h"
 #include  "Task_Enemy01.h"
 #include  "Task_Map2D.h"
-#include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
+#include  "Task_Block00.h"
+#include  "Task_Block01.h"
 #include  "Task_Block02.h"
 #include  "Task_Block03.h"
+#include  "Task_Block04.h"
+#include  "Task_Switch.h"
 
 namespace  Game
 {
@@ -77,6 +79,14 @@ namespace  Game
 		blo3 = Block03::Object::Create(true);
 		blo3->pos.x = 700;
 		blo3->pos.y = 700;
+
+		auto swi = Switch::Object::Create(true);
+		swi->pos.x = 900;
+		swi->pos.y = 1000;
+
+		auto blo4 = Block04::Object::Create(true);
+		blo4->pos.x = 100;
+		blo4->pos.y = 1000;
 
 		/*if (auto map = Generator::Object::Create_Mutex()) {
 			map->Set("./data/Map/Map.txt");

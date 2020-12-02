@@ -1,24 +1,23 @@
 //-------------------------------------------------------------------
-//スイッチ
+//弾
 //-------------------------------------------------------------------
 #include  "MyPG.h"
-#include  "Task_Switch.h"
+#include  "Task_Block04.h"
 #include  "Task_Player.h"
 #include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
-#include  "Task_Block04.h"
 
 
 
-namespace  Switch
+namespace  Block04
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_08.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_05.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -83,7 +82,7 @@ namespace  Switch
 		//if (key.B3.on) { this->MoveGravity = Gravity::down; }
 		//if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		//this->GravityMotion("ブロック");
+		this->GravityMotion("ブロック");
 
 		//this->pos += this->moveVec;
 
@@ -117,8 +116,6 @@ namespace  Switch
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
-		block->MoveGravity = Gravity::up;
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -230,7 +227,7 @@ private:
 	{
 		for (auto chips : mChips)
 		{
-			auto bl = Switch::Object::Create(true);
+			auto bl = Block04::Object::Create(true);
 			//あとはチップ情報を渡す
 
 		}
