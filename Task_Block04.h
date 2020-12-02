@@ -9,7 +9,7 @@ namespace  Block04
 {
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName(		"ブロック");	//グループ名
-	const  string  defName(				"スイッチ連動ブロック");		//タスク名
+	const  string  defName(				"ブロック");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource
 	{

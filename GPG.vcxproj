@@ -103,7 +103,11 @@
     <ClCompile Include="Task_Block01.cpp" />
     <ClCompile Include="Task_Block02.cpp" />
     <ClCompile Include="Task_Block03.cpp" />
+    <ClCompile Include="Task_Block08.cpp" />
     <ClCompile Include="Task_Block04.cpp" />
+    <ClCompile Include="Task_Block05.cpp" />
+    <ClCompile Include="Task_Block06.cpp" />
+    <ClCompile Include="Task_Block07.cpp" />
     <ClCompile Include="Task_EffectBomb.cpp" />
     <ClCompile Include="Task_EffectCreate.cpp" />
     <ClCompile Include="Task_EffectHit.cpp" />
@@ -148,7 +152,11 @@
     <ClInclude Include="Task_Block01.h" />
     <ClInclude Include="Task_Block02.h" />
     <ClInclude Include="Task_Block03.h" />
+    <ClInclude Include="Task_Block08.h" />
     <ClInclude Include="Task_Block04.h" />
+    <ClInclude Include="Task_Block05.h" />
+    <ClInclude Include="Task_Block06.h" />
+    <ClInclude Include="Task_Block07.h" />
     <ClInclude Include="Task_EffectBomb.h" />
     <ClInclude Include="Task_EffectCreate.h" />
     <ClInclude Include="Task_EffectHit.h" />

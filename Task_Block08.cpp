@@ -2,7 +2,7 @@
 //弾
 //-------------------------------------------------------------------
 #include  "MyPG.h"
-#include  "Task_Block02.h"
+#include  "Task_Block08.h"
 #include  "Task_Player.h"
 #include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
@@ -10,14 +10,14 @@
 
 
 
-namespace  Block02
+namespace  Block08
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_02.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_08.jpg");
 		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
@@ -116,6 +116,11 @@ namespace  Block02
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
+		if (from_->name == this->name)
+		{
+			this->Kill();
+			from_->Kill();
+		}
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -205,39 +210,3 @@ namespace  Block02
 	//-------------------------------------------------------------------
 	Resource::~Resource() { this->Finalize(); }
 }
-
-
-
-class ChipInfo
-{
-private:
-	ChipInfo()
-	{
-		num = chip;
-		chip++;
-		mChips.push_back(this);
-	}
-	static int chip;
-	int num;
-
-	string srcName;
-
-	std::vector<ChipInfo*> mChips;
-	void Create()
-	{
-		for (auto chips : mChips)
-		{
-			auto bl = Block02::Object::Create(true);
-			//あとはチップ情報を渡す
-
-		}
-	}
-public:
-	enum class Chiptype {
-		broken, //壊せるオブジェクト
-		hardbroken, //壊しにくいオブジェクト
-		Unbroken //壊せないオブジェクト
-	};
-
-	ML::Box2D src;
-};

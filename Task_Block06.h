@@ -5,11 +5,11 @@
 //-------------------------------------------------------------------
 #include "BChara.h"
 
-namespace  Block03
+namespace  Block06
 {
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName(		"ブロック");	//グループ名
-	const  string  defName(				"移動ブロック");		//タスク名
+	const  string  defName(				"ブロック");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource
 	{

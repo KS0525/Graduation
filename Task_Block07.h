@@ -5,11 +5,11 @@
 //-------------------------------------------------------------------
 #include "BChara.h"
 
-namespace  Block03
+namespace  Block07
 {
 	//タスクに割り当てるグループ名と固有名
 	const  string  defGroupName(		"ブロック");	//グループ名
-	const  string  defName(				"移動ブロック");		//タスク名
+	const  string  defName(				"ブロック");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource
 	{
@@ -50,10 +50,16 @@ namespace  Block03
 	//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 		//追加したい変数・メソッドはここに追加する
 		int hp;
+		int direction[4] = {0,1,2,3};        //進む方向{右、下、左、上}
+		int i;                               
+		int RightTime;        //右に進む時間
+		int DownTime;         //下に進む時間
+		int LeftTime;         //左に進む時間
+		int UpTime;           //上に進む時間
 		//BCharaに含まれないモノのみここに追加する
 		AttackInfo atk;
-		void  Object::Received(BChara*  from_);
-		bool Attack_Std(const string& GName);
+		void  Object::Received(BChara*  from_, AttackInfo  at_);
+		bool Attack_Std(const string& GName, AttackInfo at_);
 		bool Check_bottom();
 	};
 }
