@@ -120,6 +120,7 @@ namespace Player
 			{
 				//相手にダメージの処理を行わせる
 				(*it)->Received(this);
+				this->Kill();
 				return true;
 			}
 

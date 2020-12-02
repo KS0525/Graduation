@@ -1,31 +1,28 @@
-//-------------------------------------------------------------------
-//スイッチ
-//-------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//プレイヤー（卵）
+//-----------------------------------------------------------------------------
+#include "Task_Goal.h"
+#include "Task_EffectHit.h"
 #include  "MyPG.h"
-#include  "Task_Switch.h"
-#include  "Task_Player.h"
-#include  "Task_Enemy.h"
-#include  "Task_EffectHit.h"
-#include  "Task_EffectBomb.h"
-#include  "Task_Block04.h"
 
-
-
-namespace  Switch
+namespace Goal
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_10.jpg");
-		se = DM::Sound::CreateSE("./data/sound/shot.wav");
+		this->img = DG::Image::Create("./data/image/Goal/Goal01.png");
+		this->chargeimg = DG::Image::Create("./data/image/bar.png");
+
 		return true;
 	}
 	//-------------------------------------------------------------------
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
+		this->img.reset();
+		this->chargeimg.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -38,23 +35,20 @@ namespace  Switch
 		this->res = Resource::Create();
 
 		//★データ初期化
-		hitBase = ML::Box2D(0, 0, 128, 128);
-		hp = 3;
-		moveVec = { 0,2 };
-		atk = { 0 };
-
-		this->maxFallSpeed = 5.0f;	//最大落下速度
-		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 3; //重力加速度＆時間速度による加算量
+		//this->render2D_Priority[1] = 0.5f;
+		this->hitBase = ML::Box2D(0, 0, 128, 128);
+		this->angle_LR = Angle_LR::Right;
+		this->controller = ge->in1;
+		this->hp = 10;
 
 		ge->serial++;
 		this->serial = ge->serial;
 
+		//this->maxFallSpeed = 10.0f;	//最大落下速度
+		//this->gensoku = 0.2f;		//時間による減速量
+		//this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
-		//this->res->se->Play_Normal(false);
 
-		se::LoadFile("shot", "./data/sound/shot.wav");
-		se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -62,7 +56,7 @@ namespace  Switch
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-		ge->KillAll_G("ブロック");
+
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
@@ -73,9 +67,8 @@ namespace  Switch
 	//-------------------------------------------------------------------
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
-	{		
+	{
 		auto key = ge->in1->GetState();
-		//ML::Vec2 savePos = this->pos;
 
 		//重力変更
 		//if (key.B1.on) { this->MoveGravity = Gravity::up; }
@@ -84,66 +77,54 @@ namespace  Switch
 		//if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
 		//this->GravityMotion("ブロック");
-		auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
-		if (nullptr == block) 
-		{
-		}
-		else
-		{
-			if (Attack_Std("ブロック"))
-			{
-				block->MoveGravity = Gravity::up;
-			}
-			else
-			{
-				block->MoveGravity = Gravity::down;
-			}
-		}
 
 		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
-		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }
-		if (this->pos.y < 0) { pos.y = 0; this->moveVec.y = 0; }
-		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; this->moveVec.x = 0; }
-		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
-
-		//敵との当たり判定
-		//if (this->Attack_Std("プレイヤー")) { //共通化により
-		//	//接触していた場合、自分に対して何かしたいなら
-		//}
-
-		//if (this->Attack_Std("ブロック")) { //共通化により
-		//	//接触していた場合、自分に対して何かしたいなら
-		//	this->pos = savePos;
+		if (this->pos.x < 0) { pos.x = 0; }
+		if (this->pos.y < 0) { pos.y = 0; }
+		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
+		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
+		
+		if (Attack_Std("プレイヤー"))
+		{
+			ge->KillAll_G("本編");
+		}
+		//カメラの位置を再調整
+		//{
+		//	//プレイヤを画面のどこに置くか（今回は画面中央）
+		//	int px = ge->camera2D.w / 2;
+		//	int py = ge->camera2D.h / 2;
+		//	//プレイヤを画面中央に置いた時のカメラの左上座標を求める
+		//	int cpx = int(this->pos.x) - px;
+		//	int cpy = int(this->pos.y) - py;
+		//	//カメラの座標を更新
+		//	//ge->camera2D.x = cpx;
+		//	//ge->camera2D.y = cpy;
+		//	//以下はスクロール停止の節まで入力しない
+		//	if (auto map = ge->qa_Map) {
+		//		//map->AdjustCameraPos();
+		//	}
 		//}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-		ML::Box2D draw = hitBase;
-		ML::Box2D src = ML::Box2D(0, 0, 128, 128);
-		draw.Offset(this->pos);
+		{
+			ML::Box2D draw = this->hitBase;
+			ML::Box2D src(0, 0, 330, 330);
+			draw.Offset(this->pos);
 
-		res->img->Draw(draw, src);
+			this->res->img->Draw(draw, src);
+		} 
+		
 	}
-	//------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_)
+	void  Object::Received(BChara*  from_, AttackInfo  at_)
 	{
-
-	}
-	//------------------------------------------------------------------
-	bool Object::Check_bottom()
-	{
-		ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
-		bottom.Offset(this->pos);
-
-		auto pl = ge->GetTask_One_GN<Player::Object>(Player::defGroupName,Player::defName);
-		if (nullptr == pl) {return false;}
-
-		return pl->CheckHit(bottom);
+		this->Kill();
 	}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
@@ -160,14 +141,28 @@ namespace  Switch
 			{
 				//相手にダメージの処理を行わせる
 				(*it)->Received(this);
-				//auto block = ge->GetTask_One_GN<BChara>("ブロック", "スイッチ連動ブロック");
-				//block->MoveGravity = Gravity::up;
+				this->Kill();
 				return true;
 			}
 
 		}
 		return false;
 	}
+	//-----------------------------------------------------------------------------
+	//接触判定
+	bool  Object::CheckHit(const  ML::Box2D&  hit_)
+	{
+		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);
+		return  me.Hit(hit_);
+	}
+	//-----------------------------------------------------------------------------
+	//
+	/*bool Object::Check_Head(const ML::Box2D& hit_)
+	{
+		ML::Box2D me(this->hitBase.x, this->hitBase.y, this->hitBase.w, -1);
+		me.Offset(this->pos);
+		return me.Hit(hit_);
+	}*/
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -226,37 +221,3 @@ namespace  Switch
 }
 
 
-
-class ChipInfo
-{
-private:
-	ChipInfo()
-	{
-		num = chip;
-		chip++;
-		mChips.push_back(this);
-	}
-	static int chip;
-	int num;
-
-	string srcName;
-
-	std::vector<ChipInfo*> mChips;
-	void Create()
-	{
-		for (auto chips : mChips)
-		{
-			auto bl = Switch::Object::Create(true);
-			//あとはチップ情報を渡す
-
-		}
-	}
-public:
-	enum class Chiptype {
-		broken, //壊せるオブジェクト
-		hardbroken, //壊しにくいオブジェクト
-		Unbroken //壊せないオブジェクト
-	};
-
-	ML::Box2D src;
-};
