@@ -72,10 +72,7 @@ namespace  Block00
 	//-------------------------------------------------------------------
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
-	{
-		//pos.x += moveVec.x;
-		//pos.y += moveVec.y;
-		
+	{		
 		auto key = ge->in1->GetState();
 
 		//重力変更
@@ -86,8 +83,6 @@ namespace  Block00
 
 		this->GravityMotion("ブロック");
 
-		//this->pos += this->moveVec;
-
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }
 		if (this->pos.y < 0) { pos.y = 0; this->moveVec.y = 0; }
@@ -95,11 +90,11 @@ namespace  Block00
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
 
 		////敵との当たり判定
-		//if (this->Attack_Std("プレイヤー", atk)) { //共通化により
-		//	//接触していた場合、自分に対して何かしたいなら
-		//	
-		//   //this->Kill();
-		//}
+		if (this->Attack_Std("プレイヤー")) { //共通化により
+			//接触していた場合、自分に対して何かしたいなら
+			
+		   //this->Kill();
+		}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
@@ -119,29 +114,19 @@ namespace  Block00
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		/*this->hp -= at_.power;
-
-		if (this->hp <= 0)
-		{
-			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
-			++ge->score;
-			this->Kill();
-		}
-		else {
-			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
-		}*/
+		
 	}
 	//------------------------------------------------------------------
-	bool Object::Check_bottom()
-	{
-		ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
-		bottom.Offset(this->pos);
+	//bool Object::Check_bottom()
+	//{
+	//	ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
+	//	bottom.Offset(this->pos);
 
-		auto pl = ge->GetTask_One_GN<Player::Object>(Player::defGroupName,Player::defName);
-		if (nullptr == pl) {return false;}
+	//	auto pl = ge->GetTask_One_GN<Player::Object>(Player::defGroupName,Player::defName);
+	//	if (nullptr == pl) {return false;}
 
-		return pl->CheckHit(bottom);
-	}
+	//	return pl->CheckHit(bottom);
+	//}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
 	{
@@ -159,6 +144,12 @@ namespace  Block00
 		}
 	}
 	return false;
+	}
+
+	bool  Object::CheckHit(const  ML::Box2D& hit_)
+	{
+		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);
+		return  me.Hit(hit_);
 	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド

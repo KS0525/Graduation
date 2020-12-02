@@ -44,7 +44,6 @@ namespace  Block05
 
 		this->maxFallSpeed = 10.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 3; //重力加速度＆時間速度による加算量
 
 		ge->serial++;
 		this->serial = ge->serial;
@@ -85,7 +84,7 @@ namespace  Block05
 
 		this->GravityMotion("ブロック");
 
-		this->pos += this->moveVec;
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.y < 0) { pos.y = 0; }

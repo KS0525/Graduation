@@ -14,8 +14,8 @@ namespace  Title
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->back = DG::Image::Create("./data/image/titleback.png");
-		this->titlelogo = DG::Image::Create("./data/image/title.png");
+		this->back = DG::Image::Create("./data/image/Title/title.png");
+		//this->titlelogo = DG::Image::Create("./data/image/title.png");
 		
 		//bgm::LoadFile("title", "./data/sound/夢幻の世界-Real_promenade-.mp3");
 
@@ -25,8 +25,8 @@ namespace  Title
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		this->back.reset();
-		this->titlelogo.reset();
+		//this->back.reset();
+		//this->titlelogo.reset();
 		//bgm::Pause("title");
 		return true;
 	}
@@ -41,16 +41,16 @@ namespace  Title
 
 		this->render2D_Priority[1] = 1.0f;
 		//★データ初期化
-		easing::Init();
+		//easing::Init();
 
 		//★タスクの生成
 		//bgm::Play("title");
-		easing::Init();
+		//easing::Init();
 		//左上からバウンドで落ちてくる
-		easing::Create("titlelogoY", easing::EASINGTYPE::BOUNCEOUT, -100, 300, 100);
-		easing::Start("titlelogoY");
-		easing::Create("titlelogoX", easing::EASINGTYPE::CIRCOUT, -100, 1280 / 2, 100);
-		easing::Start("titlelogoX");
+		//easing::Create("titlelogoY", easing::EASINGTYPE::BOUNCEOUT, -100, 300, 100);
+		//easing::Start("titlelogoY");
+		//easing::Create("titlelogoX", easing::EASINGTYPE::CIRCOUT, -100, 1280 / 2, 100);
+		//easing::Start("titlelogoX");
 
 		return  true;
 	}
@@ -72,15 +72,15 @@ namespace  Title
 	{
 		auto ms = ge->mouse->GetState();
 
-		easing::UpDate();
+		//easing::UpDate();
 
 		if (ms.CB.down) {
 			//ロゴの出現が終わっているか？
-			if(easing::GetState("titlelogoX") == easing::EQ_STATE::EQ_END){
+		//	if(easing::GetState("titlelogoX") == easing::EQ_STATE::EQ_END){
 				//自身に消滅要請
 				this->Kill();
 			}
-		}
+		//}
 
 	}
 	//-------------------------------------------------------------------
@@ -91,13 +91,13 @@ namespace  Title
 		ML::Box2D  src1(0, 0, 1280, 720);
 		this->res->back->Draw(draw1, src1);
 
-		ML::Box2D  draw2(-792 / 2, 89 / 2, 792, 89);
-		ML::Box2D  src2(0, 0, 792, 89);
-		int x = easing::GetPos("titlelogoX");
-		int y = easing::GetPos("titlelogoY");
+		//ML::Box2D  draw2(-792 / 2, 89 / 2, 792, 89);
+	//	ML::Box2D  src2(0, 0, 792, 89);
+		//int x = easing::GetPos("titlelogoX");
+	//	int y = easing::GetPos("titlelogoY");
 
-		draw2.Offset(x, y);
-		this->res->titlelogo->Draw(draw2, src2);
+	//	draw2.Offset(x, y);
+		//this->res->titlelogo->Draw(draw2, src2);
 	}
 
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

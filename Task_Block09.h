@@ -1,15 +1,16 @@
 #pragma warning(disable:4996)
 #pragma once
+
 //-------------------------------------------------------------------
 //ブロック(破壊可能)
 //-------------------------------------------------------------------
 #include "BChara.h"
 
-namespace  Block00
+namespace  Block09
 {
 	//タスクに割り当てるグループ名と固有名
-	const  string  defGroupName(		"ブロック");	//グループ名
-	const  string  defName(				"移動ブロック");		//タスク名
+	const  string  defGroupName("ブロック");	//グループ名
+	const  string  defName("スイッチ連動ブロック");		//タスク名
 	//-------------------------------------------------------------------
 	class  Resource : public BResource
 	{
@@ -22,8 +23,8 @@ namespace  Block00
 		typedef  weak_ptr<Resource>		WP;
 		static   WP  instance;
 		static  Resource::SP  Create();
-	//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
-		//共有する変数はここに追加する
+		//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+			//共有する変数はここに追加する
 		DG::Image::SP img;
 		DM::Sound::SP se;
 	};
@@ -47,14 +48,13 @@ namespace  Block00
 		void  Render2D_AF()	override;	//「2D描画」１フレーム毎に行う処理
 		bool  Finalize();		//「終了」タスク消滅時に１回だけ行う処理
 	public:
-	//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
-		//追加したい変数・メソッドはここに追加する
+		//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
+			//追加したい変数・メソッドはここに追加する
 		int hp;
 		//BCharaに含まれないモノのみここに追加する
 		AttackInfo atk;
-		void  Object::Received(BChara*  from_);
+		void  Object::Received(BChara* from_);
 		bool Attack_Std(const string& GName);
-		//bool Check_bottom();
-		bool CheckHit(const ML::Box2D& hit) override;
+		bool Check_bottom();
 	};
 }

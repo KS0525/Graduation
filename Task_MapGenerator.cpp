@@ -15,7 +15,8 @@
 #include  "Task_Block06.h"
 #include  "Task_Block07.h"
 #include  "Task_Block08.h"
-//#include  "Task_Block09.h"
+#include  "Task_Block09.h"
+#include  "Task_Switch.h"
 
 namespace  Generator
 {
@@ -45,7 +46,7 @@ namespace  Generator
 		//★データ初期化
 		this->res = Resource::Create();
 		this->genCnt = 0;
-		this->genSpan = 18;
+		this->genSpan = 1;
 
 		//★タスクの生成
 
@@ -214,11 +215,16 @@ namespace  Generator
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}
-		/*if (kind == "Block09") {
+		if (kind == "Block09") {
 			auto bl = Block09::Object::Create(true);
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
-		}*/
+		}
+		if (kind == "Switch") {
+			auto sw = Switch::Object::Create(true);
+			sw->pos = ML::Vec2(pos.x, pos.y);
+			sw->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
 		/*if (kind == "Goal") {
 			auto bl = Goal::Object::Create(true);
 			bl->pos = ML::Vec2(pos.x, pos.y);

@@ -55,7 +55,7 @@ namespace Player {
 		int hp;
 
 		//ÚG‚Ì‰“šˆ—(•K‚¸ó‚¯g‚Ìˆ—‚Æ‚µ‚ÄÀ‘•‚·‚é)
-		void Received(BChara* from_, AttackInfo at_);
+		void Received(BChara* from_);
 		bool CheckHit(const  ML::Box2D&  hit_);
 		bool Attack_Std(const string& GName);
 		bool Check_Head(const ML::Box2D& head_);

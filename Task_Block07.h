@@ -58,8 +58,8 @@ namespace  Block07
 		int UpTime;           //è„Ç…êiÇﬁéûä‘
 		//BCharaÇ…ä‹Ç‹ÇÍÇ»Ç¢ÉÇÉmÇÃÇ›Ç±Ç±Ç…í«â¡Ç∑ÇÈ
 		AttackInfo atk;
-		void  Object::Received(BChara*  from_, AttackInfo  at_);
-		bool Attack_Std(const string& GName, AttackInfo at_);
+		void  Object::Received(BChara*  from_);
+		bool Attack_Std(const string& GName);
 		bool Check_bottom();
 	};
 }

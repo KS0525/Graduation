@@ -11,13 +11,21 @@
 /Block04 動くブロック(X軸のみ動く)
 /Block05 動くブロック(Y軸のみ動く)
 /Block06 動くブロック(画面外をまたぐ)
-/Block07 動くブロック(スイッチ)
+/Block07 動くブロック(パターン移動)
 /Block08 動くブロック(ペアが衝突で自壊)
-/Block09 動くブロック(パターン移動)
+/Block09 動くブロック(スイッチ)
 
 crt>player 100 100 50 50
-crt>Block00 400 400 50 100
-crt>Block04 600 600 40 40
-crt>Block05 700 100 50 50
-crt>Block03 900 200 100 100 
+crt>Block00 400 200 100 100
+/crt>Block01 300 300 100 100
+/crt>Block02 300 300 100 100
+/crt>Block03 300 300 100 100
+/crt>Block04 300 300 100 100
+/crt>Block05 300 300 100 100
+/crt>Block06 300 300 100 100
+/crt>Block07 100 100 100 100
+/crt>Block08 300 300 100 100 
+/crt>Block08 500 300 100 100
+crt>Switch 500 500 100 100
+crt>Block09 300 300 100 100
 end>

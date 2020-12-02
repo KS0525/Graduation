@@ -49,6 +49,11 @@ namespace  Block07
 		LeftTime = 100;
 		UpTime = 40;
 
+		this->maxFallSpeed = 10.0f;	//最大落下速度
+		this->gensoku = 0.2f;		//時間による減速量
+
+		ge->serial++;
+		this->serial = ge->serial;
 
 
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
@@ -133,13 +138,13 @@ namespace  Block07
 		this->GravityMotion("ブロック");
 
 
-		this->pos += this->moveVec;
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.y < -this->hitBase.h) { pos.y = ge->screen2DHeight; }
 		
 		//敵との当たり判定
-		if (this->Attack_Std("プレイヤー", atk)) { //共通化により
+		if (this->Attack_Std("プレイヤー")) { //共通化により
 			//接触していた場合、自分に対して何かしたいなら
 			
 		   //this->Kill();
@@ -157,18 +162,16 @@ namespace  Block07
 	}
 	//------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_, AttackInfo  at_)
+	void  Object::Received(BChara*  from_)
 	{
-		this->hp -= at_.power;
-
 		if (this->hp <= 0)
 		{
-			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
-			++ge->score;
-			this->Kill();
+			//ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
+			//++ge->score;
+			//this->Kill();
 		}
 		else {
-			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
+			//ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
 		}
 	}
 	//------------------------------------------------------------------
@@ -183,7 +186,7 @@ namespace  Block07
 		return pl->CheckHit(bottom);
 	}
 	//------------------------------------------------------------------
-	bool Object::Attack_Std(const string& GName,AttackInfo at_)
+	bool Object::Attack_Std(const string& GName)
 	{
 		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
 	

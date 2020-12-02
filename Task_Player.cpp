@@ -80,30 +80,11 @@ namespace Player
 
 		this->GravityMotion("ブロック");
 
-		//this->pos += this->moveVec;
-
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; }
 		if (this->pos.y < 0) { pos.y = 0; }
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; }
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; }
-		
-		//カメラの位置を再調整
-		//{
-		//	//プレイヤを画面のどこに置くか（今回は画面中央）
-		//	int px = ge->camera2D.w / 2;
-		//	int py = ge->camera2D.h / 2;
-		//	//プレイヤを画面中央に置いた時のカメラの左上座標を求める
-		//	int cpx = int(this->pos.x) - px;
-		//	int cpy = int(this->pos.y) - py;
-		//	//カメラの座標を更新
-		//	//ge->camera2D.x = cpx;
-		//	//ge->camera2D.y = cpy;
-		//	//以下はスクロール停止の節まで入力しない
-		//	if (auto map = ge->qa_Map) {
-		//		//map->AdjustCameraPos();
-		//	}
-		//}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
@@ -120,7 +101,7 @@ namespace Player
 	}
 	//-----------------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_, AttackInfo  at_)
+	void  Object::Received(BChara*  from_)
 	{
 		this->Kill();
 	}
