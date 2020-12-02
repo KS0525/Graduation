@@ -12,7 +12,7 @@ namespace Goal
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		this->img = DG::Image::Create("./data/image/Goal/Goal01.png");
+		this->img = DG::Image::Create("./data/image/Goal/Goal02.png");
 		this->chargeimg = DG::Image::Create("./data/image/bar.png");
 
 		return true;

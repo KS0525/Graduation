@@ -16,8 +16,9 @@
 #include  "Task_Block07.h"
 #include  "Task_Block08.h"
 #include  "Task_Block09.h"
+#include  "Task_Block10.h"
 #include  "Task_Switch.h"
-
+#include  "Task_Goal.h"
 namespace  Generator
 {
 	Object::WP Object::instance;
@@ -220,16 +221,21 @@ namespace  Generator
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}
+		if (kind == "Block10") {
+			auto bl = Block10::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
 		if (kind == "Switch") {
 			auto sw = Switch::Object::Create(true);
 			sw->pos = ML::Vec2(pos.x, pos.y);
 			sw->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}
-		/*if (kind == "Goal") {
+		if (kind == "Goal") {
 			auto bl = Goal::Object::Create(true);
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
-		}*/
+		}
 	}
 	//-------------------------------------------------------------------
 	void Object::Generate()

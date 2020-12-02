@@ -1,30 +1,24 @@
 //-------------------------------------------------------------------
-//ゲーム本編
+//弾
 //-------------------------------------------------------------------
 #include  "MyPG.h"
-#include  "Task_Game.h"
-#include  "Task_Ending.h"
+#include  "Task_Block10.h"
 #include  "Task_Player.h"
-#include  "Task_BackGround.h"
 #include  "Task_Enemy.h"
-#include  "Task_Block00.h"
-#include  "Task_EffectBomb.h"
 #include  "Task_EffectHit.h"
-#include  "Task_Enemy01.h"
-#include  "Task_Map2D.h"
-#include  "Task_Block01.h"
-#include  "Task_MapGenerator.h"
-#include  "Task_Block02.h"
-//#include  "Task_Block03.h"
+#include  "Task_EffectBomb.h"
 
-namespace  Game
+
+
+namespace  Block10
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->score = DG::Image::Create("./data/image/font_number.png");
+		img = DG::Image::Create("./data/image/Block/Block_10.jpg");
+		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -43,21 +37,23 @@ namespace  Game
 		this->res = Resource::Create();
 
 		//★データ初期化
-		this->count = 0;
-		this->bcount = 0;
+		hitBase = ML::Box2D(0, 0, 128, 128);
+		hp = 3;
+		moveVec = { 0,2 };
+		atk = { 0 };
 
-		ge->camera2D = ML::Box2D(0,0, ge->screen2DWidth, ge->screen2DHeight);
+		this->maxFallSpeed = 10.0f;	//最大落下速度
+		this->gensoku = 0.2f;		//時間による減速量
+		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 
-		//スコア初期化
-		ge->score = 0;
+		ge->serial++;
+		this->serial = ge->serial;
 
-	   //★タスクの生成
-		BackGround::Object::Create(true);
+		//★タスクの生成
+		//this->res->se->Play_Normal(false);
 
-		if (auto map = Generator::Object::Create_Mutex()) {
-			map->Set("./data/Map/Map.txt");
-		}
-
+		se::LoadFile("shot", "./data/sound/shot.wav");
+		se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -65,17 +61,10 @@ namespace  Game
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-		ge->KillAll_G("プレイヤー");
-		ge->KillAll_G("背景画像");
-		ge->KillAll_G("敵");
-		ge->KillAll_G("弾");
-		ge->KillAll_G("ブロック");
-		ge->KillAll_G("スイッチ");
+
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
-			auto nextTask = Ending::Object::Create(true);
-
 		}
 
 		return  true;
@@ -84,47 +73,84 @@ namespace  Game
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
 	{
-		auto ms = ge->mouse->GetState();
-		auto inp = ge->in1->GetState();
+		auto key = ge->in1->GetState();
 
-		if (ms.LB.down) {
-			ge->KillAll_G("プレイヤー");
-			ge->KillAll_G("ブロック");
-			ge->KillAll_G("固定ブロック");
-			ge->KillAll_G("スイッチ");
-			ge->KillAll_G("ゴール");
+		//重力変更
+		if (key.B1.on) { this->MoveGravity = Gravity::up; }
+		if (key.B2.on) { this->MoveGravity = Gravity::left; }
+		if (key.B3.on) { this->MoveGravity = Gravity::down; }
+		if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-			if (auto map = Generator::Object::Create_Mutex()) {
-				map->Set("./data/Map/Map.txt");
-			}
-		}
-		if (ms.CB.down) {
-			//自身に消滅要請
-			this->Kill();
+		//this->GravityMotion("ブロック");
+
+		//画面外へ出ないように
+		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }
+		if (this->pos.y < 0) { pos.y = 0; this->moveVec.y = 0; }
+		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; this->moveVec.x = 0; }
+		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
+
+		////敵との当たり判定
+		if (this->Attack_Std("プレイヤー")) { //共通化により
+			//接触していた場合、自分に対して何かしたいなら
+
+		   //this->Kill();
 		}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
+		ML::Box2D draw = hitBase;
+		/*ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
+							ML::Box2D(289,64,30,32),
+							ML::Box2D(257, 64, 30, 32)
+							};*/
+		ML::Box2D src(0, 0, 128, 128);
+		draw.Offset(this->pos);
 
-		//スコア描画
-		//char msg[10];
-		//sprintf(msg, "%5d", ge->score);
-		////SPRINTF　S　String　Print Format　フォーマットに合わせて出力
-		////　Intからchar配列への変換
+		res->img->Draw(draw, src);
+	}
+	//------------------------------------------------------------------
+	//接触時の応答処理（これ自体はダミーのようなモノ）
+	void  Object::Received(BChara* from_)
+	{
 
-		//for (int i = 0; i < 5; i++) {
-		//	if (msg[i] != ' ') {
-		//		ML::Box2D  draw2(-(48 / 2), (-60 / 2), 48, 60);
-		//		ML::Box2D  src2((msg[i] - '0') * 19, 32, 19, 32);
-		//		draw2.Offset((50 * i) + 500, 50);
+	}
+	//------------------------------------------------------------------
+	//bool Object::Check_bottom()
+	//{
+	//	ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
+	//	bottom.Offset(this->pos);
 
-		//		this->res->score->Draw(draw2, src2);
-		//	}
-		//}
+	//	auto pl = ge->GetTask_One_GN<Player::Object>(Player::defGroupName,Player::defName);
+	//	if (nullptr == pl) {return false;}
+
+	//	return pl->CheckHit(bottom);
+	//}
+	//------------------------------------------------------------------
+	bool Object::Attack_Std(const string& GName)
+	{
+		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
+
+		auto targets = ge->GetTask_Group_G<BChara>(GName);
+		for (auto it = targets->begin();
+			it != targets->end();
+			++it) {
+			//相手に接触の有無を確認させる
+			if ((*it)->CheckHit(me) && this->serial != (*it)->serial) {
+				//相手にダメージの処理を行わせる
+				(*it)->Received(this);
+				return true;
+			}
+		}
+		return false;
 	}
 
+	bool  Object::CheckHit(const  ML::Box2D& hit_)
+	{
+		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);
+		return  me.Hit(hit_);
+	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -137,6 +163,7 @@ namespace  Game
 			ob->me = ob;
 			if (flagGameEnginePushBack_) {
 				ge->PushBack_ABCDEFGHIJKLMN(ob);//ゲームエンジンに登録
+				//（メソッド名が変なのは旧バージョンのコピーによるバグを回避するため
 			}
 			if (!ob->B_Initialize()) {
 				ob->Kill();//イニシャライズに失敗したらKill

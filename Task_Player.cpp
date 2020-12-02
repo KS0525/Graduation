@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include "Task_Player.h"
 #include "Task_EffectHit.h"
+#include "Task_MapGenerator.h"
 #include  "MyPG.h"
 
 namespace Player 
@@ -46,8 +47,8 @@ namespace Player
 		this->serial = ge->serial;
 
 		this->maxFallSpeed = 10.0f;	//最大落下速度
-		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
+		this->gensoku = 0.4f;		//時間による減速量
+		this->gravity = ML::Gravity(32) * 7; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 
 		return  true;
@@ -57,10 +58,16 @@ namespace Player
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-
+		ge->KillAll_G("プレイヤー");
+		ge->KillAll_G("ブロック");
+		ge->KillAll_G("固定ブロック");
+		ge->KillAll_G("スイッチ");
+		ge->KillAll_G("ゴール");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
+
+			
 		}
 
 		return  true;
@@ -103,7 +110,13 @@ namespace Player
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
+
+		if (auto map = Generator::Object::Create_Mutex()) {
+			map->Set("./data/Map/Map.txt");
+		}
+
 		this->Kill();
+
 	}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)

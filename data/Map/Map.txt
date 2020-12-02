@@ -4,12 +4,81 @@
 
 /オブジェクト種類
 /player プレイヤー
-/Block00 動かないブロック
-/Block01 動くブロック(ベース)
-/Block02 動くブロック(2xスピード)
-/Block03 動くブロック(反転移動)
+/Block00 動くブロック(ベース)
+/Block01 動くブロック(2xスピード)
+/Block02 動くブロック(0.5xスピード)
+/Block03 動くブロック(動き反転) 
+/Block04 動くブロック(X軸のみ動く)
+/Block05 動くブロック(Y軸のみ動く)
+/Block06 動くブロック(画面外をまたぐ)
+/Block07 動くブロック(パターン移動)
+/Block08 動くブロック(ペアが衝突で自壊)
+/Block09 動くブロック(スイッチ)
+/Block10 動かないブロック
 
 crt>player 100 100 50 50
-crt>Block00 400 400 50 100
-crt>Block00 600 600 300 500
+/左端
+crt>Block10 0 0 80 180
+crt>Block10 0 180 80 180
+crt>Block10 0 360 80 180
+crt>Block10 0 540 80 180
+
+crt>Block00 200 100 80 80
+
+/上部左
+crt>Block10 80 0 160 60
+crt>Block10 240 0 160 60
+crt>Block10 400 0 160 60
+crt>Block10 560 0 160 60
+
+/下部
+crt>Block10 80 680 120 40
+crt>Block10 200 680 120 40
+crt>Block10 320 680 120 40
+crt>Block10 440 680 120 40
+crt>Block10 560 680 120 40
+crt>Block10 680 680 120 40
+crt>Block10 800 680 120 40
+crt>Block10 920 680 120 40
+crt>Block10 1040 680 120 40
+crt>Block10 1160 680 120 40
+
+/左中央
+crt>Block10 310 200 200 200
+
+/中央上部1
+crt>Block10 600 60 60 120
+/中央上部2
+crt>Block10 600 180 120 150
+/中央右
+crt>Block10 720 0 70 140
+crt>Block10 720 140 70 140
+crt>Block10 720 280 70 140 
+crt>Block10 720 420 70 140
+/中央右2連
+crt>Block10 790 490 100 70
+crt>Block10 890 490 100 70
+
+/右3連
+crt>Block10 990 200 50 120
+crt>Block10 990 320 50 120
+crt>Block10 990 440 50 120
+
+/上部右
+crt>Block10 790 0 98 40
+crt>Block10 888 0 98 40
+crt>Block10 986 0 98 40
+crt>Block10 1084 0 98 40
+crt>Block10 1182 0 98 40
+/右
+crt>Block10 1220 40 60 80
+crt>Block10 1220 120 60 80
+crt>Block10 1220 200 60 80
+crt>Block10 1220 280 60 80
+crt>Block10 1220 360 60 80
+crt>Block10 1220 440 60 80
+crt>Block10 1220 520 60 80
+crt>Block10 1220 600 60 80
+
+crt>Goal 840 380 100 100 
 end>
