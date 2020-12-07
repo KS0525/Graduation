@@ -18,7 +18,7 @@ namespace  Block00
 	bool  Resource::Initialize()
 	{
 		img = DG::Image::Create("./data/image/Block/Block_00.jpg");
-		se = DM::Sound::CreateSE("./data/sound/shot.wav");
+		//se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -52,8 +52,8 @@ namespace  Block00
 		//šƒ^ƒXƒN‚Ì¶¬
 		//this->res->se->Play_Normal(false);
 
-		se::LoadFile("shot", "./data/sound/shot.wav");
-		se::Play("shot");
+		//se::LoadFile("shot", "./data/sound/shot.wav");
+		//se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------

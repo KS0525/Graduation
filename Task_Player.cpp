@@ -13,7 +13,7 @@ namespace Player
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->img = DG::Image::Create("./data/image/chara/Egg_normal.png");
+		this->img = DG::Image::Create("./data/image/chara/Egg_anim_01.png");
 		this->chargeimg = DG::Image::Create("./data/image/bar.png");
 
 		return true;
@@ -58,11 +58,11 @@ namespace Player
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-		ge->KillAll_G("プレイヤー");
-		ge->KillAll_G("ブロック");
-		ge->KillAll_G("固定ブロック");
-		ge->KillAll_G("スイッチ");
-		ge->KillAll_G("ゴール");
+		//ge->KillAll_G("プレイヤー");
+		//ge->KillAll_G("ブロック");
+		//ge->KillAll_G("固定ブロック");
+		//ge->KillAll_G("スイッチ");
+		//ge->KillAll_G("ゴール");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
@@ -97,11 +97,30 @@ namespace Player
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
+		
 		{
 			ML::Box2D draw = this->hitBase;
 			ML::Box2D src(0, 0, 100, 100);
-			draw.Offset(this->pos);
 
+			float pie(3.1415f);
+			switch (this->MoveGravity) {
+			case 0:
+				this->res->img->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				break;
+			case 1:
+				this->res->img->Rotation(0*pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				break;
+			case 2:
+				this->res->img->Rotation(0.5f* pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				break;
+			case 3:
+				this->res->img->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				break;
+			default:
+				break;
+			}
+			draw.Offset(this->pos);
+			
 			this->res->img->Draw(draw, src);
 		} 
 		

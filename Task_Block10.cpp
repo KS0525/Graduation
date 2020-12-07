@@ -52,8 +52,8 @@ namespace  Block10
 		//šƒ^ƒXƒN‚Ì¶¬
 		//this->res->se->Play_Normal(false);
 
-		se::LoadFile("shot", "./data/sound/shot.wav");
-		se::Play("shot");
+		//se::LoadFile("shot", "./data/sound/shot.wav");
+		//se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -105,6 +105,7 @@ namespace  Block10
 							ML::Box2D(289,64,30,32),
 							ML::Box2D(257, 64, 30, 32)
 							};*/
+		
 		ML::Box2D src(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
