@@ -30,7 +30,7 @@ public:
 	float gensoku;			//時間による減速量
 	int serial;				//ブロックナンバー
 	//重力の方向
-	enum Gravity { up, down, left, right };
+	enum Gravity { up, down, left, right, non };
 	Gravity MoveGravity;
 	
 	//メンバ変数に最低限の初期化を行う
@@ -41,7 +41,7 @@ public:
 		, moveVec(0, 0)
 		, moveCnt(0)
 		, angle_LR(Right)
-		, MoveGravity(down)
+		, MoveGravity(non)
 		, maxFallSpeed(0)
 		,gravity(0)
 		,serial(0)

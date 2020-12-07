@@ -71,6 +71,11 @@ void BChara::GravityMotion(const string& GName)
 	{
 		this->moveVec.x = min(this->moveVec.x + this->gravity, this->maxFallSpeed);
 	}
+	else if (this->MoveGravity == Gravity::non)//‰Šúó‘Ô
+	{
+		this->moveVec.x = 0;
+		this->moveVec.y = 0;
+	}
 
 	//XˆÚ“®
 	float moveX = this->moveVec.x;
