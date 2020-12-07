@@ -90,13 +90,51 @@ namespace  Switch
 		}
 		else
 		{
-			if (Attack_Std("ブロック"))
+			switch (this->MoveGravity)
 			{
-				block->MoveGravity = Gravity::up;
-			}
-			else
-			{
-				block->MoveGravity = Gravity::down;
+			case Gravity::up:
+				if (Attack_Std("ブロック"))
+				{
+					block->MoveGravity = Gravity::up;
+				}
+				else
+				{
+					block->MoveGravity = Gravity::down;
+				}
+				break;
+
+			case Gravity::down:
+				if (Attack_Std("ブロック"))
+				{
+					block->MoveGravity = Gravity::down;
+				}
+				else
+				{
+					block->MoveGravity = Gravity::up;
+				}
+				break;
+
+			case Gravity::left:
+				if (Attack_Std("ブロック"))
+				{
+					block->MoveGravity = Gravity::left;
+				}
+				else
+				{
+					block->MoveGravity = Gravity::right;
+				}
+				break;
+
+			case Gravity::right:
+				if (Attack_Std("ブロック"))
+				{
+					block->MoveGravity = Gravity::right;
+				}
+				else
+				{
+					block->MoveGravity = Gravity::left;
+				}
+				break;
 			}
 		}
 
@@ -128,6 +166,7 @@ namespace  Switch
 
 		res->img->Draw(draw, src);
 	}
+
 	//------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
