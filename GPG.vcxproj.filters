@@ -44,6 +44,9 @@
     <Filter Include="MyPG\Tasks\LIB\XI2018">
       <UniqueIdentifier>{5862f99e-0b18-46c5-8c66-f794bd25d4b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyPG\Tasks\Block">
+      <UniqueIdentifier>{79a9eaec-e370-4da0-b294-b24faccb1407}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myLib.cpp">
@@ -148,48 +151,55 @@
     <ClCompile Include="Task_BackGround.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Block00.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="Task_Enemy01.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="Task_Map2D.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Block01.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="Task_MapGenerator.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="Task_Goal.cpp">
+      <Filter>MyPG\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Switch.cpp">
+      <Filter>MyPG\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block00.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block01.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
     <ClCompile Include="Task_Block02.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Switch.cpp" />
-    <ClCompile Include="Task_Block05.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Block06.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Block07.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Block08.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Block04.cpp">
-      <Filter>MyPG\Tasks</Filter>
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClCompile>
     <ClCompile Include="Task_Block03.cpp">
-      <Filter>MyPG\Tasks</Filter>
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block04.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block05.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block06.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block07.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block08.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClCompile>
     <ClCompile Include="Task_Block09.cpp">
-      <Filter>MyPG\Tasks</Filter>
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Goal.cpp" />
     <ClCompile Include="Task_Block10.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_MapSelector.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
   </ItemGroup>
@@ -293,48 +303,55 @@
     <ClInclude Include="Task_BackGround.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="Task_Block00.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="Task_Enemy01.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_Map2D.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="Task_Block01.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="Task_MapGenerator.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="Task_Goal.h">
+      <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Switch.h">
+      <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block00.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block01.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
     <ClInclude Include="Task_Block02.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Switch.h" />
-    <ClInclude Include="Task_Block05.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Block06.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Block07.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Block08.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Block04.h">
-      <Filter>MyPG\Tasks</Filter>
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClInclude>
     <ClInclude Include="Task_Block03.h">
-      <Filter>MyPG\Tasks</Filter>
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block04.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block05.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block06.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block07.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block08.h">
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClInclude>
     <ClInclude Include="Task_Block09.h">
-      <Filter>MyPG\Tasks</Filter>
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Task_Goal.h" />
     <ClInclude Include="Task_Block10.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_MapSelector.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
   </ItemGroup>
