@@ -227,9 +227,23 @@ namespace  Generator
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}
 		if (kind == "Switch") {
+			string direction;
+			ds_ >> direction;
 			auto sw = Switch::Object::Create(true);
 			sw->pos = ML::Vec2(pos.x, pos.y);
 			sw->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+			if (direction == "up") {
+				sw->MoveGravity = sw->Gravity::up;
+			}
+			if (direction == "down") {
+				sw->MoveGravity = sw->Gravity::down;
+			}
+			if (direction == "right") {
+				sw->MoveGravity = sw->Gravity::left;
+			}
+			if (direction == "left") {
+				sw->MoveGravity = sw->Gravity::right;
+			}
 		}
 		if (kind == "Goal") {
 			auto bl = Goal::Object::Create(true);

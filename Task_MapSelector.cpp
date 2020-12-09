@@ -14,20 +14,15 @@ namespace  MapSelector
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->back = DG::Image::Create("./data/image/Title/title.png");
-		//this->titlelogo = DG::Image::Create("./data/image/title.png");
-		
-		//bgm::LoadFile("title", "./data/sound/夢幻の世界-Real_promenade-.mp3");
-
+		this->img = DG::Image::Create("./data/image/Block/Block_00.jpg");
+		this->choosingimg = DG::Image::Create("./data/image/UI_choosing.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		//this->back.reset();
-		//this->titlelogo.reset();
-		//bgm::Pause("title");
+		
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -40,18 +35,16 @@ namespace  MapSelector
 		this->res = Resource::Create();
 
 		this->render2D_Priority[1] = 1.0f;
+
+		//Button::set_allNum(0);
+		buttons[0].set_StagePass("./data/Map/Map.txt");
+		buttons[1].set_StagePass("./data/Map/Map_Title.txt");
 		//★データ初期化
 		//easing::Init();
-
+		choosing = 1;
+		choiceMax_ = 6;
 		//★タスクの生成
-		//bgm::Play("title");
-		//easing::Init();
-		//左上からバウンドで落ちてくる
-		//easing::Create("titlelogoY", easing::EASINGTYPE::BOUNCEOUT, -100, 300, 100);
-		//easing::Start("titlelogoY");
-		//easing::Create("titlelogoX", easing::EASINGTYPE::CIRCOUT, -100, 1280 / 2, 100);
-		//easing::Start("titlelogoX");
-
+		
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -71,12 +64,11 @@ namespace  MapSelector
 	void  Object::UpDate()
 	{
 		auto ms = ge->mouse->GetState();
-
-		//easing::UpDate();
-
+		
+		Carsol();
+		
 		if (ms.LB.down) {
-			//ロゴの出現が終わっているか？
-		//	if(easing::GetState("titlelogoX") == easing::EQ_STATE::EQ_END){
+			ge->nowStage = buttons[choosing].get_StagePass();
 				//自身に消滅要請
 				this->Kill();
 			}
@@ -87,19 +79,44 @@ namespace  MapSelector
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-		ML::Box2D  draw1(0, 0, 1280, 720);
-		ML::Box2D  src1(0, 0, 1280, 720);
-		this->res->back->Draw(draw1, src1);
+#define choiceMax 6
+		ML::Box2D draw[choiceMax] = {
+			ML::Box2D(100,100,100,100),
+			ML::Box2D(200,100,100,100),
+			ML::Box2D(300,100,100,100),
+			ML::Box2D(400,100,100,100),
+			ML::Box2D(500,100,100,100),
+			ML::Box2D(600,100,100,100),
+		};
+		ML::Box2D  draw1(100,100, 100, 100);
+		ML::Box2D  src1(0, 0, 128, 128);
+		this->res->img->Draw(draw1, src1);
+		
+		this->res->img->Draw(draw[1], src1);
 
-		//ML::Box2D  draw2(-792 / 2, 89 / 2, 792, 89);
-	//	ML::Box2D  src2(0, 0, 792, 89);
-		//int x = easing::GetPos("titlelogoX");
-	//	int y = easing::GetPos("titlelogoY");
-
-	//	draw2.Offset(x, y);
-		//this->res->titlelogo->Draw(draw2, src2);
+		ML::Box2D src2(0, 0, 132, 132);
+		this->res->choosingimg->Draw(draw[choosing], src2);
+		
 	}
-
+	//------------------------------------------------------------------
+	void Object::Carsol() 
+	{
+		auto key = ge->in1->GetState();
+		//カーソル移動
+		if (key.B1.down) {
+			choosing++;
+		}
+		if (key.B2.down) {
+			choosing--;
+		}
+		//下限と上限
+		if (choosing < 0) {
+			choosing = 0;
+		}
+		if (choosing > this->choiceMax_) {
+			choosing = choiceMax_;
+		}
+	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

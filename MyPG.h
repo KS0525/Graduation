@@ -87,6 +87,7 @@ namespace  MyPG
 		XI::GamePad::SP  in1, in2, in3, in4;	//取り合えず４本
 																					//２Ｄカメラ矩形
 		ML::Box2D				camera2D;	//  ２Ｄスクロール制御用
+		string nowStage;
 
 		//敵検出処理を少なくするために
 		shared_ptr< vector< BChara::SP > >    qa_Enemys;

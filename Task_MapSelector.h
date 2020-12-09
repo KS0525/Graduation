@@ -4,6 +4,7 @@
 //タイトル画面
 //-------------------------------------------------------------------
 #include "GameEngine_Ver3_82.h"
+#include "Button.h"
 
 namespace  MapSelector
 {
@@ -23,8 +24,9 @@ namespace  MapSelector
 		static   WP  instance;
 		static  Resource::SP  Create();
 		//共有する変数はここに追加する
-		DG::Image::SP  back;
-		DG::Image::SP  titlelogo;
+		DG::Image::SP  img;
+		DG::Image::SP  choosingimg;
+		//DG::Image::SP  titlelogo;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask
@@ -48,5 +50,26 @@ namespace  MapSelector
 	//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 	public:
 		//追加したい変数・メソッドはここに追加する
+		int choosing;
+		int choiceMax_;
+		void Carsol();
+		
+		
+
+		class StageButton : public Button {
+			
+			string stagePass;
+		public:
+			StageButton(string inPass) :Button() {
+				stagePass = inPass;
+			};
+			StageButton() :Button() {};
+
+			string get_StagePass() const  { return stagePass; }
+			void set_StagePass(const string pass) { stagePass = pass; }
+		};
+		
+		StageButton buttons[6];
 	};
 }
+

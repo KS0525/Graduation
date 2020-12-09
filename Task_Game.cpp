@@ -50,12 +50,13 @@ namespace  Game
 
 		//スコア初期化
 		ge->score = 0;
+		ge->nowStage;
 
 	   //★タスクの生成
 		BackGround::Object::Create(true);
 
 		if (auto map = Generator::Object::Create_Mutex()) {
-			map->Set("./data/Map/Map.txt");
+			map->Set(ge->nowStage);
 		}
 
 		return  true;
@@ -95,7 +96,7 @@ namespace  Game
 			ge->KillAll_G("ゴール");
 
 			if (auto map = Generator::Object::Create_Mutex()) {
-				map->Set("./data/Map/Map.txt");
+				map->Set(ge->nowStage);
 			}
 		}
 		if (ms.CB.down) {
