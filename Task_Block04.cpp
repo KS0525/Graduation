@@ -42,6 +42,7 @@ namespace  Block04
 		moveVec = { 0,2 };
 		atk = { 0 };
 
+		this->render2D_Priority[1] = 1.0f;
 
 		this->maxFallSpeed = 10.0f;	//Å‘å—Ž‰º‘¬“x
 		this->gensoku = 0.2f;		//ŽžŠÔ‚É‚æ‚éŒ¸‘¬—Ê
@@ -81,6 +82,9 @@ namespace  Block04
 		auto key = ge->in1->GetState();
 
 		//d—Í•ÏX
+		if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
+
 		if (key.B2.on) { this->MoveGravity = Gravity::left; }
 		if (key.B4.on) { this->MoveGravity = Gravity::right; }
 

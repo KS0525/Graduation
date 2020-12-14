@@ -25,6 +25,7 @@ namespace Player {
 		static  Resource::SP  Create();
 		//共有する変数はここに追加する
 		DG::Image::SP  img;
+		DG::Image::SP  break_img;
 		DG::Image::SP chargeimg;
 
 	};
@@ -53,7 +54,8 @@ namespace Player {
 		//BCharaに持たせていない変数・メソッドのみここに書く
 		XI::GamePad::SP  controller;
 		int hp;
-
+		bool isDead;
+		int animCnt;
 		//接触時の応答処理(必ず受け身の処理として実装する)
 		void Received(BChara* from_);
 		bool CheckHit(const  ML::Box2D&  hit_);

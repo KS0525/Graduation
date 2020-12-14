@@ -33,10 +33,7 @@ namespace  Ending
 		this->res = Resource::Create();
 
 		//★データ初期化
-		easing::Init();
-		easing::Create("endlogoY", easing::EASINGTYPE::BOUNCEOUT, (int)-ge->screenHeight, 0, 100);
-		easing::Start("endlogoY");
-		this->logoPosY = (int)-ge->screenHeight;
+
 		//★タスクの生成
 
 		return  true;
@@ -60,11 +57,15 @@ namespace  Ending
 	void  Object::UpDate()
 	{
 		auto ms = ge->mouse->GetState();
+		auto key = ge->in1->GetState();
 
-		easing::UpDate();
+		if (key.B1.down) {
+			this->Kill();
+		}
 
-		this->logoPosY = (int)easing::GetPos("endlogoY");
-		
+		if (ms.RB.down) {
+
+		}
 		if (ms.LB.down) {
 			//自身に消滅要請
 			this->Kill();

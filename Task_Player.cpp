@@ -14,6 +14,7 @@ namespace Player
 	bool  Resource::Initialize()
 	{
 		this->img = DG::Image::Create("./data/image/chara/Egg_anim_01.png");
+		this->break_img = DG::Image::Create("./data/image/chara/Egg_break_anim_01.png");
 		this->chargeimg = DG::Image::Create("./data/image/bar.png");
 
 		return true;
@@ -42,7 +43,8 @@ namespace Player
 		this->angle_LR = Angle_LR::Right;
 		this->controller = ge->in1;
 		this->hp = 10;
-
+		this->isDead = false;
+		this->animCnt = 0;
 		ge->serial++;
 		this->serial = ge->serial;
 
@@ -58,11 +60,6 @@ namespace Player
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-		//ge->KillAll_G("プレイヤー");
-		//ge->KillAll_G("ブロック");
-		//ge->KillAll_G("固定ブロック");
-		//ge->KillAll_G("スイッチ");
-		//ge->KillAll_G("ゴール");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
@@ -80,13 +77,20 @@ namespace Player
 		auto key = ge->in1->GetState();
 
 		//重力変更
-		if (key.B1.on) { this->MoveGravity = Gravity::up; }
-		if (key.B2.on) { this->MoveGravity = Gravity::left; }
-		if (key.B3.on) { this->MoveGravity = Gravity::down; }
-		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+		if (!isDead) {
+			if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+			if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+			if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
+			if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion("ブロック");
-
+			this->GravityMotion("ブロック");
+		}
+		if (isDead) {
+			animCnt++;
+			if (animCnt > 3) {
+				animCnt = 3;
+			}
+		}
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; }
 		if (this->pos.y < 0) { pos.y = 0; }
@@ -104,25 +108,60 @@ namespace Player
 
 			float pie(3.1415f);
 			switch (this->MoveGravity) {
-			case 0:
+			case 0: //up
 				this->res->img->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				this->res->break_img->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 				break;
-			case 1:
-				this->res->img->Rotation(0*pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			case 1: // down
+				this->res->img->Rotation(0 * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				this->res->break_img->Rotation(0 * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 				break;
-			case 2:
-				this->res->img->Rotation(0.5f* pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			case 2: //left
+				this->res->img->Rotation(0.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				this->res->break_img->Rotation(0.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 				break;
-			case 3:
+			case 3: //right
 				this->res->img->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+				this->res->break_img->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 				break;
 			default:
 				break;
 			}
 			draw.Offset(this->pos);
-			
-			this->res->img->Draw(draw, src);
-		} 
+			//生きているとき
+			if (isDead == false) {
+				this->res->img->Draw(draw, src);
+			}
+			//死んでいるとき
+			else {
+				ML::Box2D anim[] = {
+					{0,0,200,200},
+					{200,0,200,200 },
+					{400,0,200,200},
+					{600,0,200,200}
+				};
+				//描画をずらして、白身が垂れているように
+				ML::Box2D draw_ = draw;
+				switch (this->MoveGravity) {
+				case 0: //up
+					draw_.y -= 25;
+					break;
+				case 1: //down
+					draw_.y += 25;
+					break;
+				case 2: //left
+					draw_.x -= 25;
+					break;
+				case 3: //right
+					draw_.x += 25;
+					break;
+				default:
+					break;
+				}
+
+				this->res->break_img->Draw(draw_, anim[animCnt%4]);
+			}
+		}
 		
 	}
 	//-----------------------------------------------------------------------------
@@ -133,8 +172,9 @@ namespace Player
 		//if (auto map = Generator::Object::Create_Mutex()) {
 		//	map->Set("./data/Map/Map.txt");
 		//}
+		this->isDead = true;
 
-		this->Kill();
+		//this->Kill();
 
 	}
 	//------------------------------------------------------------------
@@ -152,7 +192,8 @@ namespace Player
 			{
 				//相手にダメージの処理を行わせる
 				(*it)->Received(this);
-				this->Kill();
+				this->isDead = true;
+				//this->Kill();
 				return true;
 			}
 

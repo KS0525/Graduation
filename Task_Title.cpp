@@ -5,6 +5,7 @@
 #include  "Task_Title.h"
 #include  "Task_Game.h"
 #include  "Task_MapSelector.h"
+#include  "Task_MapGenerator.h"
 #include "easing.h"
 
 namespace  Title
@@ -15,6 +16,7 @@ namespace  Title
 	bool  Resource::Initialize()
 	{
 		this->back = DG::Image::Create("./data/image/Title/title.png");
+		this->presskey = DG::Image::Create("./data/image/Title/pressKey02.png");
 		//this->titlelogo = DG::Image::Create("./data/image/title.png");
 		
 		//bgm::LoadFile("title", "./data/sound/夢幻の世界-Real_promenade-.mp3");
@@ -25,7 +27,8 @@ namespace  Title
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		//this->back.reset();
+		this->back.reset();
+		this->presskey.reset();
 		//this->titlelogo.reset();
 		//bgm::Pause("title");
 		return true;
@@ -39,19 +42,14 @@ namespace  Title
 		//リソースクラス生成orリソース共有
 		this->res = Resource::Create();
 
-		this->render2D_Priority[1] = 1.0f;
+		this->render2D_Priority[1] = 0.5f;
 		//★データ初期化
-		//easing::Init();
+		
 
 		//★タスクの生成
-		//bgm::Play("title");
-		//easing::Init();
-		//左上からバウンドで落ちてくる
-		//easing::Create("titlelogoY", easing::EASINGTYPE::BOUNCEOUT, -100, 300, 100);
-		//easing::Start("titlelogoY");
-		//easing::Create("titlelogoX", easing::EASINGTYPE::CIRCOUT, -100, 1280 / 2, 100);
-		//easing::Start("titlelogoX");
-
+		if (auto map = Generator::Object::Create_Mutex()) {
+			map->Set("./data/Map/Map_Title.txt");
+		}
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -59,6 +57,11 @@ namespace  Title
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
+		ge->KillAll_G("プレイヤー");
+		ge->KillAll_G("ブロック");
+		ge->KillAll_G("固定ブロック");
+		ge->KillAll_G("スイッチ");
+		ge->KillAll_G("ゴール");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
@@ -71,9 +74,24 @@ namespace  Title
 	void  Object::UpDate()
 	{
 		auto ms = ge->mouse->GetState();
-
+		auto key = ge->in1->GetState();
 		//easing::UpDate();
 
+		if (ms.RB.down || key.B2.down) {
+			ge->KillAll_G("プレイヤー");
+			ge->KillAll_G("ブロック");
+			ge->KillAll_G("固定ブロック");
+			ge->KillAll_G("スイッチ");
+			ge->KillAll_G("ゴール");
+
+			if (auto map = Generator::Object::Create_Mutex()) {
+				map->Set("./data/Map/Map_Title.txt");
+			}
+		}
+
+		if (key.B1.down) {
+			this->Kill();
+		}
 		if (ms.LB.down) {
 			//ロゴの出現が終わっているか？
 		//	if(easing::GetState("titlelogoX") == easing::EQ_STATE::EQ_END){
@@ -90,7 +108,7 @@ namespace  Title
 		ML::Box2D  draw1(0, 0, 1280, 720);
 		ML::Box2D  src1(0, 0, 1280, 720);
 		this->res->back->Draw(draw1, src1);
-
+		this->res->presskey->Draw(draw1, src1);
 		//ML::Box2D  draw2(-792 / 2, 89 / 2, 792, 89);
 	//	ML::Box2D  src2(0, 0, 792, 89);
 		//int x = easing::GetPos("titlelogoX");

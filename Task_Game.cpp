@@ -86,9 +86,9 @@ namespace  Game
 	void  Object::UpDate()
 	{
 		auto ms = ge->mouse->GetState();
-		auto inp = ge->in1->GetState();
+		auto key = ge->in1->GetState();
 
-		if (ms.RB.down) {
+		if (ms.RB.down || key.B2.down) {
 			ge->KillAll_G("プレイヤー");
 			ge->KillAll_G("ブロック");
 			ge->KillAll_G("固定ブロック");
@@ -99,7 +99,8 @@ namespace  Game
 				map->Set(ge->nowStage);
 			}
 		}
-		if (ms.CB.down) {
+
+		if (ms.CB.down ) {
 			//自身に消滅要請
 			this->Kill();
 		}

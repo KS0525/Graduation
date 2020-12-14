@@ -208,8 +208,14 @@ namespace  Generator
 		}
 		if (kind == "Block07") {
 			auto bl = Block07::Object::Create(true);
+			int up, down, right, left;
+			ds_ >> up >> down >> right >> left;
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+			bl->UpTime = up;
+			bl->DownTime = down;
+			bl->RightTime = right;
+			bl->LeftTime = left;
 		}
 		if (kind == "Block08") {
 			auto bl = Block08::Object::Create(true);

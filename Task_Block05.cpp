@@ -42,6 +42,8 @@ namespace  Block05
 		moveVec = { 0,2 };
 		atk = { 0 };
 
+		this->render2D_Priority[1] = 1.0f;
+
 		this->maxFallSpeed = 10.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
 
@@ -79,8 +81,8 @@ namespace  Block05
 		auto key = ge->in1->GetState();
 
 		//重力変更
-		if (key.B1.on) { this->MoveGravity = Gravity::up; }
-		if (key.B3.on) { this->MoveGravity = Gravity::down; }
+		if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+		if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
 
 		this->GravityMotion("ブロック");
 

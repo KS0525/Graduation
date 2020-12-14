@@ -38,7 +38,8 @@ namespace  MapSelector
 
 		//Button::set_allNum(0);
 		buttons[0].set_StagePass("./data/Map/Map.txt");
-		buttons[1].set_StagePass("./data/Map/Map_Title.txt");
+		buttons[1].set_StagePass("./data/Map/Map4.txt");
+		buttons[2].set_StagePass("./data/Map/Map3.txt");
 		//★データ初期化
 		//easing::Init();
 		choosing = 1;
@@ -64,10 +65,10 @@ namespace  MapSelector
 	void  Object::UpDate()
 	{
 		auto ms = ge->mouse->GetState();
-		
+		auto key = ge->in1->GetState();
 		Carsol();
 		
-		if (ms.LB.down) {
+		if (key.B1.down) {
 			ge->nowStage = buttons[choosing].get_StagePass();
 				//自身に消滅要請
 				this->Kill();
@@ -93,7 +94,7 @@ namespace  MapSelector
 		this->res->img->Draw(draw1, src1);
 		
 		this->res->img->Draw(draw[1], src1);
-
+		this->res->img->Draw(draw[2], src1);
 		ML::Box2D src2(0, 0, 132, 132);
 		this->res->choosingimg->Draw(draw[choosing], src2);
 		
@@ -103,10 +104,10 @@ namespace  MapSelector
 	{
 		auto key = ge->in1->GetState();
 		//カーソル移動
-		if (key.B1.down) {
+		if (key.LStick.BR.down) {
 			choosing++;
 		}
-		if (key.B2.down) {
+		if (key.LStick.BL.down) {
 			choosing--;
 		}
 		//下限と上限

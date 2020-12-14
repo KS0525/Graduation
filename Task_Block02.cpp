@@ -42,6 +42,8 @@ namespace  Block02
 		moveVec = { 0,2 };
 		atk = { 0 };
 
+		this->render2D_Priority[1] = 1.0f;
+
 		this->maxFallSpeed = 5.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 3; //重力加速度＆時間速度による加算量
@@ -77,10 +79,10 @@ namespace  Block02
 		//ML::Vec2 savePos = this->pos;
 
 		//重力変更
-		if (key.B1.on) { this->MoveGravity = Gravity::up; }
-		if (key.B2.on) { this->MoveGravity = Gravity::left; }
-		if (key.B3.on) { this->MoveGravity = Gravity::down; }
-		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+		if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+		if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+		if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
+		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
 		this->GravityMotion("ブロック");
 

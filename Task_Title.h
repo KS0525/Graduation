@@ -25,6 +25,7 @@ namespace  Title
 		//‹¤—L‚·‚é•Ï”‚Í‚±‚±‚É’Ç‰Á‚·‚é
 		DG::Image::SP  back;
 		DG::Image::SP  titlelogo;
+		DG::Image::SP  presskey;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask

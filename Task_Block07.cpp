@@ -43,6 +43,8 @@ namespace  Block07
 		atk = { 0 };
 		i = 0;
 
+		this->render2D_Priority[1] = 1.0f;
+
 		//ˆÚ“®ŠÔİ’è
 		RightTime = 100;
 		DownTime = 40;

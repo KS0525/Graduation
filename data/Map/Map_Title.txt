@@ -2,6 +2,8 @@
 /crtに必要なパラメータ 作るオブジェクト名　x座標(左上) y座標(左上) w(幅) h (高さ) 
 /パラメータの区切りの判別のためにスペースは必須
 
+/画面サイズ 1280 720
+
 /オブジェクト種類
 /player プレイヤー
 /Block00 動くブロック(ベース)
@@ -16,19 +18,34 @@
 /Block09 動くブロック(スイッチ)
 /Block10 動かないブロック
 
-crt>player 100 100 50 50
-crt>Block00 400 200 100 100
-/crt>Block01 300 300 100 100
-/crt>Block02 300 300 100 100
-/crt>Block03 300 300 100 100
-/crt>Block04 300 300 100 100
-/crt>Block05 300 300 100 100
-/crt>Block06 300 300 100 100
-/crt>Block07 100 100 100 100
-/crt>Block08 300 300 100 100 
-/crt>Block08 500 300 100 100
-crt>Switch 500 500 100 100 up
-crt>Block09 300 300 100 100
-crt>Goal 1000 360 100 100
-crt>Block10 600 300 100 100
+/プレイヤ
+crt>Block00 80 800 60 60
+
+/左
+crt>Block10 0 0 80 80
+crt>Block10 0 80 80 80
+crt>Block10 0 160 80 80
+crt>Block10 0 240 80 80
+crt>Block10 0 320 80 80
+crt>Block10 0 400 120 70
+crt>Block10 120 400 120 70
+
+/
+crt>Block10 320 400 120 70
+crt>Block10 440 400 120 70
+
+crt>Block10 480 470 80 62
+crt>Block10 480 532 80 62
+crt>Block10 480 594 80 63
+crt>Block10 480 657 80 63
+
+crt>Block10 560 0 120 60
+crt>Block10 680 0 120 60
+
+
+crt>Block10 640 400 80 200
+crt>Block10 720 400 200 70
+
+crt>Block10 920 0 70 470
+crt>Block10 920 530 70 190
 end>

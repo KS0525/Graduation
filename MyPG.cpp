@@ -169,17 +169,18 @@ namespace MyPG
 		this->camera[3] = this->camera[2] = this->camera[1] = this->camera[0];
 
 		//デバッグ用情報の表示ON/OFF
-		DebugMode(false);
+		DebugMode(true);
 
 		//キーボードの入力を受け取るオブジェクトを生成する
 		XI::AnalogAxisKB	ls = { DIK_LEFT, DIK_RIGHT, DIK_UP, DIK_DOWN };
 		XI::AnalogAxisKB	rs = { DIK_NUMPAD4, DIK_NUMPAD6, DIK_NUMPAD8, DIK_NUMPAD2 };
 		XI::AnalogTriggerKB  tg = { DIK_E, DIK_R };
 		XI::KeyDatas_KB	 key = {
-			{ DIK_W, XI::VGP::B1 },{ DIK_A, XI::VGP::B2 },{ DIK_S, XI::VGP::B3 },
-			{ DIK_D, XI::VGP::B4 },{ DIK_Z, XI::VGP::SE },{ DIK_X, XI::VGP::ST },
+			{ DIK_W, XI::VGP::B4 },{ DIK_A, XI::VGP::B3 },{ DIK_S, XI::VGP::B1 },
+			{ DIK_D, XI::VGP::B2 },{ DIK_Z, XI::VGP::SE },{ DIK_X, XI::VGP::ST },
 			{ DIK_Q, XI::VGP::L1 },{ DIK_C, XI::VGP::R1 },
 			{ DIK_V, XI::VGP::L3 },{ DIK_NUMPAD5, XI::VGP::R3 },
+			{DIK_UP,XI::VGP::HU},{DIK_LEFT,XI::VGP::HL},{DIK_RIGHT,XI::VGP::HR},{DIK_DOWN,XI::VGP::HD}
 		};
 		//ゲームパッドパラメータ
 		XI::KeyDatas_GP	but = {
