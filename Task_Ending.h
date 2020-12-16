@@ -24,6 +24,11 @@ namespace  Ending
 		static  Resource::SP  Create();
 		//‹¤—L‚·‚é•Ï”‚Í‚±‚±‚É’Ç‰Á‚·‚é
 		DG::Image::SP  img;
+		DG::Image::SP  back;
+		DG::Image::SP  back2;
+		DG::Image::SP  back3;
+		DG::Image::SP  back4;
+		DG::Image::SP backs[];
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask

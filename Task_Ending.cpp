@@ -14,6 +14,11 @@ namespace  Ending
 	bool  Resource::Initialize()
 	{
 		this->img = DG::Image::Create("./data/image/Ending.bmp");
+		this->back = DG::Image::Create("./data/image/UI/back1.png");
+		this->back2 = DG::Image::Create("./data/image/UI/back2.png");
+		this->back3 = DG::Image::Create("./data/image/UI/back3.png");
+		this->back4 = DG::Image::Create("./data/image/UI/back4.png");
+
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -80,6 +85,23 @@ namespace  Ending
 
 		draw.Offset(0, this->logoPosY);
 		this->res->img->Draw(draw, src);
+
+	/*	for (int i = 0; i < 4; ++i) {
+			ML::Box2D draw2(i * 200, 640, 128, 128);
+			ML::Box2D src2(0, 0, 128, 128);
+			this->res->back->Draw(draw2, src2);
+		}*/
+		ML::Box2D draw1(200, 600, 128, 128);
+		ML::Box2D draw2(400, 600, 128, 128);
+		ML::Box2D draw3(600, 600, 128, 128);
+		ML::Box2D draw4(800, 600, 128, 128);
+		ML::Box2D src2(0, 0, 128, 128);
+
+		this->res->back->Draw(draw1, src2);
+		this->res->back2->Draw(draw2, src2);
+		this->res->back3->Draw(draw3, src2);
+		this->res->back4->Draw(draw4, src2);
+
 	}
 
 	//šššššššššššššššššššššššššššššššššššššššššš

@@ -40,6 +40,9 @@ namespace  MapSelector
 		buttons[0].set_StagePass("./data/Map/Map.txt");
 		buttons[1].set_StagePass("./data/Map/Map4.txt");
 		buttons[2].set_StagePass("./data/Map/Map3.txt");
+		buttons[3].set_StagePass("./data/Map/Map5.txt");
+		buttons[4].set_StagePass("./data/Map/Map6.txt");
+
 		//šƒf[ƒ^‰Šú‰»
 		//easing::Init();
 		choosing = 1;
@@ -95,6 +98,8 @@ namespace  MapSelector
 		
 		this->res->img->Draw(draw[1], src1);
 		this->res->img->Draw(draw[2], src1);
+		this->res->img->Draw(draw[3], src1);
+		this->res->img->Draw(draw[4], src1);
 		ML::Box2D src2(0, 0, 132, 132);
 		this->res->choosingimg->Draw(draw[choosing], src2);
 		

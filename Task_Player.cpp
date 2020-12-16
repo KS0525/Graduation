@@ -2,6 +2,7 @@
 //プレイヤー（卵）
 //-----------------------------------------------------------------------------
 #include "Task_Player.h"
+#include "Task_Ending.h"
 #include "Task_EffectHit.h"
 #include "Task_MapGenerator.h"
 #include  "MyPG.h"
@@ -63,7 +64,7 @@ namespace Player
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
-
+			//auto nextTask = Ending::Object::Create(true);
 			
 		}
 
@@ -142,18 +143,19 @@ namespace Player
 				};
 				//描画をずらして、白身が垂れているように
 				ML::Box2D draw_ = draw;
-				switch (this->MoveGravity) {
+				int dif = 25;
+				switch (this->MoveGravity) {					
 				case 0: //up
-					draw_.y -= 25;
+					draw_.y -= dif;
 					break;
 				case 1: //down
-					draw_.y += 25;
+					draw_.y += dif;
 					break;
 				case 2: //left
-					draw_.x -= 25;
+					draw_.x -= dif;
 					break;
 				case 3: //right
-					draw_.x += 25;
+					draw_.x += dif;
 					break;
 				default:
 					break;
