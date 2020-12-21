@@ -18,7 +18,6 @@ namespace  Block01
 	bool  Resource::Initialize()
 	{
 		img = DG::Image::Create("./data/image/Block/Block_01.jpg");
-		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -52,10 +51,6 @@ namespace  Block01
 		this->serial = ge->serial;
 
 		//šƒ^ƒXƒN‚Ì¶¬
-		//this->res->se->Play_Normal(false);
-
-		se::LoadFile("shot", "./data/sound/shot.wav");
-		se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------

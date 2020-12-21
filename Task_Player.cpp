@@ -17,8 +17,10 @@ namespace Player
 		this->img = DG::Image::Create("./data/image/chara/Egg_anim_01.png");
 		this->break_img = DG::Image::Create("./data/image/chara/Egg_break_anim_01.png");
 		this->chargeimg = DG::Image::Create("./data/image/bar.png");
-		this->se = DM::Sound::CreateSE("./data/sound/玉子・潰す01.mp3");
+		
+		//this->se = DM::Sound::Create("./data/sound/玉子・潰す01.mp3");
 
+		
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -89,13 +91,14 @@ namespace Player
 		}
 		if (isDead) {
 			animCnt++;
+			se::LoadFile("tamago", "./data/sound/卵・潰す.wav");
+		
 			if (animCnt > 3) {
 				animCnt = 3;
 			}
 			else if (animCnt == 1)
-			{
-				//se::LoadFile("tamago", "./data/sound/玉子・潰す01.mp3");
-				//se::Play("tamago");
+			{				
+				se::Play("tamago");
 			}
 		}
 		//画面外へ出ないように
@@ -181,6 +184,7 @@ namespace Player
 		//	map->Set("./data/Map/Map.txt");
 		//}
 		this->isDead = true;
+	
 
 		//this->Kill();
 

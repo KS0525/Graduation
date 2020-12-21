@@ -16,7 +16,7 @@ namespace  Block09
 	bool  Resource::Initialize()
 	{
 		img = DG::Image::Create("./data/image/Block/Block_09.jpg");
-		se = DM::Sound::CreateSE("./data/sound/shot.wav");
+		
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -50,10 +50,7 @@ namespace  Block09
 		this->serial = ge->serial;
 
 		//šƒ^ƒXƒN‚Ì¶¬
-		//this->res->se->Play_Normal(false);
 
-		se::LoadFile("shot", "./data/sound/shot.wav");
-		se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------

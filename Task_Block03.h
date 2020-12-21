@@ -25,7 +25,6 @@ namespace  Block03
 	//•ÏX‰Â
 		//‹¤—L‚·‚é•Ï”‚Í‚±‚±‚É’Ç‰Á‚·‚é
 		DG::Image::SP img;
-		DM::Sound::SP se;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BChara

@@ -18,7 +18,6 @@ namespace  Block00
 	bool  Resource::Initialize()
 	{
 		img = DG::Image::Create("./data/image/Block/Block_00.jpg");
-		//se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -52,11 +51,7 @@ namespace  Block00
 		this->serial = ge->serial;
 
 		//★タスクの生成
-		//this->res->se->Play_Normal(false);
-
-		//se::LoadFile("shot", "./data/sound/shot.wav");
-		//se::Play("shot");
-		return  true;
+	return  true;
 	}
 	//-------------------------------------------------------------------
 	//「終了」タスク消滅時に１回だけ行う処理

@@ -16,7 +16,6 @@ namespace  Block06
 	bool  Resource::Initialize()
 	{
 		img = DG::Image::Create("./data/image/Block/Block_06.jpg");
-		se = DM::Sound::CreateSE("./data/sound/shot.wav");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -50,10 +49,7 @@ namespace  Block06
 
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
-		//this->res->se->Play_Normal(false);
 
-		se::LoadFile("shot", "./data/sound/shot.wav");
-		se::Play("shot");
 		return  true;
 	}
 	//-------------------------------------------------------------------
