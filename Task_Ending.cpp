@@ -14,10 +14,16 @@ namespace  Ending
 	bool  Resource::Initialize()
 	{
 		this->img = DG::Image::Create("./data/image/Ending.bmp");
-		this->back = DG::Image::Create("./data/image/UI/back1.png");
-		this->back2 = DG::Image::Create("./data/image/UI/back2.png");
-		this->back3 = DG::Image::Create("./data/image/UI/back3.png");
-		this->back4 = DG::Image::Create("./data/image/UI/back4.png");
+		//this->back = DG::Image::Create("./data/image/UI/back1.png");
+		//this->back2 = DG::Image::Create("./data/image/UI/back2.png");
+		//this->back3 = DG::Image::Create("./data/image/UI/back3.png");
+		//this->back4 = DG::Image::Create("./data/image/UI/back4.png");
+
+
+		this->back = DG::Image::Create("./data/image/UI/select3-2.png");
+		this->back2 = DG::Image::Create("./data/image/UI/select3-3.png");
+		this->back3 = DG::Image::Create("./data/image/UI/select3-4.png");
+		this->back4 = DG::Image::Create("./data/image/UI/select3-5.png");
 
 		return true;
 	}
@@ -91,11 +97,11 @@ namespace  Ending
 			ML::Box2D src2(0, 0, 128, 128);
 			this->res->back->Draw(draw2, src2);
 		}*/
-		ML::Box2D draw1(200, 600, 128, 128);
-		ML::Box2D draw2(400, 600, 128, 128);
-		ML::Box2D draw3(600, 600, 128, 128);
-		ML::Box2D draw4(800, 600, 128, 128);
-		ML::Box2D src2(0, 0, 128, 128);
+		ML::Box2D draw1(200, 600, 170, 128);
+		ML::Box2D draw2(400, 600, 170, 128);
+		ML::Box2D draw3(600, 600, 170, 128);
+		ML::Box2D draw4(800, 600, 170, 128);
+		ML::Box2D src2(0, 0, 170, 128);
 
 		this->res->back->Draw(draw1, src2);
 		this->res->back2->Draw(draw2, src2);
