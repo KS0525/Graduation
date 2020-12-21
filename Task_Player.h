@@ -27,6 +27,7 @@ namespace Player {
 		DG::Image::SP  img;
 		DG::Image::SP  break_img;
 		DG::Image::SP chargeimg;
+		DM::Sound::SP se;
 
 	};
 	//-------------------------------------------------------------------
