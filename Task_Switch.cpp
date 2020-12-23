@@ -18,7 +18,7 @@ namespace  Switch
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_10.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_11.jpg");
 		return true;
 	}
 	//-------------------------------------------------------------------

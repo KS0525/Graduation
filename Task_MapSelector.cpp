@@ -93,7 +93,7 @@ namespace  MapSelector
 	//u‚Q‚c•`‰æv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
 	void  Object::Render2D_AF()
 	{
-#define choiceMax 6
+#define choiceMax 14
 		ML::Box2D draw[choiceMax] = {
 			ML::Box2D(100,100,100,100),
 			ML::Box2D(200,100,100,100),
@@ -101,15 +101,27 @@ namespace  MapSelector
 			ML::Box2D(400,100,100,100),
 			ML::Box2D(500,100,100,100),
 			ML::Box2D(600,100,100,100),
+			ML::Box2D(700,100,100,100),
+			ML::Box2D(800,100,100,100),
+			ML::Box2D(100,300,100,100),
+			ML::Box2D(200,300,100,100),
+			ML::Box2D(300,300,100,100),
+			ML::Box2D(400,300,100,100),
+			ML::Box2D(500,300,100,100),
+			ML::Box2D(600,300,100,100),
 		};
 		ML::Box2D  draw1(100,100, 100, 100);
 		ML::Box2D  src1(0, 0, 128, 128);
 		this->res->img->Draw(draw1, src1);
 		
-		this->res->img->Draw(draw[1], src1);
+		for (int i = 1; i < choiceMax; ++i) {
+			this->res->img->Draw(draw[i], src1);
+		}
+		/*this->res->img->Draw(draw[1], src1);
 		this->res->img->Draw(draw[2], src1);
 		this->res->img->Draw(draw[3], src1);
-		this->res->img->Draw(draw[4], src1);
+		this->res->img->Draw(draw[4], src1);*/
+
 		ML::Box2D src2(0, 0, 132, 132);
 		this->res->choosingimg->Draw(draw[choosing], src2);
 		

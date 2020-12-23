@@ -47,7 +47,7 @@ namespace  Generator
 		//★データ初期化
 		this->res = Resource::Create();
 		this->genCnt = 0;
-		this->genSpan = 1;
+		this->genSpan = 0;
 
 		//★タスクの生成
 
@@ -260,7 +260,7 @@ namespace  Generator
 	//-------------------------------------------------------------------
 	void Object::Generate()
 	{
-		if (genCnt % genSpan == 0) {
+		//if (genCnt % genSpan == 0) {
 			//新しい行を読み込む
 			string lineText;
 			string headerText;
@@ -279,7 +279,7 @@ namespace  Generator
 				}
 			}
 
-		}
+		//}
 	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
