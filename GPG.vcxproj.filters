@@ -139,9 +139,6 @@
     <ClCompile Include="Task_logo.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Enemy.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="Task_Player.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
@@ -149,9 +146,6 @@
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="Task_BackGround.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Enemy01.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="Task_Map2D.cpp">
@@ -291,9 +285,6 @@
     <ClInclude Include="Task_logo.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="Task_Enemy.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="Task_Player.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
@@ -301,9 +292,6 @@
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_BackGround.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Enemy01.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_Map2D.h">

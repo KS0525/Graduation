@@ -114,8 +114,6 @@
     <ClCompile Include="Task_EffectCreate.cpp" />
     <ClCompile Include="Task_EffectHit.cpp" />
     <ClCompile Include="Task_Ending.cpp" />
-    <ClCompile Include="Task_Enemy.cpp" />
-    <ClCompile Include="Task_Enemy01.cpp" />
     <ClCompile Include="Task_Game.cpp" />
     <ClCompile Include="Task_Goal.cpp" />
     <ClCompile Include="Task_logo.cpp" />
@@ -166,8 +164,6 @@
     <ClInclude Include="Task_EffectCreate.h" />
     <ClInclude Include="Task_EffectHit.h" />
     <ClInclude Include="Task_Ending.h" />
-    <ClInclude Include="Task_Enemy.h" />
-    <ClInclude Include="Task_Enemy01.h" />
     <ClInclude Include="Task_Game.h" />
     <ClInclude Include="Task_Goal.h" />
     <ClInclude Include="Task_logo.h" />

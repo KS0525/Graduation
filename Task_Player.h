@@ -26,7 +26,6 @@ namespace Player {
 		//‹¤—L‚·‚é•Ï”‚Í‚±‚±‚É’Ç‰Á‚·‚é
 		DG::Image::SP  img;
 		DG::Image::SP  break_img;
-		DG::Image::SP chargeimg;
 	};
 	//-------------------------------------------------------------------
 	class Object : public BChara
@@ -59,6 +58,5 @@ namespace Player {
 		void Received(BChara* from_);
 		bool CheckHit(const  ML::Box2D&  hit_);
 		bool Attack_Std(const string& GName);
-		bool Check_Head(const ML::Box2D& head_);
 	};	
 }

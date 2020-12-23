@@ -16,7 +16,6 @@ namespace Player
 	{
 		this->img = DG::Image::Create("./data/image/chara/Egg_anim_01.png");
 		this->break_img = DG::Image::Create("./data/image/chara/Egg_break_anim_01.png");
-		this->chargeimg = DG::Image::Create("./data/image/bar.png");
 		
 		//this->se = DM::Sound::Create("./data/sound/玉子・潰す01.mp3");
 
@@ -28,7 +27,6 @@ namespace Player
 	bool  Resource::Finalize()
 	{
 		this->img.reset();
-		this->chargeimg.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -179,15 +177,7 @@ namespace Player
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-
-		//if (auto map = Generator::Object::Create_Mutex()) {
-		//	map->Set("./data/Map/Map.txt");
-		//}
 		this->isDead = true;
-	
-
-		//this->Kill();
-
 	}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
