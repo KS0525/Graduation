@@ -169,7 +169,7 @@ namespace MyPG
 		this->camera[3] = this->camera[2] = this->camera[1] = this->camera[0];
 
 		//デバッグ用情報の表示ON/OFF
-		DebugMode(true);
+		DebugMode(false);
 
 		//キーボードの入力を受け取るオブジェクトを生成する
 		XI::AnalogAxisKB	ls = { DIK_LEFT, DIK_RIGHT, DIK_UP, DIK_DOWN };

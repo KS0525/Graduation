@@ -23,6 +23,16 @@ namespace  Game
 		static   WP  instance;
 		static  Resource::SP  Create();
 		//共有する変数はここに追加する
+		DG::Image::SP grab_UI_img;
+		DG::Image::SP grab_UI_img2;
+		DG::Image::SP grab_up_01;
+		DG::Image::SP grab_up_02;
+		DG::Image::SP grab_under_01;
+		DG::Image::SP grab_under_02;
+		DG::Image::SP grab_right_01;
+		DG::Image::SP grab_right_02;
+		DG::Image::SP grab_left_01;
+		DG::Image::SP grab_left_02;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask
@@ -48,5 +58,7 @@ namespace  Game
 		//追加したい変数・メソッドはここに追加する
 		int count;
 		int bcount;
+		enum Gravity { up, down, left, right, non };
+		Gravity MoveGravity;
 	};
 }

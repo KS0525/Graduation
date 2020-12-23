@@ -42,11 +42,21 @@ namespace  MapSelector
 		buttons[2].set_StagePass("./data/Map/Map3.txt");
 		buttons[3].set_StagePass("./data/Map/Map5.txt");
 		buttons[4].set_StagePass("./data/Map/Map6.txt");
+		buttons[5].set_StagePass("./data/Map/Map7.txt");
+		buttons[6].set_StagePass("./data/Map/Map8.txt");
+		buttons[7].set_StagePass("./data/Map/Map9.txt");
+		buttons[8].set_StagePass("./data/Map/Map10.txt");
+		buttons[9].set_StagePass("./data/Map/Map11.txt");
+		buttons[10].set_StagePass("./data/Map/Map12.txt");
+		buttons[11].set_StagePass("./data/Map/Map13.txt");
+		buttons[12].set_StagePass("./data/Map/Map14.txt");
+		buttons[13].set_StagePass("./data/Map/Map15.txt");
+
 
 		//★データ初期化
 		//easing::Init();
 		choosing = 1;
-		choiceMax_ = 6;
+		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
 		
 		return  true;

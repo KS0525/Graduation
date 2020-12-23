@@ -24,6 +24,21 @@ namespace  Game
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
+		this->grab_UI_img = DG::Image::Create("./data/image/UI/gravity_UI-6.png");
+		this->grab_UI_img2 = DG::Image::Create("./data/image/UI/gravity_UI-5.png");
+
+		this->grab_up_01 = DG::Image::Create("./data/image/UI/gravity_UI-6.png");
+		this->grab_up_02 = DG::Image::Create("./data/image/UI/gravity_UI-5.png");
+
+		this->grab_left_01 = DG::Image::Create("./data/image/UI/gravity_left01.png");
+		this->grab_left_02 = DG::Image::Create("./data/image/UI/gravity_left02.png");
+
+		this->grab_right_01 = DG::Image::Create("./data/image/UI/gravity_right01.png");
+		this->grab_right_02 = DG::Image::Create("./data/image/UI/gravity_right02.png");
+
+		this->grab_under_01 = DG::Image::Create("./data/image/UI/gravity_under01.png");
+		this->grab_under_02 = DG::Image::Create("./data/image/UI/gravity_under02.png");
+
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -87,6 +102,12 @@ namespace  Game
 		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 
+		if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+		if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+		if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
+		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
+		
+
 		if (ms.RB.down || key.B2.down) {
 			ge->KillAll_G("プレイヤー");
 			ge->KillAll_G("ブロック");
@@ -108,7 +129,48 @@ namespace  Game
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
+		auto key = ge->in1->GetState();
+		ML::Box2D draw(80,80,96,96);
+		ML::Box2D src(0, 0, 136, 136);
+	
+		float pie(3.1415f);
 
+		switch (this->MoveGravity) {
+		case 0: //up
+			//this->res->grab_UI_img->Rotation(0*pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			//this->res->grab_UI_img2->Rotation(0*pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			this->res->grab_UI_img = this->res->grab_up_01;
+			this->res->grab_UI_img2 = this->res->grab_up_02;
+			break;
+		case 1: // down
+			//this->res->grab_UI_img->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			//this->res->grab_UI_img2->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			this->res->grab_UI_img = this->res->grab_under_01;
+			this->res->grab_UI_img2 = this->res->grab_under_02;
+			break;
+		case 2: //left
+			//this->res->grab_UI_img->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			//this->res->grab_UI_img2->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			this->res->grab_UI_img = this->res->grab_left_01;
+			this->res->grab_UI_img2 = this->res->grab_left_02;
+			break;
+		case 3: //right
+			//this->res->grab_UI_img->Rotation(0.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			//this->res->grab_UI_img2->Rotation(0.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+			this->res->grab_UI_img = this->res->grab_right_01;
+			this->res->grab_UI_img2 = this->res->grab_right_02;
+			break;
+		default:
+
+			break;
+		}
+
+		if (key.LStick.volume != 0) {
+			this->res->grab_UI_img2->Draw(draw, src);
+		}
+		else {
+			this->res->grab_UI_img->Draw(draw, src);
+		}
 	}
 
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
