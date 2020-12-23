@@ -15,7 +15,7 @@ namespace  MapSelector
 	bool  Resource::Initialize()
 	{
 		this->img = DG::Image::Create("./data/image/Block/Block_00.jpg");
-		this->choosingimg = DG::Image::Create("./data/image/UI_choosing.png");
+		this->choosingimg = DG::Image::Create("./data/image/UI/UI_choosing.png");
 		return true;
 	}
 	//-------------------------------------------------------------------

@@ -24,7 +24,6 @@ namespace  Game
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		this->score = DG::Image::Create("./data/image/font_number.png");
 		return true;
 	}
 	//-------------------------------------------------------------------

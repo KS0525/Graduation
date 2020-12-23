@@ -17,7 +17,6 @@ namespace  Title
 	{
 		this->back = DG::Image::Create("./data/image/Title/title.png");
 		this->presskey = DG::Image::Create("./data/image/Title/pressKey02.png");
-		//this->titlelogo = DG::Image::Create("./data/image/title.png");
 		
 		//bgm::LoadFile("title", "./data/sound/夢幻の世界-Real_promenade-.mp3");
 
@@ -29,8 +28,6 @@ namespace  Title
 	{
 		this->back.reset();
 		this->presskey.reset();
-		//this->titlelogo.reset();
-		//bgm::Pause("title");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -93,13 +90,9 @@ namespace  Title
 			this->Kill();
 		}
 		if (ms.LB.down) {
-			//ロゴの出現が終わっているか？
-		//	if(easing::GetState("titlelogoX") == easing::EQ_STATE::EQ_END){
-				//自身に消滅要請
-				this->Kill();
+			//自身に消滅要請
+			this->Kill();
 			}
-		//}
-
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
@@ -109,13 +102,6 @@ namespace  Title
 		ML::Box2D  src1(0, 0, 1280, 720);
 		this->res->back->Draw(draw1, src1);
 		this->res->presskey->Draw(draw1, src1);
-		//ML::Box2D  draw2(-792 / 2, 89 / 2, 792, 89);
-	//	ML::Box2D  src2(0, 0, 792, 89);
-		//int x = easing::GetPos("titlelogoX");
-	//	int y = easing::GetPos("titlelogoY");
-
-	//	draw2.Offset(x, y);
-		//this->res->titlelogo->Draw(draw2, src2);
 	}
 
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
