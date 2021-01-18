@@ -17,7 +17,7 @@ namespace  Title
 		this->back = DG::Image::Create("./data/image/titleback.png");
 		this->titlelogo = DG::Image::Create("./data/image/title.png");
 		
-		//bgm::LoadFile("title", "./data/sound/–²Œ¶‚Ì¢ŠE-Real_promenade-.mp3");
+	   // bgm::LoadFile("title", "./data/sound/–²Œ¶‚Ì¢ŠE-Real_promenade-.mp3");
 
 		return true;
 	}
