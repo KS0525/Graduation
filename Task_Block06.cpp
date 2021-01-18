@@ -110,15 +110,15 @@ namespace  Block06
 	void  Object::Received(BChara*  from_)
 	{
 
-		if (this->hp <= 0)
-		{
-			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
-			++ge->score;
-			this->Kill();
-		}
-		else {
-			ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
-		}
+		//if (this->hp <= 0)
+		//{
+		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
+		//	++ge->score;
+		//	this->Kill();
+		//}
+		//else {
+		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
+		//}
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
@@ -144,7 +144,8 @@ namespace  Block06
 		it != targets->end();
 		++it) {
 		//相手に接触の有無を確認させる
-		if ((*it)->CheckHit(bottom)) {
+		if ((*it)->CheckHit(me) && this->serial != (*it)->serial)
+		{
 			//相手にダメージの処理を行わせる
 			(*it)->Received(this);
 			return true;

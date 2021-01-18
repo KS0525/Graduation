@@ -136,7 +136,8 @@ namespace  Block01
 		it != targets->end();
 		++it) {
 		//相手に接触の有無を確認させる
-		if ((*it)->CheckHit(me) && this->serial != (*it)->serial) {
+		if ((*it)->CheckHit(me) && this->serial != (*it)->serial) 
+		{
 			//相手にダメージの処理を行わせる
 			(*it)->Received(this);
 			return true;
