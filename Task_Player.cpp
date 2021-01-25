@@ -40,8 +40,7 @@ namespace Player
 
 		//★データ初期化
 		pos.y = 300;
-		//this->render2D_Priority[1] = 0.5f;
-		this->hitBase = ML::Box2D(8,8, 48, 48);
+		this->hitBase = ML::Box2D(12,12, 40, 40);
 		this->angle_LR = Angle_LR::Right;
 		this->controller = ge->in1;
 		this->hp = 10;
@@ -87,8 +86,15 @@ namespace Player
 				if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
 				this->GravityMotion("ブロック");
+				//重力操作のse
+				if (key.LStick.axis.Length() > 0) {
+					//se::LoadFile("gravity", "./data/sound/GravityChangeSE12.wav");
+					//se::Play("gravity");
+				}
 			}
+
 		}
+
 		if (isDead) {
 			animCnt++;
 			se::LoadFile("tamago", "./data/sound/卵・潰す.wav");

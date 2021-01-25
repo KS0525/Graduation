@@ -15,6 +15,7 @@
 #include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
 #include  "Task_MapSelector.h"
+#include  "Task_StageSelector.h"
 #include  "Task_Block02.h"
 
 namespace  Game
@@ -93,7 +94,7 @@ namespace  Game
 				auto nextTask = Ending::Object::Create(true);
 			}
 			else {
-				auto nextTask = MapSelector::Object::Create(true);
+				auto nextTask = StageSelector::Object::Create(true);
 			}
 		}
 

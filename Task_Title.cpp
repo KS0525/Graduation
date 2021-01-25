@@ -5,6 +5,7 @@
 #include  "Task_Title.h"
 #include  "Task_Game.h"
 #include  "Task_MapSelector.h"
+#include  "Task_StageSelector.h"
 #include  "Task_MapGenerator.h"
 #include  "Task_BackGround.h"
 #include "easing.h"
@@ -64,7 +65,7 @@ namespace  Title
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
-			auto nextTask = MapSelector::Object::Create(true);
+			auto nextTask = StageSelector::Object::Create(true);
 		}
 		return  true;
 	}

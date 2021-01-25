@@ -99,10 +99,7 @@ namespace  Block00
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		/*ML::Box2D src[3] = { ML::Box2D(321,64,30,32),
-							ML::Box2D(289,64,30,32),
-							ML::Box2D(257, 64, 30, 32)						
-							};*/
+	
 		ML::Box2D src(0, 0, 128, 128);
 		draw.Offset(this->pos);
 
@@ -114,17 +111,6 @@ namespace  Block00
 	{
 		
 	}
-	//------------------------------------------------------------------
-	//bool Object::Check_bottom()
-	//{
-	//	ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
-	//	bottom.Offset(this->pos);
-
-	//	auto pl = ge->GetTask_One_GN<Player::Object>(Player::defGroupName,Player::defName);
-	//	if (nullptr == pl) {return false;}
-
-	//	return pl->CheckHit(bottom);
-	//}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
 	{
@@ -143,7 +129,7 @@ namespace  Block00
 	}
 	return false;
 	}
-
+	//------------------------------------------------------------------
 	bool  Object::CheckHit(const  ML::Box2D& hit_)
 	{
 		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);

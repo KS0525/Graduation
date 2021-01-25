@@ -21,6 +21,7 @@ bool  BChara::CheckHit(const  ML::Box2D&  hit_)
 //モーションを更新(変更なしの場合 false)
 bool BChara::UpdateMotion(Motion nm_)
 {
+	
 	if (nm_ == this->motion) {
 		return false;
 	}
@@ -28,6 +29,7 @@ bool BChara::UpdateMotion(Motion nm_)
 		this->motion = nm_;
 		this->moveCnt = 0;
 		this->animCnt = 0;
+		se::Play("gravity");
 		return true;
 	}
 }

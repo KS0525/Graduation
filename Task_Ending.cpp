@@ -4,7 +4,7 @@
 #include  "MyPG.h"
 #include  "Task_Ending.h"
 #include  "Task_Title.h"
-
+#include  "Task_StageSelector.h"
 #include "easing.h"
 namespace  Ending
 {
@@ -58,7 +58,7 @@ namespace  Ending
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
-			auto  nextTask = Title::Object::Create(true);
+			auto  nextTask = StageSelector::Object::Create(true);
 		}
 
 		return  true;
