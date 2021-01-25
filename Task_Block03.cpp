@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------
-//弾
+//ブロック(重力と反転方向へ移動)
 //-------------------------------------------------------------------
 #include  "MyPG.h"
 #include  "Task_Block03.h"
@@ -77,13 +77,14 @@ namespace  Block03
 		auto key = ge->in1->GetState();
 
 		//重力変更
-		if (key.LStick.BU.on) { this->MoveGravity = Gravity::down; }
-		if (key.LStick.BL.on) { this->MoveGravity = Gravity::right; }
-		if (key.LStick.BD.on) { this->MoveGravity = Gravity::up; }
-		if (key.LStick.BR.on) { this->MoveGravity = Gravity::left; }
+		if (ge->isReady) {
+			if (key.LStick.BU.on) { this->MoveGravity = Gravity::down; }
+			if (key.LStick.BL.on) { this->MoveGravity = Gravity::right; }
+			if (key.LStick.BD.on) { this->MoveGravity = Gravity::up; }
+			if (key.LStick.BR.on) { this->MoveGravity = Gravity::left; }
 
-		this->GravityMotion("ブロック");
-
+			this->GravityMotion("ブロック");
+		}
 		//this->pos += this->moveVec;
 
 		//画面外へ出ないように

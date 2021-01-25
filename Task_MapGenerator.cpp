@@ -169,7 +169,6 @@ namespace  Generator
 		if (kind == "player") {
 			auto pl = Player::Object::Create(true);
 			pl->pos = ML::Vec2(pos.x,pos.y);
-			pl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}
 		if (kind == "Block00") {
 			auto bl = Block00::Object::Create(true);

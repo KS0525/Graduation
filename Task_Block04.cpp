@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------
-//弾
+//ブロック(等倍スピードでX軸のみ移動)
 //-------------------------------------------------------------------
 #include  "MyPG.h"
 #include  "Task_Block04.h"
@@ -78,15 +78,16 @@ namespace  Block04
 		auto key = ge->in1->GetState();
 
 		//重力変更
-		if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
-		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
+		if (ge->isReady) {
+			if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+			if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
-		if (key.B2.on) { this->MoveGravity = Gravity::left; }
-		if (key.B4.on) { this->MoveGravity = Gravity::right; }
+			if (key.B2.on) { this->MoveGravity = Gravity::left; }
+			if (key.B4.on) { this->MoveGravity = Gravity::right; }
 
-		this->GravityMotion("ブロック");
-
-		this->pos += this->moveVec;
+			this->GravityMotion("ブロック");
+		}
+		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; }

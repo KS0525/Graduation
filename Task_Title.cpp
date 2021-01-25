@@ -60,6 +60,7 @@ namespace  Title
 		ge->KillAll_G("固定ブロック");
 		ge->KillAll_G("スイッチ");
 		ge->KillAll_G("ゴール");
+		ge->KillAll_G("背景画像");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成

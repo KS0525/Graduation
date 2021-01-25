@@ -41,7 +41,7 @@ namespace Player
 		//šƒf[ƒ^‰Šú‰»
 		pos.y = 300;
 		//this->render2D_Priority[1] = 0.5f;
-		this->hitBase = ML::Box2D(8,8, 56, 56);
+		this->hitBase = ML::Box2D(8,8, 48, 48);
 		this->angle_LR = Angle_LR::Right;
 		this->controller = ge->in1;
 		this->hp = 10;
@@ -113,7 +113,7 @@ namespace Player
 	{
 		
 		{
-			ML::Box2D draw = this->hitBase;
+			ML::Box2D draw(0, 0, 50, 50);
 			ML::Box2D src(0, 0, 100, 100);
 
 			float pie(3.1415f);

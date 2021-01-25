@@ -3,6 +3,7 @@
 //-------------------------------------------------------------------
 #include  "MyPG.h"
 #include  "Task_MapSelector.h"
+#include  "Task_BackGround.h"
 #include  "Task_Game.h"
 
 #include "easing.h"
@@ -34,7 +35,7 @@ namespace  MapSelector
 		//リソースクラス生成orリソース共有
 		this->res = Resource::Create();
 
-		this->render2D_Priority[1] = 1.0f;
+		this->render2D_Priority[1] = 0.5f;
 
 		//Button::set_allNum(0);
 		buttons[0].set_StagePass("./data/Map/Map.txt");
@@ -55,6 +56,7 @@ namespace  MapSelector
 
 		//★データ初期化
 		//easing::Init();
+		BackGround::Object::Create(true);
 		choosing = 1;
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
@@ -66,6 +68,7 @@ namespace  MapSelector
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
+		ge->KillAll_G("背景画像");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
