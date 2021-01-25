@@ -61,7 +61,8 @@ namespace  StageSelector
 		
 
 		class StageButton : public Button {
-			
+			DG::Image::SP clearEgg;
+			DG::Image::SP nonClearEgg;
 			string stagePass;
 		public:
 			StageButton(string inPass) :Button() {
@@ -71,6 +72,8 @@ namespace  StageSelector
 
 			string get_StagePass() const  { return stagePass; }
 			void set_StagePass(const string pass) { stagePass = pass; }
+
+			bool isClear;
 		};
 		
 		StageButton buttons[6];
