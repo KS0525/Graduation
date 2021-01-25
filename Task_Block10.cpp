@@ -17,7 +17,7 @@ namespace  Block10
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_10.jpg");
+		img = DG::Image::Create("./data/image/Block/Block_09.jpg");
 		return true;
 	}
 	//-------------------------------------------------------------------

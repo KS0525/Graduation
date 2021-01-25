@@ -116,7 +116,7 @@ namespace  Generator
 		ss << ds_;
 		//イベント終了
 		if (hs_ == "end") {
-			
+			ge->isReady = true;
 			this->Kill();
 		}
 		//敵の生成

@@ -198,7 +198,8 @@ namespace MyPG
 		this->in4 = XI::GamePad::CreateGP(3, but);
 		this->mouse = XI::Mouse::Create(ge->viewScaleW, ge->viewScaleH);
 
-
+		this->isReady = false;
+		this->gameClearFlag = false;
 		//背景色の設定（デフォルト）
 		this->dgi->EffectState().param.bgColor = ML::Color(0, .0f, .0f, .0f);
 

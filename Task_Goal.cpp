@@ -76,6 +76,7 @@ namespace Goal
 		
 		if (Attack_Std("プレイヤー"))
 		{
+			ge->gameClearFlag = true;
 			ge->KillAll_G("本編");
 		}
 		

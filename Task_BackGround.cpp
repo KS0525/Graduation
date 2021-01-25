@@ -11,12 +11,14 @@ namespace  BackGround
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
+		this->img = DG::Image::Create("./data/image/BackGround/haikei01.jpg");
 		return true;
 	}
 	//-------------------------------------------------------------------
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
+		img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -53,26 +55,15 @@ namespace  BackGround
 	{
 		auto inp = ge->in1->GetState( );
 
-		if (inp.ST.down) {
-			//自身に消滅要請
-			//this->Kill();
-		}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-
-		ML::Box2D  src(0, 0, 32, 32);
+		ML::Box2D  draw(0, 0, 1280, 720);
+		ML::Box2D  src(0, 0, 1280, 720);
 		
-		for (int y = 0; y * 32 < ge->screenHeight; ++y) {
-			for (int x = 0; x * 32 < ge->screenWidth; ++x) {				
-				ML::Box2D  draw(x*32, y*32, 32, 32);
-				//this->res->img->Draw(draw, src);
-			}
-		}
-		
-		
+		this->res->img->Draw(draw, src);
 	}
 
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

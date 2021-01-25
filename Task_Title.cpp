@@ -6,6 +6,7 @@
 #include  "Task_Game.h"
 #include  "Task_MapSelector.h"
 #include  "Task_MapGenerator.h"
+#include  "Task_BackGround.h"
 #include "easing.h"
 
 namespace  Title
@@ -41,7 +42,7 @@ namespace  Title
 
 		this->render2D_Priority[1] = 0.5f;
 		//★データ初期化
-		
+		BackGround::Object::Create(true);
 
 		//★タスクの生成
 		if (auto map = Generator::Object::Create_Mutex()) {
@@ -74,20 +75,23 @@ namespace  Title
 		auto key = ge->in1->GetState();
 		//easing::UpDate();
 
-		if (ms.RB.down || key.B2.down) {
-			ge->KillAll_G("プレイヤー");
-			ge->KillAll_G("ブロック");
-			ge->KillAll_G("固定ブロック");
-			ge->KillAll_G("スイッチ");
-			ge->KillAll_G("ゴール");
+		//if (ms.RB.down || key.B2.down) {
+		//	ge->KillAll_G("プレイヤー");
+		//	ge->KillAll_G("ブロック");
+		//	ge->KillAll_G("固定ブロック");
+		//	ge->KillAll_G("スイッチ");
+		//	ge->KillAll_G("ゴール");
 
-			if (auto map = Generator::Object::Create_Mutex()) {
-				map->Set("./data/Map/Map_Title.txt");
+		//	if (auto map = Generator::Object::Create_Mutex()) {
+		//		map->Set("./data/Map/Map_Title.txt");
+		//	}
+		//}
+
+		if (ge->isReady) {
+			if (key.B1.down) {
+				this->Kill();
+				ge->isReady = false;
 			}
-		}
-
-		if (key.B1.down) {
-			this->Kill();
 		}
 		if (ms.LB.down) {
 			//自身に消滅要請

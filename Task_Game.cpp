@@ -14,8 +14,8 @@
 #include  "Task_Map2D.h"
 #include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
+#include  "Task_MapSelector.h"
 #include  "Task_Block02.h"
-//#include  "Task_Block03.h"
 
 namespace  Game
 {
@@ -59,13 +59,12 @@ namespace  Game
 		//★データ初期化
 		this->count = 0;
 		this->bcount = 0;
-
+		
 		ge->camera2D = ML::Box2D(0,0, ge->screen2DWidth, ge->screen2DHeight);
 
 		//スコア初期化
 		ge->score = 0;
-		ge->nowStage;
-
+		ge->gameClearFlag = false;
 	   //★タスクの生成
 		BackGround::Object::Create(true);
 
@@ -86,11 +85,16 @@ namespace  Game
 		ge->KillAll_G("弾");
 		ge->KillAll_G("ブロック");
 		ge->KillAll_G("スイッチ");
+		ge->KillAll_G("ゴール");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
-			auto nextTask = Ending::Object::Create(true);
-
+			if (ge->gameClearFlag) {
+				auto nextTask = Ending::Object::Create(true);
+			}
+			else {
+				auto nextTask = MapSelector::Object::Create(true);
+			}
 		}
 
 		return  true;
@@ -107,16 +111,18 @@ namespace  Game
 		if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
 		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 		
+		if (ge->isReady) {
+			if (ms.RB.down || key.B2.down) {
+				ge->KillAll_G("プレイヤー");
+				ge->KillAll_G("ブロック");
+				ge->KillAll_G("固定ブロック");
+				ge->KillAll_G("スイッチ");
+				ge->KillAll_G("ゴール");
 
-		if (ms.RB.down || key.B2.down) {
-			ge->KillAll_G("プレイヤー");
-			ge->KillAll_G("ブロック");
-			ge->KillAll_G("固定ブロック");
-			ge->KillAll_G("スイッチ");
-			ge->KillAll_G("ゴール");
-
-			if (auto map = Generator::Object::Create_Mutex()) {
-				map->Set(ge->nowStage);
+				if (auto map = Generator::Object::Create_Mutex()) {
+					map->Set(ge->nowStage);
+				}
+				ge->isReady = false;
 			}
 		}
 
