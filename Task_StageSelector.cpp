@@ -5,6 +5,7 @@
 #include  "Task_StageSelector.h"
 #include  "Task_BackGround.h"
 #include  "Task_Game.h"
+#include  "Task_MapSelector.h"
 
 #include "easing.h"
 
@@ -59,27 +60,30 @@ namespace  StageSelector
 
 		this->render2D_Priority[1] = 0.5f;
 
-		//Button::set_allNum(0);
-		buttons[0].set_StagePass("./data/Map/Map.txt");
-		buttons[1].set_StagePass("./data/Map/Map4.txt");
-		buttons[2].set_StagePass("./data/Map/Map3.txt");
-		buttons[3].set_StagePass("./data/Map/Map5.txt");
-		buttons[4].set_StagePass("./data/Map/Map6.txt");
-		buttons[5].set_StagePass("./data/Map/Map7.txt");
-	/*	buttons[6].set_StagePass("./data/Map/Map8.txt");
-		buttons[7].set_StagePass("./data/Map/Map9.txt");
-		buttons[8].set_StagePass("./data/Map/Map10.txt");
-		buttons[9].set_StagePass("./data/Map/Map11.txt");
-		buttons[10].set_StagePass("./data/Map/Map12.txt");
-		buttons[11].set_StagePass("./data/Map/Map13.txt");
-		buttons[12].set_StagePass("./data/Map/Map14.txt");
-		buttons[13].set_StagePass("./data/Map/Map15.txt");*/
+		/*buttons[0].set_StagePass("./data/Map/マップ/Map20.txt");
+		buttons[1].set_StagePass("./data/Map/マップ/Map21.txt");
+		buttons[2].set_StagePass("./data/Map/マップ/Map22.txt");
+		buttons[3].set_StagePass("./data/Map/マップ/Map141.txt");
+		buttons[4].set_StagePass("./data/Map/マップ/Map151.txt");
+		buttons[5].set_StagePass("./data/Map/マップ/Map161.txt");*/
+		
 
+		string pass = "./data/Map/" + to_string(mapNumber) + "/Map1.txt";
+
+		buttons[0].set_StagePass(pass);
+		buttons[1].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map2.txt");
+		buttons[2].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map3.txt");
+		buttons[3].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map4.txt");
+		buttons[4].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map5.txt");
+		buttons[5].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map6.txt");
+
+		//buttons[0].set_StagePass("./data/Map/1/Map6.txt");
 
 		//★データ初期化
 		//easing::Init();
 		BackGround::Object::Create(true);
 		choosing = 0;
+		animCnt = 0;
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
 		
@@ -106,6 +110,7 @@ namespace  StageSelector
 		auto key = ge->in1->GetState();
 		Carsol();
 		
+		animCnt++;
 		if (key.B1.down) {
 			ge->nowStage = buttons[choosing].get_StagePass();
 				//自身に消滅要請
@@ -125,7 +130,12 @@ namespace  StageSelector
 		for(int i = 0;i<6;++i){
 			this->res->nonClearEgg[i]->Draw(draw1, src1);
 		}
-		this->res->selectEgg[choosing]->Draw(draw1, src1);
+		if (animCnt %60 > 0 && animCnt %60 < 30) {
+			this->res->selectEgg[choosing]->Draw(draw1, src1);
+		}
+		else {
+
+		}
 	}
 	//------------------------------------------------------------------
 	void Object::Carsol() 

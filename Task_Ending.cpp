@@ -5,6 +5,7 @@
 #include  "Task_Ending.h"
 #include  "Task_Title.h"
 #include  "Task_StageSelector.h"
+#include  "Task_BackGround.h"
 #include "easing.h"
 namespace  Ending
 {
@@ -13,7 +14,7 @@ namespace  Ending
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->img = DG::Image::Create("./data/image/Ending.bmp");
+		//this->img = DG::Image::Create("./data/image/Ending.bmp");
 		//this->back = DG::Image::Create("./data/image/UI/back1.png");
 		//this->back2 = DG::Image::Create("./data/image/UI/back2.png");
 		//this->back3 = DG::Image::Create("./data/image/UI/back3.png");
@@ -31,7 +32,7 @@ namespace  Ending
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		this->img.reset();
+		//this->img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -44,7 +45,7 @@ namespace  Ending
 		this->res = Resource::Create();
 
 		//★データ初期化
-
+		BackGround::Object::Create(true);
 		//★タスクの生成
 
 		return  true;
@@ -73,10 +74,6 @@ namespace  Ending
 		if (key.B1.down) {
 			this->Kill();
 		}
-
-		if (ms.RB.down) {
-
-		}
 		if (ms.LB.down) {
 			//自身に消滅要請
 			this->Kill();
@@ -86,17 +83,6 @@ namespace  Ending
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-		ML::Box2D  draw(0, 0, ge->screenWidth, ge->screenHeight);
-		ML::Box2D  src(0, 0, 240, 135);
-
-		draw.Offset(0, this->logoPosY);
-		this->res->img->Draw(draw, src);
-
-	/*	for (int i = 0; i < 4; ++i) {
-			ML::Box2D draw2(i * 200, 640, 128, 128);
-			ML::Box2D src2(0, 0, 128, 128);
-			this->res->back->Draw(draw2, src2);
-		}*/
 		ML::Box2D draw1(200, 600, 170, 128);
 		ML::Box2D draw2(400, 600, 170, 128);
 		ML::Box2D draw3(600, 600, 170, 128);

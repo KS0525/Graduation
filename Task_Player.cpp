@@ -40,7 +40,7 @@ namespace Player
 
 		//šƒf[ƒ^‰Šú‰»
 		pos.y = 300;
-		this->hitBase = ML::Box2D(12,12, 40, 40);
+		this->hitBase = ML::Box2D(8,8,34, 34);
 		this->angle_LR = Angle_LR::Right;
 		this->controller = ge->in1;
 		this->hp = 10;

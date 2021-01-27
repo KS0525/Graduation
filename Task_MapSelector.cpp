@@ -5,7 +5,7 @@
 #include  "Task_MapSelector.h"
 #include  "Task_BackGround.h"
 #include  "Task_Game.h"
-
+#include  "Task_StageSelector.h"
 #include "easing.h"
 
 namespace  MapSelector
@@ -23,7 +23,8 @@ namespace  MapSelector
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		
+		img.reset();
+		choosingimg.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -37,27 +38,10 @@ namespace  MapSelector
 
 		this->render2D_Priority[1] = 0.5f;
 
-		//Button::set_allNum(0);
-		buttons[0].set_StagePass("./data/Map/Map.txt");
-		buttons[1].set_StagePass("./data/Map/Map4.txt");
-		buttons[2].set_StagePass("./data/Map/Map3.txt");
-		buttons[3].set_StagePass("./data/Map/Map5.txt");
-		buttons[4].set_StagePass("./data/Map/Map6.txt");
-		buttons[5].set_StagePass("./data/Map/Map7.txt");
-		buttons[6].set_StagePass("./data/Map/Map8.txt");
-		buttons[7].set_StagePass("./data/Map/Map9.txt");
-		buttons[8].set_StagePass("./data/Map/Map10.txt");
-		buttons[9].set_StagePass("./data/Map/Map11.txt");
-		buttons[10].set_StagePass("./data/Map/Map12.txt");
-		buttons[11].set_StagePass("./data/Map/Map13.txt");
-		buttons[12].set_StagePass("./data/Map/Map14.txt");
-		buttons[13].set_StagePass("./data/Map/Map15.txt");
-
-
 		//★データ初期化
 		//easing::Init();
 		BackGround::Object::Create(true);
-		choosing = 1;
+		choosing = 0;
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
 		
@@ -72,7 +56,7 @@ namespace  MapSelector
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
-			auto nextTask = Game::Object::Create(true);
+			auto nextTask = StageSelector::Object::Create(true);
 		}
 		return  true;
 	}
@@ -85,7 +69,7 @@ namespace  MapSelector
 		Carsol();
 		
 		if (key.B1.down) {
-			ge->nowStage = buttons[choosing].get_StagePass();
+			//ge->nowStage = buttons[choosing].get_StagePass();
 				//自身に消滅要請
 				this->Kill();
 			}
@@ -96,34 +80,18 @@ namespace  MapSelector
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-#define choiceMax 14
-		ML::Box2D draw[choiceMax] = {
-			ML::Box2D(100,100,100,100),
-			ML::Box2D(200,100,100,100),
-			ML::Box2D(300,100,100,100),
-			ML::Box2D(400,100,100,100),
-			ML::Box2D(500,100,100,100),
-			ML::Box2D(600,100,100,100),
-			ML::Box2D(700,100,100,100),
-			ML::Box2D(800,100,100,100),
-			ML::Box2D(100,300,100,100),
-			ML::Box2D(200,300,100,100),
-			ML::Box2D(300,300,100,100),
-			ML::Box2D(400,300,100,100),
-			ML::Box2D(500,300,100,100),
-			ML::Box2D(600,300,100,100),
-		};
-		ML::Box2D  draw1(100,100, 100, 100);
-		ML::Box2D  src1(0, 0, 128, 128);
-		this->res->img->Draw(draw1, src1);
-		
-		for (int i = 1; i < choiceMax; ++i) {
-			this->res->img->Draw(draw[i], src1);
-		}
+		ML::Box2D draw(0, 0, 1280, 720);
+		ML::Box2D src(0, 0, 352, 202);
 
-		ML::Box2D src2(0, 0, 132, 132);
-		this->res->choosingimg->Draw(draw[choosing], src2);
-		
+		this->res->img->Draw(draw, src);
+
+		ML::Box2D chooseDraw[3] = {
+			ML::Box2D(100,0,300,400),
+			ML::Box2D(500,0,300,400),
+			ML::Box2D(900,0,300,400)
+		};
+		ML::Box2D chooseSrc(0,0,132,132);
+		this->res->choosingimg->Draw(chooseDraw[choosing], chooseSrc);
 	}
 	//------------------------------------------------------------------
 	void Object::Carsol() 

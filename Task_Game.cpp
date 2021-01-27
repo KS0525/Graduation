@@ -94,7 +94,7 @@ namespace  Game
 				auto nextTask = Ending::Object::Create(true);
 			}
 			else {
-				auto nextTask = StageSelector::Object::Create(true);
+				auto nextTask = MapSelector::Object::Create(true);
 			}
 		}
 

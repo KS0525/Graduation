@@ -53,8 +53,6 @@ namespace  MapSelector
 		int choosing;
 		int choiceMax_;
 		void Carsol();
-		
-		
 
 		class StageButton : public Button {
 			
@@ -69,7 +67,7 @@ namespace  MapSelector
 			void set_StagePass(const string pass) { stagePass = pass; }
 		};
 		
-		StageButton buttons[14];
+		StageButton buttons[3];
 	};
 }
 

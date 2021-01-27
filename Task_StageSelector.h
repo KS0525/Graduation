@@ -30,7 +30,6 @@ namespace  StageSelector
 		DG::Image::SP selectEgg[6];
 	
 		DG::Image::SP  choosingimg;
-		//DG::Image::SP  titlelogo;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask
@@ -57,25 +56,29 @@ namespace  StageSelector
 		int choosing;
 		int choiceMax_;
 		void Carsol();
+		bool back;
 		
-		
+		int animCnt;
+		int mapNumber;
 
 		class StageButton : public Button {
 			DG::Image::SP clearEgg;
 			DG::Image::SP nonClearEgg;
 			string stagePass;
 		public:
+
+
 			StageButton(string inPass) :Button() {
 				stagePass = inPass;
 			};
-			StageButton() :Button() {};
+			StageButton() :Button() { isClear = false; };
 
 			string get_StagePass() const  { return stagePass; }
 			void set_StagePass(const string pass) { stagePass = pass; }
 
 			bool isClear;
 		};
-		
+
 		StageButton buttons[6];
 	};
 }

@@ -65,7 +65,7 @@ namespace  Title
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
-			auto nextTask = StageSelector::Object::Create(true);
+			auto nextTask = MapSelector::Object::Create(true);
 		}
 		return  true;
 	}
