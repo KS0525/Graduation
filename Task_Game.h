@@ -56,7 +56,7 @@ namespace  Game
 	//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 	public:
 		//追加したい変数・メソッドはここに追加する
-		int count;
+		int resetCoolCount;
 		int bcount;
 		enum Gravity { up, down, left, right, non };
 		Gravity MoveGravity;

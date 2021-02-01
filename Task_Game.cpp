@@ -58,7 +58,7 @@ namespace  Game
 		this->res = Resource::Create();
 
 		//★データ初期化
-		this->count = 0;
+		this->resetCoolCount = 0;
 		this->bcount = 0;
 		
 		ge->camera2D = ML::Box2D(0,0, ge->screen2DWidth, ge->screen2DHeight);
@@ -111,25 +111,32 @@ namespace  Game
 		if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
 		if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
 		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
-		
+
+
 		if (ge->isReady) {
-			if (ms.RB.down || key.B2.down) {
-				ge->KillAll_G("プレイヤー");
-				ge->KillAll_G("ブロック");
-				ge->KillAll_G("固定ブロック");
-				ge->KillAll_G("スイッチ");
-				ge->KillAll_G("ゴール");
+			if (ge->isDead) {
+				resetCoolCount++;
+				if (resetCoolCount > 60) {
+					ge->KillAll_G("プレイヤー");
+					ge->KillAll_G("ブロック");
+					ge->KillAll_G("固定ブロック");
+					ge->KillAll_G("スイッチ");
+					ge->KillAll_G("ゴール");
 
-				if (auto map = Generator::Object::Create_Mutex()) {
-					map->Set(ge->nowStage);
+					if (auto map = Generator::Object::Create_Mutex()) {
+						map->Set(ge->nowStage);
+					}
+					//ge->isReady = false;
+					ge->isDead = false;
+
+					resetCoolCount = 0;
 				}
-				ge->isReady = false;
 			}
-		}
 
-		if (ms.CB.down ) {
-			//自身に消滅要請
-			this->Kill();
+			if (ms.CB.down) {
+				//自身に消滅要請
+				this->Kill();
+			}
 		}
 	}
 	//-------------------------------------------------------------------

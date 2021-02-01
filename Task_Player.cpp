@@ -44,6 +44,7 @@ namespace Player
 		this->angle_LR = Angle_LR::Right;
 		this->controller = ge->in1;
 		this->hp = 10;
+		ge->isDead = false;
 		this->isDead = false;
 		this->animCnt = 0;
 		ge->serial++;
@@ -203,6 +204,7 @@ namespace Player
 				//相手にダメージの処理を行わせる
 				(*it)->Received(this);
 				this->isDead = true;
+				ge->isDead = true;
 				//this->Kill();
 				return true;
 			}

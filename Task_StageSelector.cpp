@@ -39,6 +39,13 @@ namespace  StageSelector
 		this->selectEgg[4] = DG::Image::Create("./data/image/Select/Select_select_05.png");
 		this->selectEgg[5] = DG::Image::Create("./data/image/Select/Select_select_06.png");
 
+		this->selectNum[0] = DG::Image::Create("./data/image/Select/Select_num_01.png");
+		this->selectNum[1] = DG::Image::Create("./data/image/Select/Select_num_02.png");
+		this->selectNum[2] = DG::Image::Create("./data/image/Select/Select_num_03.png");
+		this->selectNum[3] = DG::Image::Create("./data/image/Select/Select_num_04.png");
+		this->selectNum[4] = DG::Image::Create("./data/image/Select/Select_num_05.png");
+		this->selectNum[5] = DG::Image::Create("./data/image/Select/Select_num_06.png");
+
 		this->choosingimg = DG::Image::Create("./data/image/UI/UI_choosing.png");
 		return true;
 	}
@@ -68,14 +75,14 @@ namespace  StageSelector
 		buttons[5].set_StagePass("./data/Map/マップ/Map161.txt");*/
 		
 
-		string pass = "./data/Map/" + to_string(mapNumber) + "/Map1.txt";
+		/*string pass = "./data/Map/" + to_string(mapNumber) + "/Map1.txt";
 
 		buttons[0].set_StagePass(pass);
 		buttons[1].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map2.txt");
 		buttons[2].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map3.txt");
 		buttons[3].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map4.txt");
 		buttons[4].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map5.txt");
-		buttons[5].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map6.txt");
+		buttons[5].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map6.txt");*/
 
 		//buttons[0].set_StagePass("./data/Map/1/Map6.txt");
 
@@ -109,7 +116,8 @@ namespace  StageSelector
 		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 		Carsol();
-		
+		setPass();
+
 		animCnt++;
 		if (key.B1.down) {
 			ge->nowStage = buttons[choosing].get_StagePass();
@@ -136,6 +144,7 @@ namespace  StageSelector
 		else {
 
 		}
+		this->res->selectNum[choosing]->Draw(draw1, src1);
 	}
 	//------------------------------------------------------------------
 	void Object::Carsol() 
@@ -156,6 +165,12 @@ namespace  StageSelector
 			choosing = 0;
 		}
 	}
+	//-------------------------------------------------------------------
+	void Object::setPass()
+	{
+		this->buttons[choosing].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map" + to_string(choosing + 1) + ".txt");
+	}
+	//-------------------------------------------------------------------
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

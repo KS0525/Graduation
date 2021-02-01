@@ -82,6 +82,7 @@ namespace  MyPG
 		int						score;
 		bool					gameClearFlag;
 		bool                    isReady;        //マップ生成が終わったか
+		bool                    isDead;         //プレイヤが生きているか
 		int						serial;			//ブロックナンバー
 
 		XI::Mouse::SP  mouse;

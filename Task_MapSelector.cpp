@@ -57,6 +57,7 @@ namespace  MapSelector
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
 			auto nextTask = StageSelector::Object::Create(true);
+			nextTask->mapNumber = this->choosing + 1;
 		}
 		return  true;
 	}

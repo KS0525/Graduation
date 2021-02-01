@@ -5,8 +5,10 @@
 #include  "Task_Ending.h"
 #include  "Task_Title.h"
 #include  "Task_StageSelector.h"
+#include  "Task_MapSelector.h"
 #include  "Task_BackGround.h"
 #include "easing.h"
+
 namespace  Ending
 {
 	Resource::WP  Resource::instance;
@@ -59,7 +61,7 @@ namespace  Ending
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
-			auto  nextTask = StageSelector::Object::Create(true);
+			auto  nextTask = MapSelector::Object::Create(true);
 		}
 
 		return  true;

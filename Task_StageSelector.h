@@ -28,7 +28,8 @@ namespace  StageSelector
 		DG::Image::SP nonClearEgg[6];
 		DG::Image::SP clearEgg[6];
 		DG::Image::SP selectEgg[6];
-	
+		DG::Image::SP selectNum[6];
+
 		DG::Image::SP  choosingimg;
 	};
 	//-------------------------------------------------------------------
@@ -57,7 +58,9 @@ namespace  StageSelector
 		int choiceMax_;
 		void Carsol();
 		bool back;
-		
+		void setPass();
+		string pass;
+
 		int animCnt;
 		int mapNumber;
 
