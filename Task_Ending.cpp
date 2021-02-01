@@ -16,17 +16,33 @@ namespace  Ending
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		//this->img = DG::Image::Create("./data/image/Ending.bmp");
-		//this->back = DG::Image::Create("./data/image/UI/back1.png");
-		//this->back2 = DG::Image::Create("./data/image/UI/back2.png");
-		//this->back3 = DG::Image::Create("./data/image/UI/back3.png");
-		//this->back4 = DG::Image::Create("./data/image/UI/back4.png");
-
-
-		this->back = DG::Image::Create("./data/image/UI/select3-2.png");
-		this->back2 = DG::Image::Create("./data/image/UI/select3-3.png");
-		this->back3 = DG::Image::Create("./data/image/UI/select3-4.png");
-		this->back4 = DG::Image::Create("./data/image/UI/select3-5.png");
+		this->appear[0] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_01_01.png");
+		this->appear[1] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_01_02.png");
+		this->appear[2] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_01_03.png");
+		this->appear[3] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_02_01.png");
+		this->appear[4] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_02_02.png");
+		this->appear[5] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_02_03.png");
+		this->appear[6] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_03_01.png");
+		this->appear[7] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_03_02.png");
+		this->appear[8] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_03_03.png");
+		this->appear[9] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_04_01.png");
+		this->appear[10] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_04_02.png");
+		this->appear[11] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_04_03.png");
+		this->appear[12] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_05_01.png");
+		this->appear[13] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_05_02.png");
+		this->appear[14] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_05_03.png");
+		this->appear[15] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_06_01.png");
+		this->appear[16] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_06_02.png");
+		this->appear[17] = DG::Image::Create("./data/image/Select/nyoki/Select_Egg_06_03.png");
+		
+		this->fall[0] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_01");
+		this->fall[1] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_02");
+		this->fall[2] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_03");
+		this->fall[3] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_04");
+		this->fall[4] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_05");
+		this->fall[5] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_06");
+		this->fall[6] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_07");
+		this->fall[7] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_08");
 
 		return true;
 	}
@@ -34,7 +50,6 @@ namespace  Ending
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		//this->img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -73,6 +88,8 @@ namespace  Ending
 		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 
+		animCnt++;
+
 		if (key.B1.down) {
 			this->Kill();
 		}
@@ -85,16 +102,8 @@ namespace  Ending
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-		ML::Box2D draw1(200, 600, 170, 128);
-		ML::Box2D draw2(400, 600, 170, 128);
-		ML::Box2D draw3(600, 600, 170, 128);
-		ML::Box2D draw4(800, 600, 170, 128);
-		ML::Box2D src2(0, 0, 170, 128);
-
-		this->res->back->Draw(draw1, src2);
-		this->res->back2->Draw(draw2, src2);
-		this->res->back3->Draw(draw3, src2);
-		this->res->back4->Draw(draw4, src2);
+		ML::Box2D draw(0, 0, 1280, 720);
+		ML::Box2D src(0, 0, 1280, 720);
 
 	}
 

@@ -113,26 +113,30 @@ namespace  Game
 		if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
 
-		if (ge->isReady) {
-			if (ge->isDead) {
+		if (ge->isReady) { //マップの生成が完了しているか
+			if (ge->isDead) { //プレイヤは死んでいるか
 				resetCoolCount++;
-				if (resetCoolCount > 60) {
+				if (resetCoolCount > 60) { 
+					//マップ関係のタスクを解放
 					ge->KillAll_G("プレイヤー");
 					ge->KillAll_G("ブロック");
 					ge->KillAll_G("固定ブロック");
 					ge->KillAll_G("スイッチ");
 					ge->KillAll_G("ゴール");
-
+					//再セット
 					if (auto map = Generator::Object::Create_Mutex()) {
 						map->Set(ge->nowStage);
 					}
-					//ge->isReady = false;
 					ge->isDead = false;
-
+					//クールカウントを0に戻す
 					resetCoolCount = 0;
 				}
 			}
 
+			if (key.B2.down) {
+				//自身に消滅要請
+				this->Kill();
+			}
 			if (ms.CB.down) {
 				//自身に消滅要請
 				this->Kill();
@@ -151,38 +155,29 @@ namespace  Game
 
 		switch (this->MoveGravity) {
 		case 0: //up
-			//this->res->grab_UI_img->Rotation(0*pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
-			//this->res->grab_UI_img2->Rotation(0*pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 			this->res->grab_UI_img = this->res->grab_up_01;
 			this->res->grab_UI_img2 = this->res->grab_up_02;
 			break;
 		case 1: // down
-			//this->res->grab_UI_img->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
-			//this->res->grab_UI_img2->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 			this->res->grab_UI_img = this->res->grab_under_01;
 			this->res->grab_UI_img2 = this->res->grab_under_02;
 			break;
 		case 2: //left
-			//this->res->grab_UI_img->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
-			//this->res->grab_UI_img2->Rotation(1.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 			this->res->grab_UI_img = this->res->grab_left_01;
 			this->res->grab_UI_img2 = this->res->grab_left_02;
 			break;
 		case 3: //right
-			//this->res->grab_UI_img->Rotation(0.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
-			//this->res->grab_UI_img2->Rotation(0.5f * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
 			this->res->grab_UI_img = this->res->grab_right_01;
 			this->res->grab_UI_img2 = this->res->grab_right_02;
 			break;
 		default:
-
 			break;
 		}
-
+		//スティックの方向入力がなければ
 		if (key.LStick.volume != 0) {
 			this->res->grab_UI_img2->Draw(draw, src);
 		}
-		else {
+		else { //スティックの方向入力があったら
 			this->res->grab_UI_img->Draw(draw, src);
 		}
 	}

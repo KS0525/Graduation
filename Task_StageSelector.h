@@ -63,6 +63,7 @@ namespace  StageSelector
 
 		int animCnt;
 		int mapNumber;
+		int stageNumber;
 
 		class StageButton : public Button {
 			DG::Image::SP clearEgg;

@@ -67,29 +67,12 @@ namespace  StageSelector
 
 		this->render2D_Priority[1] = 0.5f;
 
-		/*buttons[0].set_StagePass("./data/Map/マップ/Map20.txt");
-		buttons[1].set_StagePass("./data/Map/マップ/Map21.txt");
-		buttons[2].set_StagePass("./data/Map/マップ/Map22.txt");
-		buttons[3].set_StagePass("./data/Map/マップ/Map141.txt");
-		buttons[4].set_StagePass("./data/Map/マップ/Map151.txt");
-		buttons[5].set_StagePass("./data/Map/マップ/Map161.txt");*/
-		
-
-		/*string pass = "./data/Map/" + to_string(mapNumber) + "/Map1.txt";
-
-		buttons[0].set_StagePass(pass);
-		buttons[1].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map2.txt");
-		buttons[2].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map3.txt");
-		buttons[3].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map4.txt");
-		buttons[4].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map5.txt");
-		buttons[5].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map6.txt");*/
-
-		//buttons[0].set_StagePass("./data/Map/1/Map6.txt");
-
 		//★データ初期化
 		//easing::Init();
 		BackGround::Object::Create(true);
+		back = false;
 		choosing = 0;
+		stageNumber = 0;
 		animCnt = 0;
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
@@ -105,7 +88,12 @@ namespace  StageSelector
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
-			auto nextTask = Game::Object::Create(true);
+			if (back) { //マップ選択に戻る
+				auto nextTask = MapSelector::Object::Create(true);
+			}
+			else { //選択したステージに進む
+				auto nextTask = Game::Object::Create(true);
+			}
 		}
 		return  true;
 	}
@@ -115,15 +103,24 @@ namespace  StageSelector
 	{
 		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
+		//カーソルを動かす
 		Carsol();
+		//マップのパスを選択
 		setPass();
 
 		animCnt++;
+
 		if (key.B1.down) {
+			//ステージパスを入力
 			ge->nowStage = buttons[choosing].get_StagePass();
 				//自身に消滅要請
 				this->Kill();
 			}
+		if (key.B2.down) {
+			back = true;
+			//自身に消滅要請
+			this->Kill();
+		}
 		//}
 
 	}
@@ -135,8 +132,13 @@ namespace  StageSelector
 		ML::Box2D  src1(0, 0, 1280, 720);
 		this->res->eggCapsule->Draw(draw1, src1);
 		
-		for(int i = 0;i<6;++i){
-			this->res->nonClearEgg[i]->Draw(draw1, src1);
+		for (int i = 0;i < 6;++i) {
+			if (buttons[i].isClear) {
+				this->res->clearEgg[i]->Draw(draw1, src1);
+			}
+			else {
+				this->res->nonClearEgg[i]->Draw(draw1, src1);
+			}
 		}
 		if (animCnt %60 > 0 && animCnt %60 < 30) {
 			this->res->selectEgg[choosing]->Draw(draw1, src1);
@@ -168,7 +170,9 @@ namespace  StageSelector
 	//-------------------------------------------------------------------
 	void Object::setPass()
 	{
-		this->buttons[choosing].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map" + to_string(choosing + 1) + ".txt");
+		stageNumber = choosing + 1;
+		this->buttons[choosing].set_StagePass("./data/Map/" + to_string(mapNumber) + "/Map" + to_string(stageNumber) + ".txt");
+
 	}
 	//-------------------------------------------------------------------
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

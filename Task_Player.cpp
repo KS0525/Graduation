@@ -27,6 +27,7 @@ namespace Player
 	bool  Resource::Finalize()
 	{
 		this->img.reset();
+		this->break_img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -39,7 +40,7 @@ namespace Player
 		this->res = Resource::Create();
 
 		//★データ初期化
-		pos.y = 300;
+		pos.y = 0;
 		this->hitBase = ML::Box2D(8,8,34, 34);
 		this->angle_LR = Angle_LR::Right;
 		this->controller = ge->in1;
@@ -80,7 +81,7 @@ namespace Player
 
 		//重力変更
 		if (ge->isReady) {
-			if (!isDead) {
+			if (!this->isDead) {
 				if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
 				if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
 				if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
@@ -96,7 +97,7 @@ namespace Player
 
 		}
 
-		if (isDead) {
+		if (this->isDead) {
 			animCnt++;
 			se::LoadFile("tamago", "./data/sound/卵・潰す.wav");
 		
@@ -187,6 +188,7 @@ namespace Player
 	void  Object::Received(BChara*  from_)
 	{
 		this->isDead = true;
+		ge->isDead = true;
 	}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
@@ -220,13 +222,6 @@ namespace Player
 		return  me.Hit(hit_);
 	}
 	//-----------------------------------------------------------------------------
-	//
-	/*bool Object::Check_Head(const ML::Box2D& hit_)
-	{
-		ML::Box2D me(this->hitBase.x, this->hitBase.y, this->hitBase.w, -1);
-		me.Offset(this->pos);
-		return me.Hit(hit_);
-	}*/
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
@@ -261,7 +256,7 @@ namespace Player
 		return  rtv;
 	}
 	//-------------------------------------------------------------------
-	Object::Object() {	}
+	Object::Object() { this->animCnt = 0;this->hp = 10; this->isDead = false; }
 	//-------------------------------------------------------------------
 	//リソースクラスの生成
 	Resource::SP  Resource::Create()
