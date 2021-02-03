@@ -33,6 +33,9 @@ namespace  Game
 		DG::Image::SP grab_right_02;
 		DG::Image::SP grab_left_01;
 		DG::Image::SP grab_left_02;
+
+		DG::Image::SP grab_horizontal[7];
+		DG::Image::SP grab_vertical[7];
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask
@@ -58,7 +61,10 @@ namespace  Game
 		//追加したい変数・メソッドはここに追加する
 		int resetCoolCount;
 		int bcount;
+		int animCnt;
 		enum Gravity { up, down, left, right, non };
 		Gravity MoveGravity;
+
+		void Grab_Anim();
 	};
 }

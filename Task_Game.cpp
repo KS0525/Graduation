@@ -40,6 +40,22 @@ namespace  Game
 		this->grab_under_01 = DG::Image::Create("./data/image/UI/gravity_under01.png");
 		this->grab_under_02 = DG::Image::Create("./data/image/UI/gravity_under02.png");
 
+		this->grab_horizontal[0] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0001.png");
+		this->grab_horizontal[1] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0002.png");
+		this->grab_horizontal[2] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0003.png");
+		this->grab_horizontal[3] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0004.png");
+		this->grab_horizontal[4] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0005.png");
+		this->grab_horizontal[5] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0006.png");
+		this->grab_horizontal[6] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0007.png");
+
+		this->grab_vertical[0] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0001.png");
+		this->grab_vertical[1] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0002.png");
+		this->grab_vertical[2] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0003.png");
+		this->grab_vertical[3] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0004.png");
+		this->grab_vertical[4] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0005.png");
+		this->grab_vertical[5] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0006.png");
+		this->grab_vertical[6] = DG::Image::Create("./data/image/effect/gravity/tate/Gravity_effect_tate_0007.png");
+
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -60,7 +76,8 @@ namespace  Game
 		//★データ初期化
 		this->resetCoolCount = 0;
 		this->bcount = 0;
-		
+		this->animCnt = 0;
+		this->render2D_Priority[1] = 0.5f;
 		ge->camera2D = ML::Box2D(0,0, ge->screen2DWidth, ge->screen2DHeight);
 
 		//スコア初期化
@@ -107,6 +124,10 @@ namespace  Game
 		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 
+		//animCnt++;
+		//アニメーション制御
+		Grab_Anim();
+
 		if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
 		if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
 		if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
@@ -151,9 +172,16 @@ namespace  Game
 		ML::Box2D draw(80,80,96,96);
 		ML::Box2D src(0, 0, 136, 136);
 	
-		float pie(3.1415f);
+		ML::Box2D draw2(0, 0, 1280, 720);
+		ML::Box2D src2(0, 0, 1280, 720);
+	
 
-		switch (this->MoveGravity) {
+		//Todo:重力エフェクトアニメーション
+
+		this->res->grab_vertical[animCnt / 30 % 7]->Draw(draw2, src2);
+
+		//float pie(3.1415f);
+		/*switch (this->MoveGravity) {
 		case 0: //up
 			this->res->grab_UI_img = this->res->grab_up_01;
 			this->res->grab_UI_img2 = this->res->grab_up_02;
@@ -172,16 +200,42 @@ namespace  Game
 			break;
 		default:
 			break;
-		}
-		//スティックの方向入力がなければ
-		if (key.LStick.volume != 0) {
-			this->res->grab_UI_img2->Draw(draw, src);
-		}
-		else { //スティックの方向入力があったら
-			this->res->grab_UI_img->Draw(draw, src);
-		}
+		}*/
+		
+		////スティックの方向入力がなければ
+		//if (key.LStick.volume != 0) {
+		//	this->res->grab_UI_img->Draw(draw2, src2);
+		//}
+		//else { //スティックの方向入力があったら
+		//	this->res->grab_UI_img->Draw(draw2, src2);
+		//}
 	}
+	//-------------------------------------------------------------------
+	void Object::Grab_Anim()
+	{
+		int animMax = 240;
+		switch (this->MoveGravity) {
+		case 0: //up
+			animCnt++;
+			if (animCnt > animMax) { animCnt = 0; }
+			break;
+		case 1: // down
+			animCnt--;
+			if (animCnt < 0) { animCnt = animMax; }
+			break;
+		case 2: //left
+			animCnt++;
+			if (animCnt > animMax) { animCnt = 0; }
+			break;
+		case 3: //right
+			animCnt--;
+			if (animCnt > 0) { animCnt = animMax; }
+			break;
+		default:
+			break;
+		}
 
+	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

@@ -25,6 +25,7 @@ namespace  Ending
 		//共有する変数はここに追加する
 		DG::Image::SP appear[18];
 		DG::Image::SP fall[8];
+		DG::Image::SP eggCapsule;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask
@@ -50,5 +51,6 @@ namespace  Ending
 		//追加したい変数・メソッドはここに追加する
 		int			logoPosY;		//タイトル画像スクロール用カウンタ
 		int         animCnt;
+		bool		isFall;			//卵が落ちたか
 	};
 }
