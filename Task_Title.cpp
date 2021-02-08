@@ -44,7 +44,7 @@ namespace  Title
 		this->render2D_Priority[1] = 0.5f;
 		//★データ初期化
 		BackGround::Object::Create(true);
-
+		ge->isDead = false;
 		//★タスクの生成
 		if (auto map = Generator::Object::Create_Mutex()) {
 			map->Set("./data/Map/Map_Title.txt");
@@ -95,10 +95,10 @@ namespace  Title
 				ge->isReady = false;
 			}
 		}
-		if (ms.LB.down) {
-			//自身に消滅要請
-			this->Kill();
-			}
+		//if (ms.LB.down) {
+		//	//自身に消滅要請
+		//	this->Kill();
+		//	}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理

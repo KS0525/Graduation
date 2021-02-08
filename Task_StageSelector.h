@@ -70,8 +70,6 @@ namespace  StageSelector
 			DG::Image::SP nonClearEgg;
 			string stagePass;
 		public:
-
-
 			StageButton(string inPass) :Button() {
 				stagePass = inPass;
 			};

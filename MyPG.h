@@ -84,6 +84,9 @@ namespace  MyPG
 		bool                    isReady;        //マップ生成が終わったか
 		bool                    isDead;         //プレイヤが生きているか
 		int						serial;			//ブロックナンバー
+		int                     mapNum;        //現在のマップの番号
+		int						stageNum;      //現在ステージの番号
+		bool                    isClear[3][6]; //クリアしたか
 
 		XI::Mouse::SP  mouse;
 		XI::GamePad::SP  in1, in2, in3, in4;	//取り合えず４本

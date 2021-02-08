@@ -23,17 +23,6 @@ namespace  Game
 		static   WP  instance;
 		static  Resource::SP  Create();
 		//ã§óLÇ∑ÇÈïœêîÇÕÇ±Ç±Ç…í«â¡Ç∑ÇÈ
-		DG::Image::SP grab_UI_img;
-		DG::Image::SP grab_UI_img2;
-		DG::Image::SP grab_up_01;
-		DG::Image::SP grab_up_02;
-		DG::Image::SP grab_under_01;
-		DG::Image::SP grab_under_02;
-		DG::Image::SP grab_right_01;
-		DG::Image::SP grab_right_02;
-		DG::Image::SP grab_left_01;
-		DG::Image::SP grab_left_02;
-
 		DG::Image::SP grab_horizontal[7];
 		DG::Image::SP grab_vertical[7];
 	};
@@ -62,6 +51,7 @@ namespace  Game
 		int resetCoolCount;
 		int bcount;
 		int animCnt;
+		bool animFin;
 		enum Gravity { up, down, left, right, non };
 		Gravity MoveGravity;
 

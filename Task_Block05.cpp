@@ -78,10 +78,12 @@ namespace  Block05
 
 		//重力変更
 		if (ge->isReady) {
-			if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
-			if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
+			if (!ge->isDead) {
+				if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+				if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
 
-			this->GravityMotion("ブロック");
+				this->GravityMotion("ブロック");
+			}
 		}
 		//this->pos += this->moveVec;
 

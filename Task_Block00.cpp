@@ -74,12 +74,14 @@ namespace  Block00
 
 		//重力変更
 		if (ge->isReady) {
-			if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
-			if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
-			if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
-			if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
+			if (!ge->isDead) {
+				if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+				if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+				if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
+				if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
-			this->GravityMotion("ブロック");
+				this->GravityMotion("ブロック");
+			}
 		}
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }

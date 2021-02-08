@@ -80,7 +80,7 @@ namespace  Ending
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
-			auto  nextTask = MapSelector::Object::Create(true);
+			auto  nextTask = StageSelector::Object::Create(true);
 		}
 
 		return  true;

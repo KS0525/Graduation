@@ -84,58 +84,59 @@ namespace  Block07
 		auto key = ge->in1->GetState();
 		this->moveCnt++;
 		//重力変更
-		switch (this->direction[i])
-		{
-		case 0:
-			if (this->RightTime > this->moveCnt)
+		if (!ge->isDead) {
+			switch (this->direction[i])
 			{
-				this->MoveGravity = Gravity::right;
+			case 0:
+				if (this->RightTime > this->moveCnt)
+				{
+					this->MoveGravity = Gravity::right;
+				}
+				else
+				{
+					i++;
+					this->moveCnt = 0;
+				}
+				break;
+			case 1:
+				if (this->DownTime > this->moveCnt)
+				{
+					this->MoveGravity = Gravity::down;
+				}
+				else
+				{
+					i++;
+					this->moveCnt = 0;
+				}
+				break;
+			case 2:
+				if (this->LeftTime > this->moveCnt)
+				{
+					this->MoveGravity = Gravity::left;
+				}
+				else
+				{
+					i++;
+					this->moveCnt = 0;
+				}
+				break;
+			case 3:
+				if (this->UpTime > this->moveCnt)
+				{
+					this->MoveGravity = Gravity::up;
+				}
+				else
+				{
+					i++;
+					this->moveCnt = 0;
+				}
+				break;
+
 			}
-			else
-			{
-				i++;
-				this->moveCnt = 0;
-			}
-			break;
-		case 1:
-			if (this->DownTime > this->moveCnt)
-			{
-				this->MoveGravity = Gravity::down;
-			}
-			else
-			{
-				i++;
-				this->moveCnt = 0;
-			}
-			break;
-		case 2:
-			if (this->LeftTime > this->moveCnt)
-			{
-				this->MoveGravity = Gravity::left;
-			}
-			else
-			{
-				i++;
-				this->moveCnt = 0;
-			}
-			break;
-		case 3:
-			if (this->UpTime > this->moveCnt)
-			{
-				this->MoveGravity = Gravity::up;
-			}
-			else
-			{
-				i ++;
-				this->moveCnt = 0;
-			}
-			break;
-			
+			if (i > 3)i = 0;
+			this->GravityMotion("ブロック");
+
 		}
-		if (i > 3)i = 0;
-		this->GravityMotion("ブロック");
-
-
 		//this->pos += this->moveVec;
 
 		//画面外へ出ないように

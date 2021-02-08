@@ -150,6 +150,17 @@ namespace MyPG
 			bgm::Init();
 			se::Init(wnd_);
 		}
+		//変数の初期化
+		/*{
+			for (auto a : isClear) {
+				*a = false;
+			}
+		}*/
+		for (int i = 0;i < 3;++i) {
+			for (int j = 0;j < 6;++j) {
+				ge->isClear[i][j] = false;
+			}
+		}
 		//FPS計測
 		{
 			c = new FPSCounter(REFRESHRATE);
@@ -229,7 +240,7 @@ namespace MyPG
 		this->dii->UpDate();
 		//	サウンドの更新(ストリーミング監視）
 		this->dmi->UpDate();
-
+		
 		//小柳サウンドライブラリ更新
 		se::EndCheck();
 		bgm::EndCheck();

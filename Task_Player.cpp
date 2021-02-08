@@ -81,7 +81,7 @@ namespace Player
 
 		//重力変更
 		if (ge->isReady) {
-			if (!this->isDead) {
+			if (!ge->isDead) {
 				if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
 				if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
 				if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
@@ -97,7 +97,7 @@ namespace Player
 
 		}
 
-		if (this->isDead) {
+		if (ge->isDead) {
 			animCnt++;
 			se::LoadFile("tamago", "./data/sound/卵・潰す.wav");
 		
@@ -256,7 +256,7 @@ namespace Player
 		return  rtv;
 	}
 	//-------------------------------------------------------------------
-	Object::Object() { this->animCnt = 0;this->hp = 10; this->isDead = false; }
+	Object::Object() { }
 	//-------------------------------------------------------------------
 	//リソースクラスの生成
 	Resource::SP  Resource::Create()

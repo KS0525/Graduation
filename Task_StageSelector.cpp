@@ -113,6 +113,7 @@ namespace  StageSelector
 		if (key.B1.down) {
 			//ステージパスを入力
 			ge->nowStage = buttons[choosing].get_StagePass();
+			ge->stageNum = choosing;
 				//自身に消滅要請
 				this->Kill();
 			}
@@ -132,8 +133,9 @@ namespace  StageSelector
 		ML::Box2D  src1(0, 0, 1280, 720);
 		this->res->eggCapsule->Draw(draw1, src1);
 		
+		ge->isClear[0][0] = true;
 		for (int i = 0;i < 6;++i) {
-			if (buttons[i].isClear) {
+			if (ge->isClear[0][stageNumber-1] == true) {
 				this->res->clearEgg[i]->Draw(draw1, src1);
 			}
 			else {

@@ -25,21 +25,6 @@ namespace  Game
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->grab_UI_img = DG::Image::Create("./data/image/UI/gravity_UI-6.png");
-		this->grab_UI_img2 = DG::Image::Create("./data/image/UI/gravity_UI-5.png");
-
-		this->grab_up_01 = DG::Image::Create("./data/image/UI/gravity_UI-6.png");
-		this->grab_up_02 = DG::Image::Create("./data/image/UI/gravity_UI-5.png");
-
-		this->grab_left_01 = DG::Image::Create("./data/image/UI/gravity_left01.png");
-		this->grab_left_02 = DG::Image::Create("./data/image/UI/gravity_left02.png");
-
-		this->grab_right_01 = DG::Image::Create("./data/image/UI/gravity_right01.png");
-		this->grab_right_02 = DG::Image::Create("./data/image/UI/gravity_right02.png");
-
-		this->grab_under_01 = DG::Image::Create("./data/image/UI/gravity_under01.png");
-		this->grab_under_02 = DG::Image::Create("./data/image/UI/gravity_under02.png");
-
 		this->grab_horizontal[0] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0001.png");
 		this->grab_horizontal[1] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0002.png");
 		this->grab_horizontal[2] = DG::Image::Create("./data/image/effect/gravity/yoko/Gravity_effect_yoko_0003.png");
@@ -62,6 +47,10 @@ namespace  Game
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
+		for (int i = 0;i < 7;++i) {
+			this->grab_horizontal[i].reset();
+			this->grab_vertical[i].reset();
+		}
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -83,6 +72,7 @@ namespace  Game
 		//スコア初期化
 		ge->score = 0;
 		ge->gameClearFlag = false;
+		animFin = false;
 	   //★タスクの生成
 		BackGround::Object::Create(true);
 
@@ -177,9 +167,9 @@ namespace  Game
 	
 
 		//Todo:重力エフェクトアニメーション
-
-		this->res->grab_vertical[animCnt / 30 % 7]->Draw(draw2, src2);
-
+		if (!animFin) {
+			this->res->grab_vertical[animCnt / 4 % 7]->Draw(draw2, src2);
+		}
 		//float pie(3.1415f);
 		/*switch (this->MoveGravity) {
 		case 0: //up
@@ -213,24 +203,28 @@ namespace  Game
 	//-------------------------------------------------------------------
 	void Object::Grab_Anim()
 	{
-		int animMax = 240;
+		int animMax = 28;
 		switch (this->MoveGravity) {
 		case 0: //up
-			animCnt++;
-			if (animCnt > animMax) { animCnt = 0; }
+			animCnt--;
+			animFin = false;
+			if (animCnt < 0) { animCnt = 0;  animFin = true; }
 			break;
 		case 1: // down
-			animCnt--;
-			if (animCnt < 0) { animCnt = animMax; }
-			break;
-		case 2: //left
 			animCnt++;
-			if (animCnt > animMax) { animCnt = 0; }
+			animFin = false;
+			if (animCnt > animMax) { animCnt = animMax; animFin = true; }		
+			break;
+		/*case 2: //left
+			animCnt++;
+			animFin = false;
+			if (animCnt > animMax) { animCnt = animMax;  animFin = true; }
 			break;
 		case 3: //right
 			animCnt--;
-			if (animCnt > 0) { animCnt = animMax; }
-			break;
+			animFin = false;
+			if (animCnt > 0) { animCnt =0; animFin = true; }
+			break;*/
 		default:
 			break;
 		}
@@ -269,7 +263,7 @@ namespace  Game
 		return  rtv;
 	}
 	//-------------------------------------------------------------------
-	Object::Object() {	}
+	Object::Object() { }
 	//-------------------------------------------------------------------
 	//リソースクラスの生成
 	Resource::SP  Resource::Create()

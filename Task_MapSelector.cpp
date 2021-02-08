@@ -58,6 +58,7 @@ namespace  MapSelector
 			//šˆø‚«Œp‚¬ƒ^ƒXƒN‚Ì¶¬
 			auto nextTask = StageSelector::Object::Create(true);
 			nextTask->mapNumber = this->choosing + 1;
+			ge->mapNum = this->choosing;
 		}
 		return  true;
 	}
@@ -110,7 +111,7 @@ namespace  MapSelector
 			choosing = 0;
 		}
 		if (choosing > this->choiceMax_) {
-			choosing = choiceMax_;
+			choosing = choiceMax_ -1 ;
 		}
 	}
 	//šššššššššššššššššššššššššššššššššššššššššš

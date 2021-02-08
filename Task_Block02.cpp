@@ -76,12 +76,14 @@ namespace  Block02
 
 		//重力変更
 		if (ge->isReady) {
-			if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
-			if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
-			if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
-			if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
+			if (!ge->isDead) {
+				if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
+				if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
+				if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
+				if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
 
-			this->GravityMotion("ブロック");
+				this->GravityMotion("ブロック");
+			}
 		}
 		//this->pos += this->moveVec;
 
