@@ -53,7 +53,13 @@ namespace  StageSelector
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
-		
+		for (int i = 0;i < 6;++i) {
+			nonClearEgg[i].reset();
+			clearEgg[i].reset();
+			selectEgg[i].reset();
+			selectNum[i].reset();
+		}
+		choosingimg.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -104,7 +110,6 @@ namespace  StageSelector
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
 	{
-		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 		//カーソルを動かす
 		Carsol();

@@ -24,6 +24,7 @@ namespace  Block10
 	//ƒŠƒ\[ƒX‚Ì‰ğ•ú
 	bool  Resource::Finalize()
 	{
+		img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------

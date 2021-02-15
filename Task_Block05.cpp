@@ -17,13 +17,14 @@ namespace  Block05
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_05.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBoxArrow_01.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
+		img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -103,7 +104,7 @@ namespace  Block05
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(0, 0, 128, 128);
+		ML::Box2D src(0, 0, 200, 200);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);

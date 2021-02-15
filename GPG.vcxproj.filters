@@ -142,9 +142,6 @@
     <ClCompile Include="Task_Player.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_Shot00.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="Task_BackGround.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
@@ -289,9 +286,6 @@
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_Player.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Shot00.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_BackGround.h">

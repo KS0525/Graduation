@@ -59,6 +59,7 @@ namespace  Ending
 			this->fall[i].reset();
 		}
 		this->eggCapsule.reset();
+
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -75,7 +76,7 @@ namespace  Ending
 		animCnt = 0;
 		isFall = false;
 		//★タスクの生成
-		se::LoadFile("clear", "./data/sound/se_maoudamashii_se_syber01.wav");
+		se::LoadFile("clear", "./data/sound/ワープ (online-audio-converter.com).wav");
 		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
 		se::Play("clear");
 		return  true;
@@ -99,7 +100,6 @@ namespace  Ending
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
 	{
-		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
 
 		animCnt++;
@@ -112,10 +112,6 @@ namespace  Ending
 
 		if (key.B1.down) {
 			se::Play("ok");
-			this->Kill();
-		}
-		if (ms.LB.down) {
-			//自身に消滅要請
 			this->Kill();
 		}
 	}

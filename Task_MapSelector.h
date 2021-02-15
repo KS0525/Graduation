@@ -67,7 +67,7 @@ namespace  MapSelector
 			void set_StagePass(const string pass) { stagePass = pass; }
 		};
 		
-		StageButton buttons[3];
+		StageButton buttons[5];
 	};
 }
 

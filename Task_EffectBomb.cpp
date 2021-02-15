@@ -20,6 +20,7 @@ namespace  EffectBomb
 	//ƒŠƒ\[ƒX‚Ì‰ğ•ú
 	bool  Resource::Finalize()
 	{
+		img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------

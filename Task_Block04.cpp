@@ -17,13 +17,14 @@ namespace  Block04
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_04.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBoxArrow_02.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
+		img.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -109,7 +110,7 @@ namespace  Block04
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(0, 0, 128, 128);
+		ML::Box2D src(0, 0, 200, 200);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
@@ -118,15 +119,7 @@ namespace  Block04
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara*  from_)
 	{
-		//if (this->hp <= 0)
-		//{
-		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
-		//	++ge->score;
-		//	this->Kill();
-		//}
-		//else {
-		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
-		//}
+		
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()

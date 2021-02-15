@@ -121,7 +121,6 @@
     <ClCompile Include="Task_MapGenerator.cpp" />
     <ClCompile Include="Task_MapSelector.cpp" />
     <ClCompile Include="Task_Player.cpp" />
-    <ClCompile Include="Task_Shot00.cpp" />
     <ClCompile Include="Task_StageSelector.cpp" />
     <ClCompile Include="Task_Switch.cpp" />
     <ClCompile Include="Task_Title.cpp" />
@@ -172,7 +171,6 @@
     <ClInclude Include="Task_MapGenerator.h" />
     <ClInclude Include="Task_MapSelector.h" />
     <ClInclude Include="Task_Player.h" />
-    <ClInclude Include="Task_Shot00.h" />
     <ClInclude Include="Task_StageSelector.h" />
     <ClInclude Include="Task_Switch.h" />
     <ClInclude Include="Task_Title.h" />
