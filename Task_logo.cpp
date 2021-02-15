@@ -40,6 +40,9 @@ namespace  Logo
 		angle = 0.f;
 		alpha = 0.f;
 
+		se::LoadFile("logo", "./data/sound/se_maoudamashii_effect12.wav");
+		se::Play("logo");
+
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -47,6 +50,7 @@ namespace  Logo
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
+		se::Stop("logo");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
