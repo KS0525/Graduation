@@ -16,34 +16,33 @@
 /Block09 動くブロック(スイッチ)
 /Block10 動かないブロック
 
-crt>player 100 100 50 50
+crt>player 551 700 50 50
 
-crt>Block06 100 400 50 50
-crt>Block06 100 500 50 50
-crt>Block06 100 300 50 50
+/左
+crt>Block00 0 0 400 500
+crt>Block00 0 500 400 200
 
-crt>Block06 1000 0 50 50
-crt>Block06 1000 100 50 50
-crt>Block06 1000 200 50 50
+/右
+crt>Block00 900 0 400 500
+crt>Block00 900 500 400 200
 
+crt>Block01 500 0 100 100
+crt>Block02 700 0 50 50 
+crt>Block03 551 150 50 50
+crt>Block04 840 350 50 50
+crt>Block05 450 350 50 50
+crt>Block06 650 700 50 50
+crt>Block07 400 100 100 100 0 0 80 80
+crt>Block08 400 0 50 50
+crt>Block08 840 700 50 50
+crt>Block10 551 400 50 50
+ 
 
-/中央
-crt>Block10 400 0 50 100
-crt>Block10 400 100 50 100
-crt>Block10 400 200 50 100
-crt>Block10 400 300 50 100
-crt>Block10 400 400 50 100
+crt>Goal 551 0 100 100 
 
-
-crt>Block10 800 220 50 100
-crt>Block10 800 320 50 100
-crt>Block10 800 420 50 100
-crt>Block10 800 520 50 100
-crt>Block10 800 620 50 100
-
-
-crt>Goal 1100 70 100 100 
 end>
+
+
 
 
 

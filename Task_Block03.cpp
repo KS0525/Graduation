@@ -60,7 +60,6 @@ namespace  Block03
 	{
 		//★データ＆タスク解放
 
-
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
 		}

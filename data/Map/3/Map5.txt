@@ -18,69 +18,106 @@
 
 crt>player 100 100 50 50
 
-crt>Block05 200 100 50 50
-crt>Block05 400 340 50 50
-crt>Block05 600 100 50 50
-crt>Block05 800 340 50 50
-crt>Block05 1000 100 50 50
- 
+/上
+crt>Block10 0 0 100 30
+crt>Block10 100 0 100 30
+crt>Block10 200 0 100 30
+crt>Block10 300 0 100 30
+crt>Block10 400 0 100 30
+crt>Block10 500 0 100 30
+crt>Block10 600 0 100 30
+crt>Block10 700 0 100 30
+crt>Block10 800 0 100 30
+crt>Block10 900 0 100 30
+crt>Block10 1000 0 100 30
+crt>Block10 1100 0 100 30
+crt>Block10 1200 0 80 30
 
-/左端
-crt>Block10 0 0 80 180
-crt>Block10 0 180 80 180
-crt>Block10 0 360 80 180
-crt>Block10 0 540 80 180
-
-/中央
-crt>Block10 200 290 50 50
-crt>Block10 400 290 50 50
-crt>Block10 600 290 50 50
-crt>Block10 800 290 50 50
-crt>Block10 1000 290 50 50
-
-
-
-/上部左
-crt>Block10 80 0 160 60
-crt>Block10 240 0 160 60
-crt>Block10 400 0 160 60
-
-
-/下部
-crt>Block10 80 680 120 40
-crt>Block10 200 680 120 40
-crt>Block10 320 680 120 40
-crt>Block10 440 680 120 40
-crt>Block10 560 680 120 40
-crt>Block10 680 680 120 40
-crt>Block10 800 680 120 40
-crt>Block10 920 680 120 40
-crt>Block10 1040 680 120 40
-crt>Block10 1160 680 120 40
+/下
+crt>Block10 0 800 100 30
+crt>Block10 100 800 100 30
+crt>Block10 200 800 100 30
+crt>Block10 300 800 100 30
+crt>Block10 400 800 100 30
+crt>Block10 500 800 100 30
+crt>Block10 600 800 100 30
+crt>Block10 700 800 100 30
+crt>Block10 800 800 100 30
+crt>Block10 900 800 100 30
+crt>Block10 1000 800 100 30
+crt>Block10 1100 800 100 30
+crt>Block10 1200 800 80 30
 
 
 
-/上部右
-crt>Block10 620 0 72 40
-crt>Block10 692 0 98 40
-crt>Block10 790 0 98 40
-crt>Block10 888 0 98 40
-crt>Block10 986 0 98 40
-crt>Block10 1084 0 98 40
-crt>Block10 1182 0 98 40
+/左
+crt>Block10 0 30 30 60
+crt>Block10 0 90 30 100
+crt>Block10 0 190 30 100
+crt>Block10 0 290 30 100
+crt>Block10 0 390 30 100
+crt>Block10 0 490 30 100
+crt>Block10 0 590 30 100
+
+/１本目
+crt>Block10 180 30 30 100
+crt>Block10 180 130 30 100
+crt>Block10 180 230 30 100
+crt>Block10 180 330 30 100
+crt>Block10 180 430 30 100
+
+crt>Block01 230 230 50 50
+
+/２本目
+crt>Block10 440 190 30 100
+crt>Block10 440 290 30 100
+crt>Block10 440 390 30 100
+crt>Block10 440 490 30 100
+crt>Block10 440 590 30 100
+
+crt>Block02 500 390 50 50
+
+/３本目
+crt>Block10 670 30 30 100
+crt>Block10 670 130 30 100
+crt>Block10 670 230 30 100
+crt>Block10 670 330 30 100
+crt>Block10 670 430 30 100
+
+crt>Block03 730 230 50 50
+
+/４本目
+crt>Block10 860 190 30 100
+crt>Block10 860 290 30 100
+crt>Block10 860 390 30 100
+crt>Block10 860 490 30 100
+crt>Block10 860 590 30 100
+
+crt>Block08 900 400 50 50
+crt>Block08 900 610 50 100
+
+/５本目
+crt>Block10 950 30 30 100
+crt>Block10 950 130 30 100
+crt>Block10 950 230 30 100
+crt>Block10 950 330 30 100
+crt>Block10 950 430 30 100
+
+crt>Block07 1050 30 100 100 80 80 0 0
 
 /右
-crt>Block10 1220 40 60 80
-crt>Block10 1220 120 60 80
-crt>Block10 1220 200 60 80
-crt>Block10 1220 280 60 80
-crt>Block10 1220 360 60 80
-crt>Block10 1220 440 60 80
-crt>Block10 1220 520 60 80
-crt>Block10 1220 600 60 80
+crt>Block10 1250 130 30 100
+crt>Block10 1250 230 30 100
+crt>Block10 1250 330 30 100
+crt>Block10 1250 430 30 100
+crt>Block10 1250 530 30 100
+crt>Block10 1250 630 30 70
 
-crt>Goal 1100 70 100 100 
+crt>Goal 1180 30 100 100 
+
 end>
+
+
 
 
 

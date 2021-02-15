@@ -117,26 +117,12 @@ namespace  Block01
 		
 	}
 	//------------------------------------------------------------------
-	bool Object::Check_bottom()
-	{
-		ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
-		bottom.Offset(this->pos);
-
-		auto pl = ge->GetTask_One_GN<Player::Object>(Player::defGroupName,Player::defName);
-		if (nullptr == pl) {return false;}
-
-		return pl->CheckHit(bottom);
-	}
-	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
 	{
 		ML::Box2D me = this->hitBase.OffsetCopy(this->pos);
-	
-		ML::Box2D bottom(this->hitBase.x, this->hitBase.y + this->hitBase.h, this->hitBase.w, 1);
-		bottom.Offset(this->pos);
 
-	auto targets = ge->GetTask_Group_G<BChara>(GName);
-	for (auto it = targets->begin();
+		auto targets = ge->GetTask_Group_G<BChara>(GName);
+		for (auto it = targets->begin();
 		it != targets->end();
 		++it) {
 		//相手に接触の有無を確認させる
@@ -205,39 +191,3 @@ namespace  Block01
 	//-------------------------------------------------------------------
 	Resource::~Resource() { this->Finalize(); }
 }
-
-
-
-class ChipInfo
-{
-private:
-	ChipInfo()
-	{
-		num = chip;
-		chip++;
-		mChips.push_back(this);
-	}
-	static int chip;
-	int num;
-
-	string srcName;
-
-	std::vector<ChipInfo*> mChips;
-	void Create()
-	{
-		for (auto chips : mChips)
-		{
-			auto bl = Block01::Object::Create(true);
-			//あとはチップ情報を渡す
-
-		}
-	}
-public:
-	enum class Chiptype {
-		broken, //壊せるオブジェクト
-		hardbroken, //壊しにくいオブジェクト
-		Unbroken //壊せないオブジェクト
-	};
-
-	ML::Box2D src;
-};

@@ -18,27 +18,14 @@
 
 crt>player 100 100 50 50
 
-crt>Block02 760 470 50 50
-crt>Block02 360 100 100 100
-crt>Block02 1060 370 50 50
-crt>Block02 100 470 100 100
-
-/左端
-crt>Block10 0 0 80 180
-crt>Block10 0 180 80 180
-crt>Block10 0 360 80 180
-crt>Block10 0 540 80 180
-
-/中央
-crt>Block10 560 70 400 400
-crt>Block10 460 370 100 100
-crt>Block10 960 370 100 100
-
-/上部左
-crt>Block10 80 0 160 60
-crt>Block10 240 0 160 60
-crt>Block10 400 0 160 60
-
+crt>Block00 200 100 50 50
+crt>Block00 0 100 50 50
+crt>Block00 100 200 50 50
+crt>Block00 100 0 50 50
+crt>Block00 200 0 50 50
+crt>Block00 200 200 50 50
+crt>Block00 0 200 50 50
+crt>Block00 0 0 50 50
 
 /下部
 crt>Block10 80 680 120 40
@@ -51,8 +38,6 @@ crt>Block10 800 680 120 40
 crt>Block10 920 680 120 40
 crt>Block10 1040 680 120 40
 crt>Block10 1160 680 120 40
-
-
 
 /上部右
 crt>Block10 620 0 72 40
