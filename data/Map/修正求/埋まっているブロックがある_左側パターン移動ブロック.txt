@@ -16,70 +16,56 @@
 /Block09 動くブロック(スイッチ)
 /Block10 動かないブロック
 
-crt>player 100 100 50 50
-/左端
-crt>Block10 0 0 80 180
-crt>Block10 0 180 80 180
-crt>Block10 0 360 80 180
-crt>Block10 0 540 80 180
+crt>player 0 0 50 50
 
-/上時間　下時間　右時間　左時間
-crt>Block07 150 50 50 50 50 50 25 25
-crt>Block07 300 10 50 50 50 50 0 0
-crt>Block07 700 60 50 50 50 50 45 45
-crt>Block07 600 110 50 50 30 30 40 40
+crt>Block00 300 0 50 50
+crt>Block01 350 150 50 50
+crt>Block02 500 150 50 50 
+crt>Block03 850 150 50 50
+crt>Block04 350 450 50 50
+crt>Block05 500 450 50 50
+crt>Block06 850 450 50 50
+crt>Block07 350 300 50 50 0 0 80 80
+crt>Block08 500 300 50 50
+crt>Block08 850 300 50 50
 
-/上部左
-crt>Block10 80 0 160 60
-crt>Block10 240 0 160 60
-crt>Block10 400 0 160 60
+ 
 
 
-/下部
-crt>Block10 80 680 120 40
-crt>Block10 200 680 120 40
-crt>Block10 320 680 120 40
-crt>Block10 440 680 120 40
-crt>Block10 560 680 120 40
-crt>Block10 680 680 120 40
-crt>Block10 800 680 120 40
-crt>Block10 920 680 120 40
-crt>Block10 1040 680 120 40
-crt>Block10 1160 680 120 40
-
-/中央
-crt>Block10 560 0 60 80
-crt>Block10 560 80 60 80
-crt>Block10 560 160 60 80
-crt>Block10 560 240 60 80
-crt>Block10 560 450 60 80
-crt>Block10 560 530 60 80
-crt>Block10 560 610 60 70
-
-/上部右
-crt>Block10 620 0 72 40
-crt>Block10 692 0 98 40
-crt>Block10 790 0 98 40
-crt>Block10 888 0 98 40
-crt>Block10 986 0 98 40
-crt>Block10 1084 0 98 40
-crt>Block10 1182 0 98 40
-
-/右
-crt>Block10 1220 40 60 80
-crt>Block10 1220 120 60 80
-crt>Block10 1220 200 60 80
-crt>Block10 1220 280 60 80
-crt>Block10 1220 360 60 80
-crt>Block10 1220 440 60 80
-crt>Block10 1220 520 60 80
-crt>Block10 1220 600 60 80
-
-/ゴールの周り 左　右　上
-crt>Block10 790 300 50 100
-crt>Block10 940 300 50 100
-crt>Block10 840 250 100 50
 
 
-crt>Goal 840 300 100 100 
+
+crt>Goal 1100 600 100 100 
+
 end>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
