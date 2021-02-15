@@ -151,11 +151,7 @@ namespace MyPG
 			se::Init(wnd_);
 		}
 		//変数の初期化
-		/*{
-			for (auto a : isClear) {
-				*a = false;
-			}
-		}*/
+		ge->mapNum = 0;
 		for (int i = 0;i < 3;++i) {
 			for (int j = 0;j < 6;++j) {
 				ge->isClear[i][j] = false;

@@ -238,20 +238,21 @@ void bgm::AllStop()
 //--------------------------------------------------------------------------------------------
 void bgm::EndCheck()
 {
-	for (auto& bgm : BgmTable){
-		if (bgm.second.bgm.use == 1){
-			//			long code;
+	for (auto& bgm : BgmTable) {
+		if (bgm.second.bgm.use == 1) {
+			long code;
 			//再生位置取得
 			LONGLONG endPos = bgm::GetEndPosition(bgm.first);
 			LONGLONG nowPos = bgm::GetCurrentPos(bgm.first);
 			//ブロッキングするようなのでやめ
-			//bgm.second.bgm.pMediaEvent->WaitForCompletion(0, &code);
+			bgm.second.bgm.pMediaEvent->WaitForCompletion(0, &code);
 			//再生終了時はループを行う。
-			//			if(code == EC_COMPLETE){
-			if (endPos <= nowPos){
-				LONGLONG	start = 0;
-				bgm.second.bgm.pMediaSeeking->SetPositions(&start, AM_SEEKING_AbsolutePositioning,
-																									 NULL, AM_SEEKING_NoPositioning);
+			if (code == EC_COMPLETE) {
+				if (endPos <= nowPos) {
+					LONGLONG	start = 0;
+					bgm.second.bgm.pMediaSeeking->SetPositions(&start, AM_SEEKING_AbsolutePositioning,
+						NULL, AM_SEEKING_NoPositioning);
+				}
 			}
 		}
 	}

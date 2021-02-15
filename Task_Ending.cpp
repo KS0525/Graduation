@@ -52,6 +52,13 @@ namespace  Ending
 	//リソースの解放
 	bool  Resource::Finalize()
 	{
+		for (int i = 0;i < 18;++i) {
+			this->appear[i].reset();
+		}
+		for (int i = 0;i < 8;++i) {
+			this->fall[i].reset();
+		}
+		this->eggCapsule.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -81,6 +88,7 @@ namespace  Ending
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
 			auto  nextTask = StageSelector::Object::Create(true);
+			nextTask->mapNumber = ge->mapNum;
 		}
 
 		return  true;
@@ -114,10 +122,10 @@ namespace  Ending
 	{
 		ML::Box2D draw(0, 0, 1280, 720);
 		ML::Box2D src(0, 0, 1280, 720);
-		
-		int cuts_fall = 8; 
-		int cuts_appear = 3;
 
+		int cuts_fall = 8;
+		int cuts_appear = 3;
+		int offset_stage = ge->stageNum;
 		int frameRate = 6;
 
 		this->res->eggCapsule->Draw(draw, src);
@@ -126,7 +134,7 @@ namespace  Ending
 			this->res->fall[animCnt / frameRate % cuts_fall]->Draw(draw, src);
 		}
 		else {
-			this->res->appear[animCnt /frameRate % cuts_appear]->Draw(draw, src);
+			this->res->appear[animCnt / frameRate % cuts_appear + (offset_stage * cuts_appear)]->Draw(draw, src);
 		}
 	}
 

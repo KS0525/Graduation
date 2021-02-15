@@ -17,7 +17,7 @@ namespace  Block00
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_00.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBox_01.png");
 		return true;
 	}
 	//-------------------------------------------------------------------

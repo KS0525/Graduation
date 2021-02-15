@@ -75,6 +75,7 @@ namespace  StageSelector
 		stageNumber = 0;
 		animCnt = 0;
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
+		mapNumber = ge->mapNum;
 		//šƒ^ƒXƒN‚Ì¶¬
 		
 		return  true;
@@ -129,20 +130,19 @@ namespace  StageSelector
 	//u‚Q‚c•`‰æv‚PƒtƒŒ[ƒ€–ˆ‚És‚¤ˆ—
 	void  Object::Render2D_AF()
 	{
-		ML::Box2D  draw1(0,0, 1280, 720);
+		ML::Box2D  draw1(0, 0, 1280, 720);
 		ML::Box2D  src1(0, 0, 1280, 720);
 		this->res->eggCapsule->Draw(draw1, src1);
-		
-		ge->isClear[0][0] = true;
+
 		for (int i = 0;i < 6;++i) {
-			if (ge->isClear[0][stageNumber-1] == true) {
+			if (ge->isClear[mapNumber][i] == true) {
 				this->res->clearEgg[i]->Draw(draw1, src1);
 			}
 			else {
 				this->res->nonClearEgg[i]->Draw(draw1, src1);
 			}
 		}
-		if (animCnt %60 > 0 && animCnt %60 < 30) {
+		if (animCnt % 60 > 0 && animCnt % 60 < 30) {
 			this->res->selectEgg[choosing]->Draw(draw1, src1);
 		}
 		else {

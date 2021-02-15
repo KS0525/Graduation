@@ -73,12 +73,16 @@ namespace  Game
 		ge->score = 0;
 		ge->gameClearFlag = false;
 		animFin = false;
+		animCnt = 0;
 	   //★タスクの生成
 		BackGround::Object::Create(true);
 
 		if (auto map = Generator::Object::Create_Mutex()) {
 			map->Set(ge->nowStage);
 		}
+		bgm::LoadFile("bgm", "./data/sound/bgm_maoudamashii_ethnic16.mp3");
+		bgm::Play("bgm");
+		bgm::VolumeControl("bgm", 90);
 
 		return  true;
 	}
@@ -94,6 +98,9 @@ namespace  Game
 		ge->KillAll_G("ブロック");
 		ge->KillAll_G("スイッチ");
 		ge->KillAll_G("ゴール");
+
+
+		bgm::Stop("bgm");
 
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
@@ -134,15 +141,20 @@ namespace  Game
 					ge->KillAll_G("固定ブロック");
 					ge->KillAll_G("スイッチ");
 					ge->KillAll_G("ゴール");
+
+					ge->isDead = false;
+					//クールカウントを0に戻す
+					resetCoolCount = 0;
+					ge->isReady = false;
+
 					//再セット
 					if (auto map = Generator::Object::Create_Mutex()) {
 						map->Set(ge->nowStage);
 					}
-					ge->isDead = false;
-					//クールカウントを0に戻す
-					resetCoolCount = 0;
 				}
 			}
+
+			bgm::EndCheck();
 
 			if (key.B2.down) {
 				//自身に消滅要請
@@ -158,47 +170,22 @@ namespace  Game
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
-		auto key = ge->in1->GetState();
-		ML::Box2D draw(80,80,96,96);
-		ML::Box2D src(0, 0, 136, 136);
-	
-		ML::Box2D draw2(0, 0, 1280, 720);
-		ML::Box2D src2(0, 0, 1280, 720);
-	
+		ML::Box2D draw(0, 0, 1280, 720);
+		ML::Box2D src(0, 0, 1280, 720);
 
-		//Todo:重力エフェクトアニメーション
 		if (!animFin) {
-			this->res->grab_vertical[animCnt / 4 % 7]->Draw(draw2, src2);
+			if (this->MoveGravity == Gravity::up ||
+				this->MoveGravity == Gravity::down) {
+				this->res->grab_vertical[animCnt / 4 % 7]->Draw(draw, src);
+			}
+			else if (this->MoveGravity == Gravity::left ||
+				this->MoveGravity == Gravity::right) {
+				this->res->grab_horizontal[animCnt / 4 % 7]->Draw(draw, src);
+			}
+			else {
+
+			}
 		}
-		//float pie(3.1415f);
-		/*switch (this->MoveGravity) {
-		case 0: //up
-			this->res->grab_UI_img = this->res->grab_up_01;
-			this->res->grab_UI_img2 = this->res->grab_up_02;
-			break;
-		case 1: // down
-			this->res->grab_UI_img = this->res->grab_under_01;
-			this->res->grab_UI_img2 = this->res->grab_under_02;
-			break;
-		case 2: //left
-			this->res->grab_UI_img = this->res->grab_left_01;
-			this->res->grab_UI_img2 = this->res->grab_left_02;
-			break;
-		case 3: //right
-			this->res->grab_UI_img = this->res->grab_right_01;
-			this->res->grab_UI_img2 = this->res->grab_right_02;
-			break;
-		default:
-			break;
-		}*/
-		
-		////スティックの方向入力がなければ
-		//if (key.LStick.volume != 0) {
-		//	this->res->grab_UI_img->Draw(draw2, src2);
-		//}
-		//else { //スティックの方向入力があったら
-		//	this->res->grab_UI_img->Draw(draw2, src2);
-		//}
 	}
 	//-------------------------------------------------------------------
 	void Object::Grab_Anim()
@@ -213,18 +200,18 @@ namespace  Game
 		case 1: // down
 			animCnt++;
 			animFin = false;
-			if (animCnt > animMax) { animCnt = animMax; animFin = true; }		
+			if (animCnt > animMax) { animCnt = animMax; animFin = true; }
 			break;
-		/*case 2: //left
+		case 2: //left	
+			animCnt--;
+			animFin = false;
+			if (animCnt < 0) { animCnt = 0; animFin = true; }
+			break;
+		case 3: //right
 			animCnt++;
 			animFin = false;
 			if (animCnt > animMax) { animCnt = animMax;  animFin = true; }
 			break;
-		case 3: //right
-			animCnt--;
-			animFin = false;
-			if (animCnt > 0) { animCnt =0; animFin = true; }
-			break;*/
 		default:
 			break;
 		}

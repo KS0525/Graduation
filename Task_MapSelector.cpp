@@ -57,10 +57,8 @@ namespace  MapSelector
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
 			auto nextTask = StageSelector::Object::Create(true);
-			nextTask->mapNumber = this->choosing + 1;
-			ge->mapNum = this->choosing;
+			return  true;
 		}
-		return  true;
 	}
 	//-------------------------------------------------------------------
 	//「更新」１フレーム毎に行う処理
@@ -72,6 +70,7 @@ namespace  MapSelector
 		
 		if (key.B1.down) {
 			//ge->nowStage = buttons[choosing].get_StagePass();
+			ge->mapNum = this->choosing + 1;
 				//自身に消滅要請
 				this->Kill();
 			}
