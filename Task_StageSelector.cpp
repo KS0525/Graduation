@@ -77,7 +77,9 @@ namespace  StageSelector
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		mapNumber = ge->mapNum;
 		//★タスクの生成
-		
+
+		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
+		se::LoadFile("no", "./data/sound/se_maoudamashii_system21.wav");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -115,11 +117,13 @@ namespace  StageSelector
 			//ステージパスを入力
 			ge->nowStage = buttons[choosing].get_StagePass();
 			ge->stageNum = choosing;
+			se::Play("ok");
 				//自身に消滅要請
 				this->Kill();
 			}
 		if (key.B2.down) {
 			back = true;
+			se::Play("no");
 			//自身に消滅要請
 			this->Kill();
 		}

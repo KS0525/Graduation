@@ -55,6 +55,7 @@ namespace Player
 		this->gensoku = 0.4f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 7; //重力加速度＆時間速度による加算量
 		//★タスクの生成
+		se::LoadFile("gravity", "./data/sound/se_maoudamashii_element_darkness01.wav");
 
 		return  true;
 	}
@@ -90,6 +91,7 @@ namespace Player
 				this->GravityMotion("ブロック");
 				//重力操作のse
 				if (key.LStick.axis.Length() > 0) {
+					se::Play("gravity");
 					//se::LoadFile("gravity", "./data/sound/GravityChangeSE12.wav");
 					//se::Play("gravity");
 				}

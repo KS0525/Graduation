@@ -75,7 +75,9 @@ namespace  Ending
 		animCnt = 0;
 		isFall = false;
 		//šƒ^ƒXƒN‚Ì¶¬
-
+		se::LoadFile("clear", "./data/sound/se_maoudamashii_se_syber01.wav");
+		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
+		se::Play("clear");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -109,6 +111,7 @@ namespace  Ending
 		}
 
 		if (key.B1.down) {
+			se::Play("ok");
 			this->Kill();
 		}
 		if (ms.LB.down) {

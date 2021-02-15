@@ -44,7 +44,7 @@ namespace  MapSelector
 		choosing = 0;
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
-		
+		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -71,6 +71,7 @@ namespace  MapSelector
 		if (key.B1.down) {
 			//ge->nowStage = buttons[choosing].get_StagePass();
 			ge->mapNum = this->choosing + 1;
+			se::Play("ok");
 				//自身に消滅要請
 				this->Kill();
 			}
