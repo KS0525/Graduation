@@ -18,47 +18,14 @@
 
 crt>player 100 100 50 50
 
-crt>Block02 360 100 50 50
-
-
-
-
-/中央
-crt>Block10 300 70 50 50
-crt>Block10 300 120 50 50
-crt>Block10 300 170 50 50
-crt>Block10 300 220 50 50
-crt>Block10 300 270 50 50
-crt>Block10 300 320 50 50
-crt>Block10 300 370 50 50
-crt>Block10 300 420 50 50
-crt>Block10 300 470 50 50
-
-crt>Block10 950 70 50 50
-crt>Block10 950 120 50 50
-crt>Block10 950 170 50 50
-crt>Block10 950 220 50 50
-crt>Block10 950 270 50 50
-crt>Block10 950 320 50 50
-crt>Block10 950 370 50 50
-crt>Block10 950 420 50 50
-crt>Block10 950 470 50 50
-
-crt>Block10 350 70 100 50
-crt>Block10 450 70 100 50
-crt>Block10 550 70 100 50
-crt>Block10 650 70 100 50
-crt>Block10 750 70 100 50
-crt>Block10 850 70 100 50
-
-crt>Block10 350 470 100 50
-crt>Block10 450 470 100 50
-crt>Block10 550 470 100 50
-crt>Block10 650 470 100 50
-crt>Block10 750 470 100 50
-crt>Block10 850 470 100 50
-
-
+crt>Block07 200 0 50 50 100 100 0 0
+crt>Block07 300 20 50 50 100 100 0 0 
+crt>Block07 400 40 50 50 100 100 0 0
+crt>Block07 500 60 50 50 100 100 0 0
+crt>Block07 600 80 50 50 100 100 0 0
+crt>Block07 700 100 50 50 100 100 0 0
+crt>Block07 800 120 50 50 100 100 0 0
+ 
 
 crt>Goal 1100 70 100 100 
 end>

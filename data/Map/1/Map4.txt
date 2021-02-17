@@ -18,28 +18,18 @@
 
 crt>player 100 100 50 50
 
-
-crt>Block00 100 500 50 50
-crt>Block01 1000 100 50 50
-
-crt>Block02 500 50 50 50
-
-/Yだけ
-crt>Block05 300 100 50 50
-crt>Block05 900 400 50 50
-
 /左端
 crt>Block10 0 0 80 180
 crt>Block10 0 180 80 180
 crt>Block10 0 360 80 180
 crt>Block10 0 540 80 180
 
-
 /上部左
 crt>Block10 80 0 160 60
 crt>Block10 240 0 160 60
 crt>Block10 400 0 160 60
-
+crt>Block10 510 60 50 300
+crt>Block10 560 310 250 50
 
 /下部
 crt>Block10 80 680 120 40
@@ -52,11 +42,6 @@ crt>Block10 800 680 120 40
 crt>Block10 920 680 120 40
 crt>Block10 1040 680 120 40
 crt>Block10 1160 680 120 40
-
-/中央
-crt>Block10 400 300 500 300
-crt>Block10 300 500 100 100
-crt>Block10 900 300 100 100
 
 /上部右
 crt>Block10 560 0 34 40
@@ -78,7 +63,22 @@ crt>Block10 1220 440 60 80
 crt>Block10 1220 520 60 80
 crt>Block10 1220 600 60 80
 
+/中央左側
+crt>Block10 200 70 50 250
+crt>Block10 200 320 50 250
 
+/中央下側
+crt>Block10 250 520 250 50
+crt>Block10 500 520 250 50
+crt>Block10 750 520 250 50
+crt>Block10 1000 520 50 50
 
-crt>Goal 900 580 100 100 
+/中央右側
+crt>Block10 1050 320 50 250
+crt>Block10 1050 170 50 150
+
+/中央上側
+crt>Block10 800 120 250 50
+
+crt>Goal 400 60 100 100 
 end>

@@ -4,7 +4,6 @@
 #include  "MyPG.h"
 #include  "Task_Block06.h"
 #include  "Task_Player.h"
-#include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
 
@@ -15,7 +14,7 @@ namespace  Block06
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_06.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBoxArrow_04.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -104,7 +103,7 @@ namespace  Block06
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(0, 0, 128, 128);
+		ML::Box2D src(0, 0,200, 200);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
@@ -114,15 +113,6 @@ namespace  Block06
 	void  Object::Received(BChara*  from_)
 	{
 
-		//if (this->hp <= 0)
-		//{
-		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos,0.5f);
-		//	++ge->score;
-		//	this->Kill();
-		//}
-		//else {
-		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
-		//}
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()

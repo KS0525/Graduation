@@ -4,7 +4,6 @@
 #include  "MyPG.h"
 #include  "Task_Block07.h"
 #include  "Task_Player.h"
-#include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
 
@@ -17,7 +16,7 @@ namespace  Block07
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_07.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBoxArrow_05.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -155,7 +154,7 @@ namespace  Block07
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(0, 0, 128, 128);
+		ML::Box2D src(0, 0, 200, 200);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);

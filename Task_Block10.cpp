@@ -4,7 +4,6 @@
 #include  "MyPG.h"
 #include  "Task_Block10.h"
 #include  "Task_Player.h"
-#include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
 
@@ -17,7 +16,7 @@ namespace  Block10
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_09.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBox_04.png");
 		return true;
 	}
 	//-------------------------------------------------------------------

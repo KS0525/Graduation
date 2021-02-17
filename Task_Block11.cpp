@@ -1,22 +1,22 @@
 //-------------------------------------------------------------------
-//ブロック(2倍スピードで移動)
+//ブロック(移動不可)
 //-------------------------------------------------------------------
 #include  "MyPG.h"
-#include  "Task_Block01.h"
+#include  "Task_Block11.h"
 #include  "Task_Player.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
 
 
 
-namespace  Block01
+namespace  Block11
 {
 	Resource::WP  Resource::instance;
 	//-------------------------------------------------------------------
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/main/Block_IronBlock_00.png");
+		img = DG::Image::Create("./data/image/Block/main/Block_wall_01.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -43,14 +43,15 @@ namespace  Block01
 
 		this->render2D_Priority[1] = 1.0f;
 
-		this->maxFallSpeed = 20.0f;	//最大落下速度
+		this->maxFallSpeed = 10.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
-		this->gravity = ML::Gravity(32) * 10; //重力加速度＆時間速度による加算量
+		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 
 		ge->serial++;
 		this->serial = ge->serial;
 
 		//★タスクの生成
+
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -69,44 +70,36 @@ namespace  Block01
 	//-------------------------------------------------------------------
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
-	{		
+	{
 		auto key = ge->in1->GetState();
-		//ML::Vec2 savePos = this->pos;
-
-		//重力変更
-		if (ge->isReady) {
-			if (!ge->isDead) {
-
-				if (key.LStick.BU.on) { this->MoveGravity = Gravity::up; }
-				if (key.LStick.BL.on) { this->MoveGravity = Gravity::left; }
-				if (key.LStick.BD.on) { this->MoveGravity = Gravity::down; }
-				if (key.LStick.BR.on) { this->MoveGravity = Gravity::right; }
-
-				this->GravityMotion("ブロック");
-			}
-		}
 
 		//画面外へ出ないように
 		if (this->pos.x < 0) { pos.x = 0; this->moveVec.x = 0; }
 		if (this->pos.y < 0) { pos.y = 0; this->moveVec.y = 0; }
 		if (this->pos.x > ge->screen2DWidth - this->hitBase.w) { pos.x = ge->screen2DWidth - this->hitBase.w; this->moveVec.x = 0; }
 		if (this->pos.y > ge->screen2DHeight - this->hitBase.h) { pos.y = ge->screen2DHeight - this->hitBase.h; this->moveVec.y = 0; }
+
+		////敵との当たり判定
+		if (this->Attack_Std("プレイヤー")) { //共通化により
+			//接触していた場合、自分に対して何かしたいなら
+		}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		ML::Box2D src(0, 0, 200, 200);
+		
+		ML::Box2D src(0, 0, 57, 236);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
 	}
 	//------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）
-	void  Object::Received(BChara*  from_)
+	void  Object::Received(BChara* from_)
 	{
-		
+
 	}
 	//------------------------------------------------------------------
 	bool Object::Attack_Std(const string& GName)
@@ -115,17 +108,22 @@ namespace  Block01
 
 		auto targets = ge->GetTask_Group_G<BChara>(GName);
 		for (auto it = targets->begin();
-		it != targets->end();
-		++it) {
-		//相手に接触の有無を確認させる
-		if ((*it)->CheckHit(me) && this->serial != (*it)->serial) 
-		{
-			//相手にダメージの処理を行わせる
-			(*it)->Received(this);
-			return true;
+			it != targets->end();
+			++it) {
+			//相手に接触の有無を確認させる
+			if ((*it)->CheckHit(me) && this->serial != (*it)->serial) {
+				//相手にダメージの処理を行わせる
+				(*it)->Received(this);
+				return true;
+			}
 		}
+		return false;
 	}
-	return false;
+
+	bool  Object::CheckHit(const  ML::Box2D& hit_)
+	{
+		ML::Box2D  me = this->hitBase.OffsetCopy(this->pos);
+		return  me.Hit(hit_);
 	}
 	//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	//以下は基本的に変更不要なメソッド

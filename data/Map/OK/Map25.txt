@@ -18,7 +18,7 @@
 
 crt>player 100 100 50 50
 
-crt>Block04 360 100 50 50
+crt>Block04 580 280 50 50
 
 
 

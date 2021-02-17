@@ -196,6 +196,12 @@
     <ClCompile Include="Task_StageSelector.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="Task_Block11.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_Block12.cpp">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myLib.h">
@@ -341,6 +347,12 @@
     </ClInclude>
     <ClInclude Include="Task_StageSelector.h">
       <Filter>MyPG\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block11.h">
+      <Filter>MyPG\Tasks\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_Block12.h">
+      <Filter>MyPG\Tasks\Block</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

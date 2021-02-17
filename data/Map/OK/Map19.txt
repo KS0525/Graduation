@@ -18,7 +18,10 @@
 
 crt>player 100 100 50 50
 
-crt>Block00 360 100 50 50
+crt>Block04 580 280 50 50
+
+
+
 
 /中央
 crt>Block10 300 70 50 50

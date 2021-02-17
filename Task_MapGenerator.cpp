@@ -3,8 +3,6 @@
 //-------------------------------------------------------------------
 #include  "MyPG.h"
 #include  "Task_MapGenerator.h"
-#include  "Task_Enemy.h"
-#include  "Task_Enemy01.h"
 #include  "Task_Player.h"
 #include  "Task_Block00.h"
 #include  "Task_Block01.h"
@@ -17,8 +15,11 @@
 #include  "Task_Block08.h"
 #include  "Task_Block09.h"
 #include  "Task_Block10.h"
+#include  "Task_Block11.h"
+#include  "Task_Block12.h"
 #include  "Task_Switch.h"
 #include  "Task_Goal.h"
+
 namespace  Generator
 {
 	Object::WP Object::instance;
@@ -228,6 +229,16 @@ namespace  Generator
 		}
 		if (kind == "Block10") {
 			auto bl = Block10::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block11") {
+			auto bl = Block11::Object::Create(true);
+			bl->pos = ML::Vec2(pos.x, pos.y);
+			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+		}
+		if (kind == "Block12") {
+			auto bl = Block12::Object::Create(true);
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
 		}

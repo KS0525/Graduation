@@ -4,7 +4,6 @@
 #include  "MyPG.h"
 #include  "Task_Block03.h"
 #include  "Task_Player.h"
-#include  "Task_Enemy.h"
 #include  "Task_EffectHit.h"
 #include  "Task_EffectBomb.h"
 
@@ -17,7 +16,7 @@ namespace  Block03
 	//ƒŠƒ\[ƒX‚Ì‰Šú‰»
 	bool  Resource::Initialize()
 	{
-		img = DG::Image::Create("./data/image/Block/Block_03.jpg");
+		img = DG::Image::Create("./data/image/Block/main/Block_WoodBoxArrow_03.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -111,7 +110,7 @@ namespace  Block03
 							ML::Box2D(289,64,30,32),
 							ML::Box2D(257, 64, 30, 32)						
 							};*/
-		ML::Box2D src(0, 0, 128, 128);
+		ML::Box2D src(0, 0, 200, 200);
 		draw.Offset(this->pos);
 
 		res->img->Draw(draw, src);
