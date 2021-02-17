@@ -37,7 +37,6 @@ namespace  Block12
 
 		//★データ初期化
 		hitBase = ML::Box2D(0, 0, 128, 128);
-		hp = 3;
 		moveVec = { 0,2 };
 		atk = { 0 };
 
@@ -46,7 +45,7 @@ namespace  Block12
 		this->maxFallSpeed = 10.0f;	//最大落下速度
 		this->gensoku = 0.2f;		//時間による減速量
 		this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
-
+		this->reverse = false;
 		ge->serial++;
 		this->serial = ge->serial;
 
@@ -89,7 +88,13 @@ namespace  Block12
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw = hitBase;
-		
+		float pie(3.1415f);
+		if (this->reverse) {
+			this->res->img->Rotation(pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+		}
+		else {
+			this->res->img->Rotation(0 * pie, ML::Vec2((draw.x + draw.w) / 2, (draw.y + draw.h) / 2));
+		}
 		ML::Box2D src(0, 0, 1280, 46);
 		draw.Offset(this->pos);
 

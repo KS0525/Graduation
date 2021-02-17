@@ -6,11 +6,9 @@
 #include  "Task_Ending.h"
 #include  "Task_Player.h"
 #include  "Task_BackGround.h"
-#include  "Task_Enemy.h"
 #include  "Task_Block00.h"
 #include  "Task_EffectBomb.h"
 #include  "Task_EffectHit.h"
-#include  "Task_Enemy01.h"
 #include  "Task_Map2D.h"
 #include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
@@ -82,7 +80,7 @@ namespace  Game
 		}
 		bgm::LoadFile("bgm", "./data/sound/bgm_maoudamashii_ethnic16.mp3");
 		bgm::Play("bgm");
-		bgm::VolumeControl("bgm", 90);
+		bgm::VolumeControl("bgm", 70);
 
 		return  true;
 	}

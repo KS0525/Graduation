@@ -48,7 +48,7 @@ namespace  Block12
 	public:
 	//変更可◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇◇
 		//追加したい変数・メソッドはここに追加する
-		int hp;
+		bool reverse;
 		//BCharaに含まれないモノのみここに追加する
 		AttackInfo atk;
 		void  Object::Received(BChara*  from_);

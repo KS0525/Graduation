@@ -41,10 +41,6 @@ namespace Goal
 
 		ge->serial++;
 		this->serial = ge->serial;
-
-		//this->maxFallSpeed = 10.0f;	//最大落下速度
-		//this->gensoku = 0.2f;		//時間による減速量
-		//this->gravity = ML::Gravity(32) * 5; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 
 		return  true;

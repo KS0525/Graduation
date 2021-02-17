@@ -43,7 +43,7 @@ namespace  Logo
 
 		se::LoadFile("logo", "./data/sound/se_maoudamashii_effect12.wav");
 		se::Play("logo");
-
+		se::SetVolume("logo", 80);
 		return  true;
 	}
 	//-------------------------------------------------------------------

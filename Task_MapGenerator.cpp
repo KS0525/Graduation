@@ -239,8 +239,11 @@ namespace  Generator
 		}
 		if (kind == "Block12") {
 			auto bl = Block12::Object::Create(true);
+			bool reverse_;
+			ds_ >> reverse_;
 			bl->pos = ML::Vec2(pos.x, pos.y);
 			bl->hitBase = ML::Box2D(0, 0, pos.w, pos.h);
+			bl->reverse = reverse_;
 		}
 		if (kind == "Switch") {
 			string direction;

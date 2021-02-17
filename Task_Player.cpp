@@ -92,6 +92,7 @@ namespace Player
 				//d—Í‘€ì‚Ìse
 				if (key.LStick.axis.Length() > 0) {
 					se::Play("gravity");
+					se::SetVolume("gravity", 80);
 					//bgm::Play("grav");
 					//se::LoadFile("gravity", "./data/sound/GravityChangeSE12.wav");
 					//se::Play("gravity");
