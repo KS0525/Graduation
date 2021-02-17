@@ -26,7 +26,8 @@ namespace  MapSelector
 		//‹¤—L‚·‚é•Ï”‚Í‚±‚±‚É’Ç‰Á‚·‚é
 		DG::Image::SP  img;
 		DG::Image::SP  choosingimg;
-		//DG::Image::SP  titlelogo;
+
+		DG::Image::SP imgselect;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask

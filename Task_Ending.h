@@ -24,8 +24,9 @@ namespace  Ending
 		static  Resource::SP  Create();
 		//‹¤—L‚·‚é•Ï”‚Í‚±‚±‚É’Ç‰Á‚·‚é
 		DG::Image::SP appear[18];
-		DG::Image::SP fall[8];
+		DG::Image::SP fall[19];
 		DG::Image::SP eggCapsule;
+		DG::Image::SP nextimg;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask

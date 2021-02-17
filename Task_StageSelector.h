@@ -31,6 +31,11 @@ namespace  StageSelector
 		DG::Image::SP selectNum[6];
 
 		DG::Image::SP  choosingimg;
+
+
+		DG::Image::SP imgback;
+		DG::Image::SP imgnext;
+		DG::Image::SP imgselect;
 	};
 	//-------------------------------------------------------------------
 	class  Object : public  BTask

@@ -13,7 +13,7 @@ namespace Goal
 	bool  Resource::Initialize()
 	{
 		this->img = DG::Image::Create("./data/image/Goal/Goal02.png");
-	
+		this->arrowimg = DG::Image::Create("./data/image/UI/Arrow.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -21,6 +21,7 @@ namespace Goal
 	bool  Resource::Finalize()
 	{
 		this->img.reset();
+		this->arrowimg.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -89,7 +90,14 @@ namespace Goal
 
 			this->res->img->Draw(draw, src);
 		} 
-		
+		{
+			//1-1のみ
+			if (ge->mapNum == 1 && ge->stageNum == 0) {
+				ML::Box2D draw(this->pos.x - 65, this->pos.y, 65, 48);
+				ML::Box2D src(0, 0, 65, 48);
+				this->res->arrowimg->Draw(draw, src);
+			}
+		}
 	}
 	//-----------------------------------------------------------------------------
 	//接触時の応答処理（これ自体はダミーのようなモノ）

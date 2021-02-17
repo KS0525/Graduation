@@ -17,6 +17,7 @@ namespace  MapSelector
 	{
 		this->img = DG::Image::Create("./data/image/Goal/Goal02.png");
 		this->choosingimg = DG::Image::Create("./data/image/UI/UI_choosing.png");
+		this->imgselect = DG::Image::Create("./data/image/UI/select3-3.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -25,6 +26,7 @@ namespace  MapSelector
 	{
 		img.reset();
 		choosingimg.reset();
+		imgselect.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -89,8 +91,7 @@ namespace  MapSelector
 			ML::Box2D(279, 400,264, 264),
 			ML::Box2D(508, 40, 264, 264),
 			ML::Box2D(737, 400, 264, 264),
-			ML::Box2D(966, 40, 264, 264),
-		
+			ML::Box2D(966, 40, 264, 264),		
 		};
 
 		ML::Box2D src(0, 0, 330, 330);
@@ -99,13 +100,12 @@ namespace  MapSelector
 		}
 		//this->res->img->Draw(draw, src);
 
-		ML::Box2D chooseDraw[3] = {
-			ML::Box2D(100,0,300,400),
-			ML::Box2D(500,0,300,400),
-			ML::Box2D(900,0,300,400)
-		};
 		ML::Box2D chooseSrc(0,0,132,132);
 		this->res->choosingimg->Draw(draws[choosing], chooseSrc);
+
+		ML::Box2D selectdraw(ge->screen2DWidth / 2, 600, 170, 128);
+		ML::Box2D selectsrc(0, 0, 170, 128);
+		this->res->imgselect->Draw(selectdraw, selectsrc);
 	}
 	//------------------------------------------------------------------
 	void Object::Carsol() 

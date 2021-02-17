@@ -43,9 +43,21 @@ namespace  Ending
 		this->fall[5] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_06.png");
 		this->fall[6] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_07.png");
 		this->fall[7] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_08.png");
+		this->fall[8] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_09.png");
+		this->fall[9] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_10.png");
+		this->fall[10] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_11.png");
+		this->fall[11] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_12.png");
+		this->fall[12] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_13.png");
+		this->fall[13] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_14.png");
+		this->fall[14] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_15.png");
+		this->fall[15] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_16.png");
+		this->fall[16] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_17.png");
+		this->fall[17] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_18.png");
+		this->fall[18] = DG::Image::Create("./data/image/Select/fall/Select_Eggfall_19.png");
 
 		this->eggCapsule = DG::Image::Create("./data/image/Select/Select_body.png");
 
+		this->nextimg = DG::Image::Create("./data/image/UI/next3-5.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -55,7 +67,7 @@ namespace  Ending
 		for (int i = 0;i < 18;++i) {
 			this->appear[i].reset();
 		}
-		for (int i = 0;i < 8;++i) {
+		for (int i = 0;i < 19;++i) {
 			this->fall[i].reset();
 		}
 		this->eggCapsule.reset();
@@ -107,7 +119,7 @@ namespace  Ending
 			if (animCnt >= 47) { animCnt = 0;  isFall = true; }
 		}
 		else {
-			if (animCnt >= 17) { animCnt = 17;}
+			if (animCnt >= 39) { animCnt = 39;}
 		}
 
 		if (key.B1.down) {
@@ -122,7 +134,7 @@ namespace  Ending
 		ML::Box2D draw(0, 0, 1280, 720);
 		ML::Box2D src(0, 0, 1280, 720);
 
-		int cuts_fall = 8;
+		int cuts_fall = 19;
 		int cuts_appear = 3;
 		int offset_stage = ge->stageNum;
 		int frameRate = 6;
@@ -135,6 +147,10 @@ namespace  Ending
 		else {
 			this->res->appear[animCnt / frameRate % cuts_appear + (offset_stage * cuts_appear)]->Draw(draw, src);
 		}
+
+		ML::Box2D selectdraw(ge->screen2DWidth / 2, 600, 170, 128);
+		ML::Box2D selectsrc(0, 0, 170, 128);
+		this->res->nextimg->Draw(selectdraw, selectsrc);
 	}
 
 	//šššššššššššššššššššššššššššššššššššššššššš

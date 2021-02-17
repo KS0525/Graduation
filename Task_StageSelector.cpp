@@ -47,6 +47,8 @@ namespace  StageSelector
 		this->selectNum[5] = DG::Image::Create("./data/image/Select/Select_num_06.png");
 
 		this->choosingimg = DG::Image::Create("./data/image/UI/UI_choosing.png");
+		this->imgback = DG::Image::Create("./data/image/UI/back2.png");
+		this->imgnext = DG::Image::Create("./data/image/UI/next2-5.png");
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -60,6 +62,8 @@ namespace  StageSelector
 			selectNum[i].reset();
 		}
 		choosingimg.reset();
+		imgback.reset();
+		imgnext.reset();
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -160,6 +164,14 @@ namespace  StageSelector
 
 		}
 		this->res->selectNum[choosing]->Draw(draw1, src1);
+
+		ML::Box2D backdraw(ge->screen2DWidth / 2, 600, 170, 128);
+		ML::Box2D backsrc(0, 0, 170, 128);
+		this->res->imgback->Draw(backdraw, backsrc);
+
+		ML::Box2D nextdraw(ge->screen2DWidth / 2 + 200, 600, 170, 128);
+		ML::Box2D nextsrc(0, 0, 170, 128);
+		this->res->imgnext->Draw(nextdraw, nextsrc);
 	}
 	//------------------------------------------------------------------
 	void Object::Carsol() 
