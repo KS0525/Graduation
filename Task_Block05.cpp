@@ -67,9 +67,6 @@ namespace  Block05
 	//「更新」１フレーム毎に行う処理
 	void  Object::UpDate()
 	{
-		//pos.x += moveVec.x;
-		//pos.y += moveVec.y;
-
 		auto key = ge->in1->GetState();
 
 		//重力変更
@@ -81,7 +78,6 @@ namespace  Block05
 				this->GravityMotion("ブロック");
 			}
 		}
-		//this->pos += this->moveVec;
 
 		//画面外へ出ないように
 		if (this->pos.y < 0) { pos.y = 0; }
@@ -108,15 +104,6 @@ namespace  Block05
 	//接触時の応答処理（これ自体はダミーのようなモノ）
 	void  Object::Received(BChara* from_)
 	{
-		//if (this->hp <= 0)
-		//{
-		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMB, this->pos, 0.5f);
-		//	++ge->score;
-		//	this->Kill();
-		//}
-		//else {
-		//	ge->effectCreator->CreateEffect(EffectCreate::Object::BOMBMINI, this->pos);
-		//}
 	}
 	//------------------------------------------------------------------
 	bool Object::Check_bottom()
