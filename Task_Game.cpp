@@ -7,8 +7,6 @@
 #include  "Task_Player.h"
 #include  "Task_BackGround.h"
 #include  "Task_Block00.h"
-#include  "Task_EffectBomb.h"
-#include  "Task_EffectHit.h"
 #include  "Task_Map2D.h"
 #include  "Task_Block01.h"
 #include  "Task_MapGenerator.h"
@@ -153,15 +151,13 @@ namespace  Game
 			}
 
 			bgm::EndCheck();
-
-			if (key.B2.down) {
-				//自身に消滅要請
-				this->Kill();
+			if (ge->isReady) {
+				if (key.B2.down) {
+					//自身に消滅要請
+					this->Kill();
+				}
 			}
-			if (ms.CB.down) {
-				//自身に消滅要請
-				this->Kill();
-			}
+		
 		}
 	}
 	//-------------------------------------------------------------------

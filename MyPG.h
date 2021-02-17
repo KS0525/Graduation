@@ -10,7 +10,6 @@
 #include "fpscounter.h"
 #include "BChara.h"
 #include "Task_Map2D.h"
-#include "Task_EffectCreate.h"
 //-----------------------------------------------------------------------------------------------
 namespace  MyPG
 {
@@ -96,7 +95,6 @@ namespace  MyPG
 
 		//“GŒŸoˆ—‚ğ­‚È‚­‚·‚é‚½‚ß‚É
 		shared_ptr< vector< BChara::SP > >    qa_Enemys;
-		EffectCreate::Object::SP effectCreator;
 
 		Map2D::Object::SP               qa_Map;
 		//----------------------------------------------

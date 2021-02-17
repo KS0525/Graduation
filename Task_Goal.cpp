@@ -2,7 +2,6 @@
 //プレイヤー（卵）
 //-----------------------------------------------------------------------------
 #include "Task_Goal.h"
-#include "Task_EffectHit.h"
 #include  "MyPG.h"
 
 namespace Goal

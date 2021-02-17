@@ -48,6 +48,7 @@ namespace  MapSelector
 		//★タスクの生成
 		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
 		se::SetVolume("ok", 70);
+		se::LoadFile("carsol", "./data/sound/se_maoudamashii_system48.wav");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -114,9 +115,11 @@ namespace  MapSelector
 		//カーソル移動
 		if (key.LStick.BR.down) {
 			choosing++;
+			se::Play("carsol");
 		}
 		if (key.LStick.BL.down) {
 			choosing--;
+			se::Play("carsol");
 		}
 		//下限と上限
 		if (choosing < 0) {

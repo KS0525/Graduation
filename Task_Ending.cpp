@@ -116,10 +116,10 @@ namespace  Ending
 
 		animCnt++;
 		if (!isFall) {
-			if (animCnt >= 47) { animCnt = 0;  isFall = true; }
+			if (animCnt >= 114) { animCnt = 114;  isFall = true; }
 		}
 		else {
-			if (animCnt >= 39) { animCnt = 39;}
+			if (animCnt >= 17) { animCnt = 17;}
 		}
 
 		if (key.B1.down) {

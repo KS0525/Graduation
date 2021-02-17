@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include "Task_Player.h"
 #include "Task_Ending.h"
-#include "Task_EffectHit.h"
 #include "Task_MapGenerator.h"
 #include  "MyPG.h"
 
@@ -56,7 +55,6 @@ namespace Player
 		this->gravity = ML::Gravity(32) * 7; //重力加速度＆時間速度による加算量
 		//★タスクの生成
 		se::LoadFile("gravity", "./data/sound/ジャンプ (online-audio-converter.com) (1).wav");
-		bgm::LoadFile("grav", "./data/sound/ジャンプ.mp3");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -64,11 +62,9 @@ namespace Player
 	bool  Object::Finalize()
 	{
 		//★データ＆タスク解放
-		bgm::Stop("grav");
+
 		if (!ge->QuitFlag() && this->nextTaskCreate) {
 			//★引き継ぎタスクの生成
-			//auto nextTask = Ending::Object::Create(true);
-			
 		}
 
 		return  true;
@@ -93,9 +89,6 @@ namespace Player
 				if (key.LStick.axis.Length() > 0) {
 					se::Play("gravity");
 					se::SetVolume("gravity", 80);
-					//bgm::Play("grav");
-					//se::LoadFile("gravity", "./data/sound/GravityChangeSE12.wav");
-					//se::Play("gravity");
 				}
 			}
 

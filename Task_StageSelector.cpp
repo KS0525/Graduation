@@ -92,6 +92,7 @@ namespace  StageSelector
 		se::LoadFile("no", "./data/sound/se_maoudamashii_system21.wav");
 		se::SetVolume("ok", 70);
 		se::SetVolume("no", 70);
+		se::LoadFile("carsol", "./data/sound/se_maoudamashii_system48.wav");
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -180,9 +181,11 @@ namespace  StageSelector
 		//ÉJÅ[É\Éãà⁄ìÆ
 		if (key.LStick.BR.down) {
 			choosing++;
+			se::Play("carsol");
 		}
 		if (key.LStick.BL.down) {
 			choosing--;
+			se::Play("carsol");
 		}
 		//â∫å¿Ç∆è„å¿
 		if (choosing < 0) {

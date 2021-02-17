@@ -4,8 +4,6 @@
 #include  "MyPG.h"
 #include  "Task_Switch.h"
 #include  "Task_Player.h"
-#include  "Task_EffectHit.h"
-#include  "Task_EffectBomb.h"
 #include  "Task_Block04.h"
 
 

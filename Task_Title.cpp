@@ -19,9 +19,7 @@ namespace  Title
 	{
 		this->back = DG::Image::Create("./data/image/Title/title.png");
 		this->presskey = DG::Image::Create("./data/image/Title/pressKey02.png");
-		
-		//bgm::LoadFile("title", "./data/sound/夢幻の世界-Real_promenade-.mp3");
-
+	
 		return true;
 	}
 	//-------------------------------------------------------------------
@@ -75,19 +73,6 @@ namespace  Title
 	{
 		auto ms = ge->mouse->GetState();
 		auto key = ge->in1->GetState();
-		//easing::UpDate();
-
-		//if (ms.RB.down || key.B2.down) {
-		//	ge->KillAll_G("プレイヤー");
-		//	ge->KillAll_G("ブロック");
-		//	ge->KillAll_G("固定ブロック");
-		//	ge->KillAll_G("スイッチ");
-		//	ge->KillAll_G("ゴール");
-
-		//	if (auto map = Generator::Object::Create_Mutex()) {
-		//		map->Set("./data/Map/Map_Title.txt");
-		//	}
-		//}
 
 		if (ge->isReady) {
 			if (key.B1.down) {
@@ -95,10 +80,6 @@ namespace  Title
 				ge->isReady = false;
 			}
 		}
-		//if (ms.LB.down) {
-		//	//自身に消滅要請
-		//	this->Kill();
-		//	}
 	}
 	//-------------------------------------------------------------------
 	//「２Ｄ描画」１フレーム毎に行う処理

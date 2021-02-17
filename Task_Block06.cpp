@@ -4,8 +4,6 @@
 #include  "MyPG.h"
 #include  "Task_Block06.h"
 #include  "Task_Player.h"
-#include  "Task_EffectHit.h"
-#include  "Task_EffectBomb.h"
 
 namespace  Block06
 {

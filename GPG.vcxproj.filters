@@ -127,15 +127,6 @@
     <ClCompile Include="Task_Ending.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
-    <ClCompile Include="Task_EffectHit.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_EffectCreate.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_EffectBomb.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="Task_logo.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
@@ -143,9 +134,6 @@
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="Task_BackGround.cpp">
-      <Filter>MyPG\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="Task_Map2D.cpp">
       <Filter>MyPG\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="Task_MapGenerator.cpp">
@@ -279,15 +267,6 @@
     <ClInclude Include="sound.h">
       <Filter>MyPG</Filter>
     </ClInclude>
-    <ClInclude Include="Task_EffectHit.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_EffectCreate.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_EffectBomb.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
     <ClInclude Include="Task_logo.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
@@ -295,9 +274,6 @@
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_BackGround.h">
-      <Filter>MyPG\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="Task_Map2D.h">
       <Filter>MyPG\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="Task_MapGenerator.h">
