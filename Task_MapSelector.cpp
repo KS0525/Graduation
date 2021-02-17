@@ -15,7 +15,7 @@ namespace  MapSelector
 	//リソースの初期化
 	bool  Resource::Initialize()
 	{
-		this->img = DG::Image::Create("./data/image/Select/Map_Select_body.png");
+		this->img = DG::Image::Create("./data/image/Goal/Goal02.png");
 		this->choosingimg = DG::Image::Create("./data/image/UI/UI_choosing.png");
 		return true;
 	}
@@ -45,6 +45,7 @@ namespace  MapSelector
 		choiceMax_ = sizeof(buttons)/sizeof(buttons[0]);
 		//★タスクの生成
 		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
+		se::SetVolume("ok", 70);
 		return  true;
 	}
 	//-------------------------------------------------------------------
@@ -83,9 +84,20 @@ namespace  MapSelector
 	void  Object::Render2D_AF()
 	{
 		ML::Box2D draw(0, 0, 1280, 720);
-		ML::Box2D src(0, 0, 352, 202);
+		ML::Box2D draws[5] = { 
+			ML::Box2D(50, 40, 264, 264),
+			ML::Box2D(279, 400,264, 264),
+			ML::Box2D(508, 40, 264, 264),
+			ML::Box2D(737, 400, 264, 264),
+			ML::Box2D(966, 40, 264, 264),
+		
+		};
 
-		this->res->img->Draw(draw, src);
+		ML::Box2D src(0, 0, 330, 330);
+		for (int i = 0; i < 5; ++i) {
+			this->res->img->Draw(draws[i], src);
+		}
+		//this->res->img->Draw(draw, src);
 
 		ML::Box2D chooseDraw[3] = {
 			ML::Box2D(100,0,300,400),
@@ -93,7 +105,7 @@ namespace  MapSelector
 			ML::Box2D(900,0,300,400)
 		};
 		ML::Box2D chooseSrc(0,0,132,132);
-		this->res->choosingimg->Draw(chooseDraw[choosing], chooseSrc);
+		this->res->choosingimg->Draw(draws[choosing], chooseSrc);
 	}
 	//------------------------------------------------------------------
 	void Object::Carsol() 

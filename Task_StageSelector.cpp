@@ -86,6 +86,8 @@ namespace  StageSelector
 
 		se::LoadFile("ok", "./data/sound/se_maoudamashii_system46.wav");
 		se::LoadFile("no", "./data/sound/se_maoudamashii_system21.wav");
+		se::SetVolume("ok", 70);
+		se::SetVolume("no", 70);
 		return  true;
 	}
 	//-------------------------------------------------------------------

@@ -18,34 +18,42 @@
 /Block09 動くブロック(スイッチ)
 /Block10 動かないブロック
 
-/プレイヤ
+
 crt>Block00 80 800 60 60
 
+crt>Block00 400 200 60 60
 /左
 crt>Block10 0 0 80 80
 crt>Block10 0 80 80 80
 crt>Block10 0 160 80 80
 crt>Block10 0 240 80 80
 crt>Block10 0 320 80 80
-crt>Block10 0 400 120 70
-crt>Block10 120 400 120 70
+crt>Block10 0 400 80 80
+crt>Block10 80 400 80 80
 
 /
-crt>Block10 320 400 120 70
-crt>Block10 440 400 120 70
+crt>Block10 260 400 80 80
+crt>Block10 340 400 80 80
 
-crt>Block10 480 470 80 62
-crt>Block10 480 532 80 62
-crt>Block10 480 594 80 63
-crt>Block10 480 657 80 63
+crt>Block10 340 480 80 80
+crt>Block10 340 560 80 80
+crt>Block10 340 640 80 80
 
-crt>Block10 560 0 120 60
-crt>Block10 680 0 120 60
+crt>Block10 560 0 80 80
+crt>Block10 640 0 80 80
 
+crt>Block10 640 400 80 80
+crt>Block10 640 480 80 80
+crt>Block10 720 400 80 80
+crt>Block10 800 400 80 80
 
-crt>Block10 640 400 80 200
-crt>Block10 720 400 200 70
+crt>Block10 920 0 80 80
+crt>Block10 920 80 80 80
+crt>Block10 920 160 80 80 
+crt>Block10 920 240 80 80 
+crt>Block10 920 320 80 80
+crt>Block10 920 400 80 80  
 
-crt>Block10 920 0 70 470
-crt>Block10 920 530 70 190
+crt>Block10 920 560 80 80
+crt>Block10 920 640 80 80
 end>
